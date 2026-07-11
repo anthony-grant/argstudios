@@ -1,0 +1,19 @@
+import { createBrowserRouter } from "react-router";
+import Home from "../pages/Home";
+import WorkDetail from "../pages/WorkDetail";
+import NotFound from "../pages/NotFound";
+
+export const router = createBrowserRouter([
+  {
+    path: "/",
+    Component: Home,
+  },
+  {
+    path: "/work/:slug",
+    Component: WorkDetail,
+  },
+  {
+    path: "*",
+    Component: NotFound,
+  },
+]);
