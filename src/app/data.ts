@@ -57,6 +57,15 @@ export const projects = [
     img: "https://images.unsplash.com/photo-1560439514-0fc9d2cd5e1b?w=800&h=600&fit=crop&auto=format",
     tags: ["Presentations", "Narrative", "F8"],
   },
+  {
+    index: "07",
+    slug: "additional-projects",
+    title: "Additional Projects",
+    category: "Comms Design",
+    description: "A collection of brand, illustration, and event work spanning a range of clients and collaborators.",
+    img: "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1451196243569-FIYRD1MXQRJVIO1QEUMQ/d4df.jpg?format=750w",
+    tags: ["Brand", "Illustration", "Collection"],
+  },
 ];
 
 export const additionalImages = [

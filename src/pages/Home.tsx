@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router";
 import imgPortrait from "@/imports/ContentBlock1/portrait.webp";
-import { CORAL, DARK, CREAM, projects, additionalImages } from "@/app/data";
+import { CORAL, DARK, CREAM, projects } from "@/app/data";
 
 // ─── Shared components ────────────────────────────────────────────────────────
 
@@ -10,7 +10,7 @@ function ArgLogo({ color }: { color: string }) {
     <svg
       viewBox="0 0 2334 2334"
       xmlns="http://www.w3.org/2000/svg"
-      style={{ width: 110, height: 110, display: "block", transition: "fill 0.4s ease", fill: color }}
+      style={{ width: 88, height: 88, display: "block", transition: "fill 0.4s ease", fill: color }}
     >
       <path fillRule="evenodd" d="M1166.713,67.272c293.646,0 569.692,114.35 777.346,322c207.654,207.654 322,483.75 322,777.442c0,293.646 -114.346,569.692 -322,777.346c-207.654,207.65 -483.7,322 -777.346,322c-293.692,0 -569.787,-114.35 -777.438,-322c-207.654,-207.654 -322.004,-483.7 -322.004,-777.346c0,-293.692 114.35,-569.787 322.004,-777.442c207.65,-207.65 483.746,-322 777.438,-322m0,-23.604c-620.258,0 -1123.046,502.792 -1123.046,1123.046c0,620.163 502.787,1122.95 1123.046,1122.95c620.163,0 1122.95,-502.788 1122.95,-1122.95c0,-620.254 -502.787,-1123.046 -1122.95,-1123.046" />
       <path fillRule="evenodd" d="M1703.471,1601.976l-327.821,0c-4.842,0 -9.217,-2.979 -10.987,-7.492l-44.837,-113.838l-300.071,0l-43.533,113.742c-1.767,4.562 -6.146,7.588 -11.033,7.588l-322.654,0c-3.954,0 -7.679,-1.954 -9.867,-5.258c-2.142,-3.308 -2.563,-7.45 -1.025,-11.083l380.758,-909.946c1.813,-4.421 6.096,-7.263 10.892,-7.263l299.421,0c4.75,0 9.033,2.842 10.896,7.263l380.758,909.946c1.533,3.633 1.117,7.775 -1.071,11.083c-2.192,3.304 -5.867,5.258 -9.825,5.258m-319.812,-23.604l302.075,0l-370.888,-886.338l-283.729,0l-370.842,886.338l296.812,0l43.533,-113.742c1.767,-4.562 6.146,-7.592 11.033,-7.592l316.225,0c4.846,0 9.221,2.983 10.992,7.496l44.788,113.838Z" />
@@ -224,28 +224,6 @@ function WorkRow({ project }: { project: typeof projects[0] }) {
   );
 }
 
-function AdditionalProjectsGrid() {
-  return (
-    <div style={{ columns: "3 280px", columnGap: "12px" }}>
-      {additionalImages.map((img) => (
-        <div key={img.src} className="mb-3 overflow-hidden group cursor-pointer" style={{ breakInside: "avoid" }}>
-          <div className="relative overflow-hidden" style={{ background: "#1A1A18" }}>
-            <img src={img.src} alt={img.label} className="w-full h-auto block transition-transform duration-500 group-hover:scale-105" />
-            <div
-              className="absolute inset-0 flex items-end p-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-              style={{ background: "linear-gradient(to top, rgba(12,12,11,0.85) 0%, transparent 60%)" }}
-            >
-              <span className="font-['DM_Mono',monospace] text-xs tracking-widest" style={{ color: "rgba(246,242,236,0.9)" }}>
-                {img.label}
-              </span>
-            </div>
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-}
-
 function Work() {
   return (
     <section id="work" className="min-h-screen px-6 md:px-10 py-24 md:py-32" style={{ backgroundColor: DARK }}>
@@ -258,15 +236,6 @@ function Work() {
       <div>
         {projects.map((p) => <WorkRow key={p.slug} project={p} />)}
         <div className="border-t" style={{ borderColor: "rgba(246,242,236,0.1)" }} />
-      </div>
-
-      <div className="mt-24 md:mt-32">
-        <div className="mb-12 border-t pt-10" style={{ borderColor: "rgba(246,242,236,0.1)" }}>
-          <h2 className="font-['DM_Mono',monospace] text-xs tracking-widest uppercase" style={{ color: "rgba(246,242,236,0.4)" }}>
-            Additional Projects
-          </h2>
-        </div>
-        <AdditionalProjectsGrid />
       </div>
     </section>
   );
