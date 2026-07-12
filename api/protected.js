@@ -13,7 +13,7 @@
 
 const PROTECTED = {
   meta: {
-    password: process.env.META_PASSWORD || "arg-meta-2026",
+    password: process.env.META_PASSWORD || "parrot",
     content: {
       description:
         "Product Design Lead across multiple surfaces — translating complex social infrastructure and platform features into clear, usable experiences at scale.",
