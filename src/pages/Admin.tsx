@@ -122,6 +122,66 @@ export default function Admin() {
   const [saving, setSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState("");
   const [saveError, setSaveError] = useState("");
+  const [uploadingKey, setUploadingKey] = useState<string | null>(null);
+  const [uploadError, setUploadError] = useState("");
+
+  function readAsDataUrl(file: File): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result as string);
+      reader.onerror = () => reject(new Error("Could not read file"));
+      reader.readAsDataURL(file);
+    });
+  }
+
+  async function uploadFile(file: File): Promise<string> {
+    const dataUrl = await readAsDataUrl(file);
+    const res = await fetch("/api/admin/upload", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ password, filename: file.name, dataUrl }),
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(data.error || "Upload failed");
+    return data.url as string;
+  }
+
+  async function handleCoverUpload(clientId: string, file: File) {
+    const key = `${clientId}:img`;
+    setUploadingKey(key);
+    setUploadError("");
+    try {
+      const url = await uploadFile(file);
+      updateProject(clientId, { img: url });
+    } catch (err: any) {
+      setUploadError(err.message || "Upload failed");
+    } finally {
+      setUploadingKey(null);
+    }
+  }
+
+  async function handleGalleryUpload(clientId: string, files: FileList) {
+    const key = `${clientId}:gallery`;
+    setUploadingKey(key);
+    setUploadError("");
+    try {
+      const urls: string[] = [];
+      for (const file of Array.from(files)) {
+        urls.push(await uploadFile(file));
+      }
+      setProjects((prev) =>
+        prev.map((p) =>
+          p.clientId === clientId
+            ? { ...p, gallery: [p.gallery, ...urls].filter(Boolean).join("\n") }
+            : p
+        )
+      );
+    } catch (err: any) {
+      setUploadError(err.message || "Upload failed");
+    } finally {
+      setUploadingKey(null);
+    }
+  }
 
   useEffect(() => {
     const cached = sessionStorage.getItem("adminPassword");
@@ -293,6 +353,9 @@ export default function Admin() {
           <p className="font-['DM_Mono',monospace] text-xs" style={{ color: "rgba(246,242,236,0.4)" }}>Loading…</p>
         ) : (
           <>
+            {uploadError && (
+              <p className="font-['DM_Mono',monospace] text-xs mb-6" style={{ color: CORAL }}>{uploadError}</p>
+            )}
             <div className="space-y-6 mb-10">
               {projects.map((p, i) => (
                 <div key={p.clientId} className="border p-5" style={{ borderColor: "rgba(246,242,236,0.12)" }}>
@@ -344,11 +407,51 @@ export default function Admin() {
                     </Field>
                   </div>
 
-                  <Field label="Cover image URL">
-                    <input style={inputStyle} value={p.img} onChange={(e) => updateProject(p.clientId, { img: e.target.value })} />
+                  <Field label="Cover image">
+                    <div className="flex gap-2 items-start">
+                      <input style={inputStyle} placeholder="Image URL, or upload one" value={p.img} onChange={(e) => updateProject(p.clientId, { img: e.target.value })} />
+                      <label
+                        className="font-['DM_Mono',monospace] text-xs tracking-widest uppercase px-3 py-2 border cursor-pointer whitespace-nowrap"
+                        style={{ color: "rgba(246,242,236,0.7)", borderColor: "rgba(246,242,236,0.2)" }}
+                      >
+                        {uploadingKey === `${p.clientId}:img` ? "Uploading…" : "Upload"}
+                        <input
+                          type="file"
+                          accept="image/png,image/jpeg,image/webp,image/gif,image/svg+xml"
+                          className="hidden"
+                          disabled={uploadingKey === `${p.clientId}:img`}
+                          onChange={(e) => {
+                            const file = e.target.files?.[0];
+                            if (file) void handleCoverUpload(p.clientId, file);
+                            e.target.value = "";
+                          }}
+                        />
+                      </label>
+                    </div>
+                    {p.img && (
+                      <img src={p.img} alt="" className="mt-2 h-20 object-cover" style={{ background: "#1A1A18" }} />
+                    )}
                   </Field>
-                  <Field label="Gallery image URLs (one per line, optional)">
+                  <Field label="Gallery images (one URL per line, optional)">
                     <textarea style={{ ...inputStyle, minHeight: 60 }} value={p.gallery} onChange={(e) => updateProject(p.clientId, { gallery: e.target.value })} />
+                    <label
+                      className="inline-block mt-2 font-['DM_Mono',monospace] text-xs tracking-widest uppercase px-3 py-2 border cursor-pointer"
+                      style={{ color: "rgba(246,242,236,0.7)", borderColor: "rgba(246,242,236,0.2)" }}
+                    >
+                      {uploadingKey === `${p.clientId}:gallery` ? "Uploading…" : "Upload images"}
+                      <input
+                        type="file"
+                        accept="image/png,image/jpeg,image/webp,image/gif,image/svg+xml"
+                        multiple
+                        className="hidden"
+                        disabled={uploadingKey === `${p.clientId}:gallery`}
+                        onChange={(e) => {
+                          const files = e.target.files;
+                          if (files && files.length) void handleGalleryUpload(p.clientId, files);
+                          e.target.value = "";
+                        }}
+                      />
+                    </label>
                   </Field>
 
                   <div className="flex items-center gap-2 mb-3 mt-2">
