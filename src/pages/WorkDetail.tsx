@@ -1,5 +1,5 @@
 import { useParams, Link, useNavigate } from "react-router";
-import { useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { CORAL, DARK, CREAM, projects, additionalImages } from "@/app/data";
 
 function ArgLogo({ color }: { color: string }) {
@@ -40,6 +40,22 @@ export default function WorkDetail() {
   const currentIndex = projects.findIndex((p) => p.slug === slug);
   const nextProject = projects[(currentIndex + 1) % projects.length];
   const isGallery = project.slug === "additional-projects";
+
+  // Tag toggles for the gallery: derived automatically from whatever tags
+  // exist on additionalImages, so adding a tag to any image is all it takes
+  // to make a new toggle appear here — no other code changes needed.
+  const [activeTags, setActiveTags] = useState<string[]>([]);
+  const allTags = useMemo(
+    () => Array.from(new Set(additionalImages.flatMap((img) => img.tags))).sort(),
+    []
+  );
+  const toggleTag = (tag: string) => {
+    setActiveTags((prev) => (prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]));
+  };
+  const filteredImages =
+    activeTags.length === 0
+      ? additionalImages
+      : additionalImages.filter((img) => img.tags.some((t) => activeTags.includes(t)));
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: DARK, fontFamily: "'Epilogue', sans-serif" }}>
@@ -102,8 +118,29 @@ export default function WorkDetail() {
       {isGallery ? (
         /* Gallery of additional project images */
         <section className="px-6 md:px-10 py-24 md:py-32">
+          {allTags.length > 0 && (
+            <div className="flex flex-wrap gap-2 mb-10">
+              {allTags.map((tag) => {
+                const active = activeTags.includes(tag);
+                return (
+                  <button
+                    key={tag}
+                    onClick={() => toggleTag(tag)}
+                    className="font-['DM_Mono',monospace] text-xs tracking-widest uppercase px-3 py-1.5 border transition-colors duration-200"
+                    style={
+                      active
+                        ? { color: DARK, backgroundColor: CORAL, borderColor: CORAL }
+                        : { color: "rgba(246,242,236,0.5)", borderColor: "rgba(246,242,236,0.15)" }
+                    }
+                  >
+                    {tag}
+                  </button>
+                );
+              })}
+            </div>
+          )}
           <div style={{ columns: "3 280px", columnGap: "12px" }}>
-            {additionalImages.map((img) => (
+            {filteredImages.map((img) => (
               <div key={img.src} className="mb-3 overflow-hidden group cursor-pointer" style={{ breakInside: "avoid" }}>
                 <div className="relative overflow-hidden" style={{ background: "#1A1A18" }}>
                   <img src={img.src} alt={img.label} className="w-full h-auto block transition-transform duration-500 group-hover:scale-105" />
