@@ -89,7 +89,21 @@ export default async function handler(req, res) {
         };
       });
 
-    res.status(200).json({ projects });
+    const pinned = data.projects.find((p) => p.slug === "additional-projects") || {};
+    const additionalProjects = {
+      title: pinned.title || "Additional Projects",
+      category: pinned.category || "",
+      description: pinned.description || "",
+      img: pinned.img || "",
+      tags: pinned.tags || [],
+    };
+    const additionalImages = (data.additionalImages || []).map((img) => ({
+      src: img.src || "",
+      label: img.label || "",
+      tags: img.tags || [],
+    }));
+
+    res.status(200).json({ projects, additionalProjects, additionalImages });
   } catch (err) {
     res.status(500).json({ error: err.message || "Failed to load project data" });
   }

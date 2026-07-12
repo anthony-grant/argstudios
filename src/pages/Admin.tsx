@@ -23,6 +23,22 @@ type AdminProject = {
   gallery: string; // newline-separated in the UI
 };
 
+type AdminGalleryImage = {
+  clientId: string;
+  src: string;
+  label: string;
+  tags: string; // comma-separated in the UI
+};
+
+type AdminAdditional = {
+  title: string;
+  category: string;
+  description: string;
+  img: string;
+  tags: string; // comma-separated in the UI
+  images: AdminGalleryImage[];
+};
+
 let idCounter = 0;
 const newClientId = () => `new-${Date.now()}-${idCounter++}`;
 
@@ -118,6 +134,14 @@ export default function Admin() {
   const [checking, setChecking] = useState(false);
 
   const [projects, setProjects] = useState<AdminProject[]>([]);
+  const [additional, setAdditional] = useState<AdminAdditional>({
+    title: "",
+    category: "",
+    description: "",
+    img: "",
+    tags: "",
+    images: [],
+  });
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState("");
@@ -183,6 +207,63 @@ export default function Admin() {
     }
   }
 
+  async function handleAdditionalCoverUpload(file: File) {
+    const key = "additional:img";
+    setUploadingKey(key);
+    setUploadError("");
+    try {
+      const url = await uploadFile(file);
+      setAdditional((prev) => ({ ...prev, img: url }));
+    } catch (err: any) {
+      setUploadError(err.message || "Upload failed");
+    } finally {
+      setUploadingKey(null);
+    }
+  }
+
+  function updateGalleryImage(clientId: string, patch: Partial<AdminGalleryImage>) {
+    setAdditional((prev) => ({
+      ...prev,
+      images: prev.images.map((img) => (img.clientId === clientId ? { ...img, ...patch } : img)),
+    }));
+  }
+
+  function addGalleryImage() {
+    setAdditional((prev) => ({
+      ...prev,
+      images: [...prev.images, { clientId: newClientId(), src: "", label: "", tags: "" }],
+    }));
+  }
+
+  function removeGalleryImage(clientId: string) {
+    setAdditional((prev) => ({ ...prev, images: prev.images.filter((img) => img.clientId !== clientId) }));
+  }
+
+  function moveGalleryImage(clientId: string, dir: -1 | 1) {
+    setAdditional((prev) => {
+      const i = prev.images.findIndex((img) => img.clientId === clientId);
+      const j = i + dir;
+      if (i === -1 || j < 0 || j >= prev.images.length) return prev;
+      const next = [...prev.images];
+      [next[i], next[j]] = [next[j], next[i]];
+      return { ...prev, images: next };
+    });
+  }
+
+  async function handleGalleryImageUpload(clientId: string, file: File) {
+    const key = `image:${clientId}`;
+    setUploadingKey(key);
+    setUploadError("");
+    try {
+      const url = await uploadFile(file);
+      updateGalleryImage(clientId, { src: url });
+    } catch (err: any) {
+      setUploadError(err.message || "Upload failed");
+    } finally {
+      setUploadingKey(null);
+    }
+  }
+
   useEffect(() => {
     const cached = sessionStorage.getItem("adminPassword");
     if (cached) {
@@ -209,6 +290,19 @@ export default function Admin() {
       }
       const data = await res.json();
       setProjects(data.projects.map(fromApi));
+      setAdditional({
+        title: data.additionalProjects?.title || "",
+        category: data.additionalProjects?.category || "",
+        description: data.additionalProjects?.description || "",
+        img: data.additionalProjects?.img || "",
+        tags: (data.additionalProjects?.tags || []).join(", "),
+        images: (data.additionalImages || []).map((img: any) => ({
+          clientId: newClientId(),
+          src: img.src || "",
+          label: img.label || "",
+          tags: (img.tags || []).join(", "),
+        })),
+      });
       setAuthed(true);
       sessionStorage.setItem("adminPassword", pw);
     } catch {
@@ -269,11 +363,31 @@ export default function Admin() {
       return;
     }
 
+    const additionalProjects = {
+      title: additional.title.trim(),
+      category: additional.category.trim(),
+      description: additional.description.trim(),
+      img: additional.img.trim(),
+      tags: additional.tags.split(",").map((t) => t.trim()).filter(Boolean),
+    };
+    const additionalImagesPayload = additional.images
+      .map((img) => ({
+        src: img.src.trim(),
+        label: img.label.trim(),
+        tags: img.tags.split(",").map((t) => t.trim()).filter(Boolean),
+      }))
+      .filter((img) => img.src);
+
     try {
       const res = await fetch("/api/admin/save", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ password, projects: withSlugs.map(toApi) }),
+        body: JSON.stringify({
+          password,
+          projects: withSlugs.map(toApi),
+          additionalProjects,
+          additionalImages: additionalImagesPayload,
+        }),
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) {
@@ -482,6 +596,118 @@ export default function Admin() {
             >
               + Add project
             </button>
+
+            <div className="mb-6 pt-10" style={{ borderTop: "1px solid rgba(246,242,236,0.1)" }}>
+              <h2 className="font-['Bricolage_Grotesque',sans-serif] font-bold text-white text-2xl mb-1">Additional Projects</h2>
+              <p className="font-['DM_Mono',monospace] text-xs tracking-widest uppercase mb-6" style={{ color: "rgba(246,242,236,0.4)" }}>
+                The 7th list item and its tagged image gallery
+              </p>
+
+              <div className="border p-5 mb-6" style={{ borderColor: "rgba(246,242,236,0.12)" }}>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4">
+                  <Field label="Title">
+                    <input style={inputStyle} value={additional.title} onChange={(e) => setAdditional((prev) => ({ ...prev, title: e.target.value }))} />
+                  </Field>
+                  <Field label="Category">
+                    <input style={inputStyle} value={additional.category} onChange={(e) => setAdditional((prev) => ({ ...prev, category: e.target.value }))} />
+                  </Field>
+                </div>
+                <Field label="Description (hero text)">
+                  <textarea style={{ ...inputStyle, minHeight: 60 }} value={additional.description} onChange={(e) => setAdditional((prev) => ({ ...prev, description: e.target.value }))} />
+                </Field>
+                <Field label="Tags (comma-separated)">
+                  <input style={inputStyle} value={additional.tags} onChange={(e) => setAdditional((prev) => ({ ...prev, tags: e.target.value }))} />
+                </Field>
+                <Field label="Cover image">
+                  <div className="flex gap-2 items-start">
+                    <input style={inputStyle} placeholder="Image URL, or upload one" value={additional.img} onChange={(e) => setAdditional((prev) => ({ ...prev, img: e.target.value }))} />
+                    <label
+                      className="font-['DM_Mono',monospace] text-xs tracking-widest uppercase px-3 py-2 border cursor-pointer whitespace-nowrap"
+                      style={{ color: "rgba(246,242,236,0.7)", borderColor: "rgba(246,242,236,0.2)" }}
+                    >
+                      {uploadingKey === "additional:img" ? "Uploading…" : "Upload"}
+                      <input
+                        type="file"
+                        accept="image/png,image/jpeg,image/webp,image/gif,image/svg+xml"
+                        className="hidden"
+                        disabled={uploadingKey === "additional:img"}
+                        onChange={(e) => {
+                          const file = e.target.files?.[0];
+                          if (file) void handleAdditionalCoverUpload(file);
+                          e.target.value = "";
+                        }}
+                      />
+                    </label>
+                  </div>
+                  {additional.img && (
+                    <img src={additional.img} alt="" className="mt-2 h-20 object-cover" style={{ background: "#1A1A18" }} />
+                  )}
+                </Field>
+              </div>
+
+              <p className="font-['DM_Mono',monospace] text-xs tracking-widest uppercase mb-4" style={{ color: "rgba(246,242,236,0.4)" }}>
+                Gallery images ({additional.images.length})
+              </p>
+
+              <div className="space-y-4 mb-6">
+                {additional.images.map((img, i) => (
+                  <div key={img.clientId} className="border p-4" style={{ borderColor: "rgba(246,242,236,0.12)" }}>
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="font-['DM_Mono',monospace] text-xs" style={{ color: "rgba(246,242,236,0.4)" }}>Image {i + 1}</span>
+                      <div className="flex gap-3">
+                        <button type="button" onClick={() => moveGalleryImage(img.clientId, -1)} disabled={i === 0} className="font-['DM_Mono',monospace] text-xs disabled:opacity-20" style={{ color: "rgba(246,242,236,0.5)" }}>↑</button>
+                        <button type="button" onClick={() => moveGalleryImage(img.clientId, 1)} disabled={i === additional.images.length - 1} className="font-['DM_Mono',monospace] text-xs disabled:opacity-20" style={{ color: "rgba(246,242,236,0.5)" }}>↓</button>
+                        <button type="button" onClick={() => removeGalleryImage(img.clientId)} className="font-['DM_Mono',monospace] text-xs tracking-widest uppercase" style={{ color: CORAL }}>Delete</button>
+                      </div>
+                    </div>
+
+                    <Field label="Image">
+                      <div className="flex gap-2 items-start">
+                        <input style={inputStyle} placeholder="Image URL, or upload one" value={img.src} onChange={(e) => updateGalleryImage(img.clientId, { src: e.target.value })} />
+                        <label
+                          className="font-['DM_Mono',monospace] text-xs tracking-widest uppercase px-3 py-2 border cursor-pointer whitespace-nowrap"
+                          style={{ color: "rgba(246,242,236,0.7)", borderColor: "rgba(246,242,236,0.2)" }}
+                        >
+                          {uploadingKey === `image:${img.clientId}` ? "Uploading…" : "Upload"}
+                          <input
+                            type="file"
+                            accept="image/png,image/jpeg,image/webp,image/gif,image/svg+xml"
+                            className="hidden"
+                            disabled={uploadingKey === `image:${img.clientId}`}
+                            onChange={(e) => {
+                              const file = e.target.files?.[0];
+                              if (file) void handleGalleryImageUpload(img.clientId, file);
+                              e.target.value = "";
+                            }}
+                          />
+                        </label>
+                      </div>
+                      {img.src && (
+                        <img src={img.src} alt="" className="mt-2 h-16 object-cover" style={{ background: "#1A1A18" }} />
+                      )}
+                    </Field>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4">
+                      <Field label="Label">
+                        <input style={inputStyle} value={img.label} onChange={(e) => updateGalleryImage(img.clientId, { label: e.target.value })} />
+                      </Field>
+                      <Field label="Tags (comma-separated — powers the filter toggles)">
+                        <input style={inputStyle} value={img.tags} onChange={(e) => updateGalleryImage(img.clientId, { tags: e.target.value })} />
+                      </Field>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <button
+                type="button"
+                onClick={addGalleryImage}
+                className="font-['DM_Mono',monospace] text-xs tracking-widest uppercase px-4 py-2 border"
+                style={{ color: "rgba(246,242,236,0.7)", borderColor: "rgba(246,242,236,0.2)" }}
+              >
+                + Add image
+              </button>
+            </div>
 
             <div className="sticky bottom-0 py-4" style={{ backgroundColor: DARK, borderTop: "1px solid rgba(246,242,236,0.1)" }}>
               <button

@@ -135,7 +135,7 @@ export default async function handler(req, res) {
     return;
   }
 
-  const { password, projects: incoming } = req.body || {};
+  const { password, projects: incoming, additionalProjects, additionalImages } = req.body || {};
   if (password !== process.env.ADMIN_PASSWORD) {
     res.status(401).json({ error: "Incorrect password" });
     return;
@@ -153,10 +153,8 @@ export default async function handler(req, res) {
     const oldData = parseDataTs(dataFile.content);
     const oldProtected = parseProtected(protectedFile.content);
 
-    const pinned = oldData.projects.find((p) => p.slug === "additional-projects");
-    if (!pinned) {
-      throw new Error("Could not find the Additional Projects entry — aborting to avoid data loss");
-    }
+    const oldPinned = oldData.projects.find((p) => p.slug === "additional-projects");
+    const pinnedSource = additionalProjects || oldPinned || {};
 
     const seenSlugs = new Set();
     const newDataProjects = [];
@@ -213,9 +211,27 @@ export default async function handler(req, res) {
       }
     });
 
-    newDataProjects.push({ ...pinned, index: String(incoming.length + 1).padStart(2, "0") });
+    newDataProjects.push({
+      index: String(incoming.length + 1).padStart(2, "0"),
+      slug: "additional-projects",
+      title: pinnedSource.title || "Additional Projects",
+      category: pinnedSource.category || "",
+      description: pinnedSource.description || "",
+      img: pinnedSource.img || "",
+      tags: Array.isArray(pinnedSource.tags) ? pinnedSource.tags : [],
+    });
 
-    const newDataTs = renderDataTs(newDataProjects, oldData.additionalImages);
+    const newAdditionalImages = Array.isArray(additionalImages)
+      ? additionalImages
+          .map((img) => ({
+            src: (img.src || "").trim(),
+            label: (img.label || "").trim(),
+            tags: Array.isArray(img.tags) ? img.tags : [],
+          }))
+          .filter((img) => img.src)
+      : oldData.additionalImages || [];
+
+    const newDataTs = renderDataTs(newDataProjects, newAdditionalImages);
     const newProtectedJs = renderProtectedJs(newProtected);
 
     await ghPut("src/app/data.ts", newDataTs, dataFile.sha, "Admin panel: update project data");
