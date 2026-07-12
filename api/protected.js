@@ -2,29 +2,46 @@
 // It is never bundled into the client JavaScript, so the passwords and
 // content below are not visible to site visitors until unlocked.
 //
-// To change a password without touching code: set an environment variable
-// in Vercel (Project Settings -> Environment Variables) named e.g.
-// META_PASSWORD, then redeploy so the function picks it up.
-//
-// To protect another project:
-//   1. In src/app/data.ts, remove that project's `description`/`img` fields
-//      and add `protected: true`.
-//   2. Add an entry for it below, following the `meta` example.
+// Managed by the /admin panel — edit protected project content and
+// passwords there instead of hand-editing this file.
 
 const PROTECTED = {
-  meta: {
-    password: process.env.META_PASSWORD || "parrot",
-    content: {
-      description:
-        "Product Design Lead across multiple surfaces — translating complex social infrastructure and platform features into clear, usable experiences at scale.",
-      role: "",
-      approach: "",
-      outcome: "",
-      metric: null, // e.g. { value: "3.2M", label: "monthly active users onboarded" }
-      img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop&auto=format",
-      gallery: [],
-    },
+  "meta": {
+    "password": "parrot",
+    "content": {
+      "description": "Product Design Lead across multiple surfaces — translating complex social infrastructure and platform features into clear, usable experiences at scale.",
+      "role": "",
+      "approach": "",
+      "outcome": "",
+      "metric": null,
+      "img": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop&auto=format",
+      "gallery": []
+    }
   },
+  "branch": {
+    "password": "parrot",
+    "content": {
+      "description": "Designed core lending and financial product flows for Branch's mobile-first platform serving emerging markets across Africa and India.",
+      "role": "",
+      "approach": "",
+      "outcome": "",
+      "metric": null,
+      "img": "https://images.unsplash.com/photo-1607705703571-c5a8695f18f6?w=800&h=600&fit=crop&auto=format",
+      "gallery": []
+    }
+  },
+  "ujet": {
+    "password": "parrot",
+    "content": {
+      "description": "Shaped the product design direction for UJET's cloud contact-center platform — agent tooling, customer-facing flows, and omnichannel interaction design.",
+      "role": "",
+      "approach": "",
+      "outcome": "",
+      "metric": null,
+      "img": "https://images.unsplash.com/photo-1686061592689-312bbfb5c055?w=800&h=600&fit=crop&auto=format",
+      "gallery": []
+    }
+  }
 };
 
 export default function handler(req, res) {
