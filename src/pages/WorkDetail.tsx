@@ -41,10 +41,19 @@ export default function WorkDetail() {
   const nextProject = projects[(currentIndex + 1) % projects.length];
   const isGallery = project.slug === "additional-projects";
 
-  // Password-protected projects: the real content (description/img) never
-  // ships in the client bundle. It's fetched from api/protected.js only
-  // after a correct password, then cached in sessionStorage for the tab.
-  const [unlocked, setUnlocked] = useState<{ description: string; img: string } | null>(null);
+  // Password-protected projects: the real content never ships in the client
+  // bundle. It's fetched from api/protected.js only after a correct
+  // password, then cached in sessionStorage for the tab.
+  type CaseStudyContent = {
+    description: string;
+    role?: string;
+    approach?: string;
+    outcome?: string;
+    metric?: { value: string; label: string } | null;
+    img: string;
+    gallery?: string[];
+  };
+  const [unlocked, setUnlocked] = useState<CaseStudyContent | null>(null);
   const [passwordInput, setPasswordInput] = useState("");
   const [authError, setAuthError] = useState("");
   const [checking, setChecking] = useState(false);
@@ -106,6 +115,13 @@ export default function WorkDetail() {
     activeTags.length === 0
       ? additionalImages
       : additionalImages.filter((img) => img.tags.some((t) => activeTags.includes(t)));
+
+  // Unified content for the case-study body: protected projects only have
+  // this once unlocked, everyone else has it straight from data.ts.
+  const content: CaseStudyContent | null = project.protected
+    ? unlocked
+    : (project as unknown as CaseStudyContent);
+  const hasWriteup = Boolean(content?.role || content?.approach || content?.outcome);
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: DARK, fontFamily: "'Epilogue', sans-serif" }}>
@@ -194,7 +210,7 @@ export default function WorkDetail() {
               className="font-['Epilogue',sans-serif] font-light leading-relaxed"
               style={{ fontSize: "clamp(1.1rem, 2vw, 1.5rem)", color: "rgba(246,242,236,0.7)", maxWidth: "60ch" }}
             >
-              {unlocked ? unlocked.description : project.description}
+              {content?.description}
             </p>
           )}
         </div>
@@ -247,43 +263,106 @@ export default function WorkDetail() {
           {/* Cover image */}
           <section className="px-6 md:px-10 py-2">
             <div className="w-full overflow-hidden" style={{ aspectRatio: "16/9", background: "#1A1A18" }}>
-              <img src={unlocked ? unlocked.img : project.img} alt={project.title} className="w-full h-full object-cover opacity-80" />
+              <img src={content?.img} alt={project.title} className="w-full h-full object-cover opacity-80" />
             </div>
           </section>
 
-          {/* Placeholder content blocks */}
           <section className="px-6 md:px-10 py-24 md:py-32">
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-24">
-              <div className="md:col-span-3">
-                <p className="font-['DM_Mono',monospace] text-xs tracking-widest uppercase" style={{ color: "rgba(246,242,236,0.3)" }}>
-                  Overview
-                </p>
-              </div>
-              <div className="md:col-span-7">
-                <div
-                  className="w-full rounded-none flex items-center justify-center"
-                  style={{ height: 320, background: "#1A1A18", border: "1px solid rgba(246,242,236,0.08)" }}
-                >
-                  <p className="font-['DM_Mono',monospace] text-xs tracking-widest uppercase" style={{ color: "rgba(246,242,236,0.2)" }}>
-                    Case study coming soon
-                  </p>
-                </div>
-              </div>
-            </div>
+            {hasWriteup ? (
+              <>
+                {/* Role / Approach / Outcome */}
+                <div className="max-w-3xl space-y-16 mb-20">
+                  {content?.role && (
+                    <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8">
+                      <div className="md:col-span-3">
+                        <p className="font-['DM_Mono',monospace] text-xs tracking-widest uppercase" style={{ color: "rgba(246,242,236,0.3)" }}>
+                          Role
+                        </p>
+                      </div>
+                      <div className="md:col-span-9">
+                        <p className="font-['Epilogue',sans-serif] font-light leading-relaxed" style={{ fontSize: "1.15rem", color: "rgba(246,242,236,0.85)" }}>
+                          {content.role}
+                        </p>
+                      </div>
+                    </div>
+                  )}
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-              {[1, 2].map((n) => (
-                <div
-                  key={n}
-                  className="w-full flex items-center justify-center"
-                  style={{ height: 280, background: "#1A1A18", border: "1px solid rgba(246,242,236,0.08)" }}
-                >
-                  <p className="font-['DM_Mono',monospace] text-xs tracking-widest uppercase" style={{ color: "rgba(246,242,236,0.15)" }}>
-                    —
+                  {content?.approach && (
+                    <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8">
+                      <div className="md:col-span-3">
+                        <p className="font-['DM_Mono',monospace] text-xs tracking-widest uppercase" style={{ color: "rgba(246,242,236,0.3)" }}>
+                          Approach
+                        </p>
+                      </div>
+                      <div className="md:col-span-9">
+                        <p className="font-['Epilogue',sans-serif] font-light leading-relaxed" style={{ fontSize: "1.15rem", color: "rgba(246,242,236,0.85)" }}>
+                          {content.approach}
+                        </p>
+                      </div>
+                    </div>
+                  )}
+
+                  {content?.outcome && (
+                    <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8">
+                      <div className="md:col-span-3">
+                        <p className="font-['DM_Mono',monospace] text-xs tracking-widest uppercase" style={{ color: "rgba(246,242,236,0.3)" }}>
+                          Outcome
+                        </p>
+                      </div>
+                      <div className="md:col-span-9">
+                        <p className="font-['Epilogue',sans-serif] font-light leading-relaxed" style={{ fontSize: "1.15rem", color: "rgba(246,242,236,0.85)" }}>
+                          {content.outcome}
+                        </p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Metric callout */}
+                {content?.metric && (
+                  <div className="mb-20 pt-12 border-t" style={{ borderColor: "rgba(246,242,236,0.1)" }}>
+                    <p
+                      className="font-['Bricolage_Grotesque',sans-serif] font-bold leading-none tracking-tight mb-3"
+                      style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)", color: CORAL }}
+                    >
+                      {content.metric.value}
+                    </p>
+                    <p className="font-['DM_Mono',monospace] text-xs tracking-widest uppercase" style={{ color: "rgba(246,242,236,0.4)" }}>
+                      {content.metric.label}
+                    </p>
+                  </div>
+                )}
+
+                {/* Gallery — flexible, 0 to many images */}
+                {content?.gallery && content.gallery.length > 0 && (
+                  <div style={{ columns: "2 320px", columnGap: "12px" }}>
+                    {content.gallery.map((src) => (
+                      <div key={src} className="mb-3 overflow-hidden" style={{ breakInside: "avoid", background: "#1A1A18" }}>
+                        <img src={src} alt="" className="w-full h-auto block" />
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
+                <div className="md:col-span-3">
+                  <p className="font-['DM_Mono',monospace] text-xs tracking-widest uppercase" style={{ color: "rgba(246,242,236,0.3)" }}>
+                    Overview
                   </p>
                 </div>
-              ))}
-            </div>
+                <div className="md:col-span-7">
+                  <div
+                    className="w-full rounded-none flex items-center justify-center"
+                    style={{ height: 320, background: "#1A1A18", border: "1px solid rgba(246,242,236,0.08)" }}
+                  >
+                    <p className="font-['DM_Mono',monospace] text-xs tracking-widest uppercase" style={{ color: "rgba(246,242,236,0.2)" }}>
+                      Case study coming soon
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
           </section>
         </>
       )}

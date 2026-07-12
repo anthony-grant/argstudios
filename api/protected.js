@@ -17,7 +17,12 @@ const PROTECTED = {
     content: {
       description:
         "Product Design Lead across multiple surfaces — translating complex social infrastructure and platform features into clear, usable experiences at scale.",
+      role: "",
+      approach: "",
+      outcome: "",
+      metric: null, // e.g. { value: "3.2M", label: "monthly active users onboarded" }
       img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop&auto=format",
+      gallery: [],
     },
   },
 };
