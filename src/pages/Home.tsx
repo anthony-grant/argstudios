@@ -127,7 +127,7 @@ function Hero() {
       className="relative min-h-screen md:h-screen flex flex-col overflow-hidden"
       style={{ backgroundColor: CORAL, padding: "0 clamp(1.5rem, 4vw, 60px)" }}
     >
-      <div ref={outerRef} className="w-full" style={{ height: "60vh", paddingTop: "clamp(72px, 9vh, 100px)" }}>
+      <div ref={outerRef} className="w-full" style={{ height: "60vh", paddingTop: "clamp(130px, 15vh, 180px)" }}>
         <div ref={innerRef} className="w-full h-full overflow-hidden">
           <h1
             ref={textRef}
