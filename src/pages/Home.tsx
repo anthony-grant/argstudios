@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router";
+import { Lock } from "lucide-react";
 import imgPortrait from "@/imports/ContentBlock1/portrait.webp";
 import { CORAL, DARK, CREAM, projects } from "@/app/data";
 
@@ -194,10 +195,17 @@ function WorkRow({ project }: { project: typeof projects[0] }) {
 
           <div className="col-span-8 md:col-span-6">
             <h3
-              className="font-['Bricolage_Grotesque',sans-serif] font-bold leading-none tracking-tight transition-colors duration-300"
+              className="font-['Bricolage_Grotesque',sans-serif] font-bold leading-none tracking-tight transition-colors duration-300 flex items-center gap-3"
               style={{ fontSize: "clamp(1.8rem, 4.5vw, 5rem)", color: hovered ? DARK : "#F6F2EC" }}
             >
               {project.title}
+              {project.protected && (
+                <Lock
+                  aria-label="Password protected"
+                  style={{ width: "0.55em", height: "0.55em", flexShrink: 0 }}
+                  strokeWidth={2.5}
+                />
+              )}
             </h3>
           </div>
 
