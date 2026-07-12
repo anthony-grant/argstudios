@@ -8,9 +8,10 @@ export const projects = [
     slug: "meta",
     title: "Meta",
     category: "Product Design",
-    description: "Product Design Lead across multiple surfaces — translating complex social infrastructure and platform features into clear, usable experiences at scale.",
-    img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop&auto=format",
     tags: ["Product", "Systems", "Lead"],
+    protected: true,
+    // description/img intentionally omitted — served only after a correct
+    // password via api/protected.js, so they're never in the public bundle.
   },
   {
     index: "02",

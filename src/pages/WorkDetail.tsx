@@ -41,6 +41,56 @@ export default function WorkDetail() {
   const nextProject = projects[(currentIndex + 1) % projects.length];
   const isGallery = project.slug === "additional-projects";
 
+  // Password-protected projects: the real content (description/img) never
+  // ships in the client bundle. It's fetched from api/protected.js only
+  // after a correct password, then cached in sessionStorage for the tab.
+  const [unlocked, setUnlocked] = useState<{ description: string; img: string } | null>(null);
+  const [passwordInput, setPasswordInput] = useState("");
+  const [authError, setAuthError] = useState("");
+  const [checking, setChecking] = useState(false);
+  const isLocked = Boolean(project.protected) && !unlocked;
+
+  useEffect(() => {
+    setUnlocked(null);
+    setPasswordInput("");
+    setAuthError("");
+    if (project.protected) {
+      const cached = sessionStorage.getItem(`unlocked:${slug}`);
+      if (cached) {
+        try {
+          setUnlocked(JSON.parse(cached));
+        } catch {
+          sessionStorage.removeItem(`unlocked:${slug}`);
+        }
+      }
+    }
+  }, [slug]);
+
+  async function handleUnlock(e: React.FormEvent) {
+    e.preventDefault();
+    setChecking(true);
+    setAuthError("");
+    try {
+      const res = await fetch("/api/protected", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ slug, password: passwordInput }),
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        setAuthError(data.error || "Incorrect password");
+        return;
+      }
+      const data = await res.json();
+      sessionStorage.setItem(`unlocked:${slug}`, JSON.stringify(data));
+      setUnlocked(data);
+    } catch {
+      setAuthError("Something went wrong. Try again.");
+    } finally {
+      setChecking(false);
+    }
+  }
+
   // Tag toggles for the gallery: derived automatically from whatever tags
   // exist on additionalImages, so adding a tag to any image is all it takes
   // to make a new toggle appear here — no other code changes needed.
@@ -106,12 +156,47 @@ export default function WorkDetail() {
             ))}
           </div>
 
-          <p
-            className="font-['Epilogue',sans-serif] font-light leading-relaxed"
-            style={{ fontSize: "clamp(1.1rem, 2vw, 1.5rem)", color: "rgba(246,242,236,0.7)", maxWidth: "60ch" }}
-          >
-            {project.description}
-          </p>
+          {isLocked ? (
+            <form onSubmit={handleUnlock} className="max-w-sm">
+              <p
+                className="font-['DM_Mono',monospace] text-xs tracking-widest uppercase mb-4"
+                style={{ color: "rgba(246,242,236,0.4)" }}
+              >
+                This project is password protected
+              </p>
+              <div className="flex gap-2">
+                <input
+                  type="password"
+                  value={passwordInput}
+                  onChange={(e) => setPasswordInput(e.target.value)}
+                  placeholder="Enter password"
+                  autoFocus
+                  className="flex-1 bg-transparent border px-3 py-2 font-['Epilogue',sans-serif] text-white outline-none"
+                  style={{ borderColor: "rgba(246,242,236,0.2)" }}
+                />
+                <button
+                  type="submit"
+                  disabled={checking}
+                  className="font-['DM_Mono',monospace] text-xs tracking-widest uppercase px-4 py-2 border transition-colors disabled:opacity-50"
+                  style={{ color: DARK, backgroundColor: CORAL, borderColor: CORAL }}
+                >
+                  {checking ? "Checking…" : "Unlock"}
+                </button>
+              </div>
+              {authError && (
+                <p className="font-['DM_Mono',monospace] text-xs mt-3" style={{ color: CORAL }}>
+                  {authError}
+                </p>
+              )}
+            </form>
+          ) : (
+            <p
+              className="font-['Epilogue',sans-serif] font-light leading-relaxed"
+              style={{ fontSize: "clamp(1.1rem, 2vw, 1.5rem)", color: "rgba(246,242,236,0.7)", maxWidth: "60ch" }}
+            >
+              {unlocked ? unlocked.description : project.description}
+            </p>
+          )}
         </div>
       </section>
 
@@ -157,12 +242,12 @@ export default function WorkDetail() {
             ))}
           </div>
         </section>
-      ) : (
+      ) : isLocked ? null : (
         <>
           {/* Cover image */}
           <section className="px-6 md:px-10 py-2">
             <div className="w-full overflow-hidden" style={{ aspectRatio: "16/9", background: "#1A1A18" }}>
-              <img src={project.img} alt={project.title} className="w-full h-full object-cover opacity-80" />
+              <img src={unlocked ? unlocked.img : project.img} alt={project.title} className="w-full h-full object-cover opacity-80" />
             </div>
           </section>
 
