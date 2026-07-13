@@ -146,7 +146,7 @@ export const additionalImages = [
   {
     "slug": "slowfeed-zine",
     "src": "/uploads/sq-slowfeed-1783983414383.png",
-    "label": "slowfeed-zine",
+    "label": "slowfeed zine",
     "tags": [
       "ai",
       "experimental publication"
