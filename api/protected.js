@@ -24,7 +24,7 @@ const PROTECTED = {
     "content": {
       "description": "Designed core lending and financial product flows for Branch's mobile-first platform serving emerging markets across Africa and India.",
       "role": "Lead Product Designer",
-      "approach": "",
+      "approach": "123",
       "outcome": "",
       "metric": {
         "value": "30 million",
