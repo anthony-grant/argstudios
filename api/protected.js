@@ -16,7 +16,7 @@ const PROTECTED = {
       "metric": null,
       "img": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop&auto=format",
       "gallery": [],
-      "demo": null
+      "demo": { "url": "/work/meta/presentation", "label": "View presentation" }
     }
   },
   "branch": {
