@@ -142,7 +142,7 @@ export const additionalImages = [
     "label": "Dub 4 the Dancefloor",
     "tags": [],
     "description": "",
-    "linkUrl": "",
+    "linkUrl": "https://www.tomaspalermo.com/label",
     "linkLabel": ""
   },
   {
