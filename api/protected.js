@@ -10,9 +10,9 @@ const PROTECTED = {
     "password": "parrot",
     "content": {
       "description": "Lead Product Designer for Ads Integration Portal—a governance tool used by 100+ teams to review and approve every feature launch into Ads Manager before it reaches advertisers. Reduced TTM from 56 days to 9 days—an 84% improvement over four years. Led and or contributed to multiple product and process improvements.",
-      "role": "",
-      "approach": "",
-      "outcome": "",
+      "role": "Lead Product Designer",
+      "approach": "If you don't have a hard number, even a rough scope number helps (\"used by 12 product teams,\" \"reviews ~40 launches a quarter\") — it does more work than \"high-quality\" ever will. Do you have any usage or efficiency numbers for this project, even approximate ones?",
+      "outcome": "Reduced TTM by 84% over four years\nIncreased peer reviewer capacity by XX%",
       "metric": null,
       "img": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop&auto=format",
       "gallery": [],
