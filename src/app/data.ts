@@ -145,7 +145,7 @@ export const projects = [
 export const additionalImages = [
   {
     "slug": "slowfeed-zine",
-    "src": "/uploads/slowfeed-zines-1783983262071.jpg/uploads/hero-slowfeed-1783982232787.png",
+    "src": "/uploads/sq-slowfeed-1783983414383.png",
     "label": "slowfeed-zine",
     "tags": [
       "ai",
