@@ -279,12 +279,14 @@ export default function WorkDetail() {
         </section>
       ) : isLocked ? null : (
         <>
-          {/* Cover image */}
-          <section className="px-6 md:px-10 py-2">
-            <div className="w-full overflow-hidden" style={{ aspectRatio: "16/9", background: "#1A1A18" }}>
-              <img src={content?.img} alt={project.title} className="w-full h-full object-cover opacity-80" />
-            </div>
-          </section>
+          {/* Cover image — only rendered when one is actually set */}
+          {content?.img && (
+            <section className="px-6 md:px-10 py-2">
+              <div className="w-full overflow-hidden" style={{ aspectRatio: "16/9", background: "#1A1A18" }}>
+                <img src={content.img} alt={project.title} className="w-full h-full object-cover opacity-80" />
+              </div>
+            </section>
+          )}
 
           <section className="px-6 md:px-10 py-24 md:py-32">
             {hasWriteup ? (
