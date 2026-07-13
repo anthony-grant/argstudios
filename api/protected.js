@@ -37,11 +37,11 @@ const PROTECTED = {
         "value": "30 million",
         "label": "Downloads"
       },
-      "img": "",
+      "img": "/uploads/hero-branch-1783976880696.png",
       "video": "",
-      "overlayColor": "",
-      "overlayOpacity": 0,
-      "backgroundColor": "",
+      "overlayColor": "#19355e",
+      "overlayOpacity": 0.98,
+      "backgroundColor": "#19355e",
       "gallery": [
         "/uploads/work-branch-1-1783965043976.png",
         "/uploads/work-branch-4-1783965053000.png",
