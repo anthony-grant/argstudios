@@ -60,9 +60,9 @@ export const projects = [
     "video": "",
     "overlayColor": "",
     "overlayOpacity": 0,
+    "overlayBlendMode": "normal",
     "backgroundColor": "",
     "gallery": [],
-    "overlayBlendMode": "normal",
     "galleryModal": false,
     "demos": []
   },
@@ -85,9 +85,9 @@ export const projects = [
     "video": "",
     "overlayColor": "",
     "overlayOpacity": 0,
+    "overlayBlendMode": "normal",
     "backgroundColor": "",
     "gallery": [],
-    "overlayBlendMode": "normal",
     "galleryModal": false,
     "demos": []
   },
@@ -110,9 +110,9 @@ export const projects = [
     "video": "",
     "overlayColor": "",
     "overlayOpacity": 0,
+    "overlayBlendMode": "normal",
     "backgroundColor": "",
     "gallery": [],
-    "overlayBlendMode": "normal",
     "galleryModal": false,
     "demos": []
   },
@@ -126,13 +126,13 @@ export const projects = [
     "video": "",
     "overlayColor": "#b51a00",
     "overlayOpacity": 0.98,
+    "overlayBlendMode": "normal",
     "backgroundColor": "",
     "tags": [
       "Brand",
       "Illustration",
       "Collection"
-    ],
-    "overlayBlendMode": "normal"
+    ]
   }
 ];
 
@@ -168,7 +168,8 @@ export const additionalImages = [
     "linkUrl": "https://www.goodcigar.co",
     "linkLabel": "",
     "extraImages": [
-      "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1539341602778-49A5PLXY2266UEC4W28R/good_cigar_pouch_mock.jpg?format=750w"
+      "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1539341602778-49A5PLXY2266UEC4W28R/good_cigar_pouch_mock.jpg?format=750w",
+      "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1539341604989-XT8CX3IH8LQSSH6RBMR1/gcc_box.jpg?format=2500w"
     ]
   },
   {
@@ -250,20 +251,13 @@ export const additionalImages = [
     "extraImages": []
   },
   {
-    "slug": "good-cigar-co-mailer",
-    "src": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1539341602778-49A5PLXY2266UEC4W28R/good_cigar_pouch_mock.jpg?format=750w",
-    "label": "Good Cigar Co. Mailer",
-    "tags": [],
-    "description": "",
-    "linkUrl": "",
-    "linkLabel": "",
-    "extraImages": []
-  },
-  {
     "slug": "weathertoons",
     "src": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1451181065179-FT4UCR6PDO2W56QN0H2J/logos_illos_wt.png?format=750w",
     "label": "WeatherToons",
-    "tags": [],
+    "tags": [
+      "brand",
+      "iOS app"
+    ],
     "description": "",
     "linkUrl": "",
     "linkLabel": "",
@@ -273,7 +267,9 @@ export const additionalImages = [
     "slug": "resonant-people",
     "src": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1539338961595-899VPQ9DBWVIGFJYU6JG/logos_illos_resonantpeople.png?format=750w",
     "label": "Resonant People",
-    "tags": [],
+    "tags": [
+      "brand"
+    ],
     "description": "",
     "linkUrl": "",
     "linkLabel": "",
@@ -283,7 +279,10 @@ export const additionalImages = [
     "slug": "silverlake-ramen",
     "src": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1539338961757-FYM7FV0M01283NHUYQ0B/logos_illos_slr.png?format=750w",
     "label": "Silverlake Ramen",
-    "tags": [],
+    "tags": [
+      "brand",
+      "comms"
+    ],
     "description": "",
     "linkUrl": "",
     "linkLabel": "",
@@ -293,7 +292,11 @@ export const additionalImages = [
     "slug": "eventbrite-sxsw",
     "src": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1451179728518-422ED2NQV2REYDJNAO4Y/logos_illos_ebsxsw.png?format=750w",
     "label": "Eventbrite SXSW",
-    "tags": [],
+    "tags": [
+      "brand",
+      "comms",
+      "experiential marketing"
+    ],
     "description": "",
     "linkUrl": "",
     "linkLabel": "",
@@ -303,7 +306,9 @@ export const additionalImages = [
     "slug": "livestop",
     "src": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1556232862486-QU9WKSUSJ5S0RN0WRGXK/POV-Primary.png?format=750w",
     "label": "Livestop",
-    "tags": [],
+    "tags": [
+      "brand"
+    ],
     "description": "",
     "linkUrl": "",
     "linkLabel": "",
@@ -313,7 +318,9 @@ export const additionalImages = [
     "slug": "urban-fit-sf",
     "src": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1539296002131-F0TWJMB0L1RDDEHUJKKF/logos_illos_urbanfitsf.png?format=750w",
     "label": "Urban Fit SF",
-    "tags": [],
+    "tags": [
+      "brand"
+    ],
     "description": "",
     "linkUrl": "",
     "linkLabel": "",
@@ -323,7 +330,9 @@ export const additionalImages = [
     "slug": "infinity-search-partners",
     "src": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1451179728986-LZI2A71411SVXI2WSC2E/logos_illos_infinitysearch.png?format=750w",
     "label": "Infinity Search Partners",
-    "tags": [],
+    "tags": [
+      "brand"
+    ],
     "description": "",
     "linkUrl": "",
     "linkLabel": "",
@@ -333,7 +342,9 @@ export const additionalImages = [
     "slug": "pillow-ai",
     "src": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1465961226086-21QO13QV9SMGBLDGEXQ6/pillow_ai_logo_c5_a__c5_a_.png?format=750w",
     "label": "Pillow.ai",
-    "tags": [],
+    "tags": [
+      "brand"
+    ],
     "description": "",
     "linkUrl": "",
     "linkLabel": "",
@@ -343,7 +354,10 @@ export const additionalImages = [
     "slug": "moonlighting-sf",
     "src": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1451974923620-F3676AIAVS9LYCEIXMRZ/logos_illos_moonlighting.png?format=750w",
     "label": "Moonlighting SF",
-    "tags": [],
+    "tags": [
+      "brand",
+      "comms"
+    ],
     "description": "",
     "linkUrl": "",
     "linkLabel": "",
@@ -353,31 +367,37 @@ export const additionalImages = [
     "slug": "livestop-2",
     "src": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1451179729440-ODZI3BXG9L7SHOHPS0II/logos_illos_livestop.png?format=750w",
     "label": "Livestop",
-    "tags": [],
+    "tags": [
+      "brans",
+      "web development"
+    ],
     "description": "",
     "linkUrl": "",
     "linkLabel": "",
     "extraImages": []
   },
   {
-    "slug": "editlift",
-    "src": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1451179728637-X7QUH96KMXTPSNJVKAHU/logos_illos_editlift.png?format=750w",
-    "label": "EditLift",
-    "tags": [],
-    "description": "",
-    "linkUrl": "",
+    "slug": "black-collagists-rebrand",
+    "src": "/uploads/black-collagists-2x-1783978271170.png",
+    "label": "Black Collagists Rebrand",
+    "tags": [
+      "brand"
+    ],
+    "description": "Black Collagists is a community founded by acclaimed writer / curator Teri Henderson which creates \nspace enabling artists to be showcased in virtual and physical spaces.",
+    "linkUrl": "https://www.instagram.com/blackcollagists/",
     "linkLabel": "",
-    "extraImages": []
-  },
-  {
-    "slug": "evil-jerk-food-truck",
-    "src": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1451184651657-Z0RRMYYUE03IAH7GTG37/logos_illos_evljrk_stamp.png?format=750w",
-    "label": "Evil Jerk Food Truck",
-    "tags": [],
-    "description": "",
-    "linkUrl": "",
-    "linkLabel": "",
-    "extraImages": []
+    "extraImages": [
+      "/uploads/black-collagists-2023-edited-1-1783979269498.png",
+      "/uploads/black-collagists-2023-edited-10-1783979270669.png",
+      "/uploads/black-collagists-2023-edited-9-1783979272399.png",
+      "/uploads/black-collagists-2023-edited-8-1783979273796.png",
+      "/uploads/black-collagists-2023-edited-7-1783979275550.png",
+      "/uploads/black-collagists-2023-edited-6-1783979278214.png",
+      "/uploads/black-collagists-2023-edited-5-1783979281174.png",
+      "/uploads/black-collagists-2023-edited-4-1783979282713.png",
+      "/uploads/black-collagists-2023-edited-3-1783979284010.png",
+      "/uploads/black-collagists-2023-edited-2-1783979285308.png"
+    ]
   }
 ];
 
