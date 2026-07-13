@@ -1,10 +1,23 @@
-import { useParams, Link } from "react-router";
+import { useParams, Link, useNavigate } from "react-router";
 import { CORAL, DARK, CREAM, additionalImages } from "@/app/data";
 import { renderLinkedText } from "@/lib/linkedText";
 
 export default function AdditionalProjectDetail() {
   const { slug } = useParams();
+  const navigate = useNavigate();
   const img = additionalImages.find((i) => i.slug === slug);
+
+  const handleBack = () => {
+    // Prefer real browser history so "back" returns to wherever the visitor
+    // actually came from (the gallery, the homepage, a filtered view, etc.).
+    // Only fall back to a fixed destination if there's no history to go to
+    // (e.g. the page was opened directly from a shared link).
+    if (window.history.length > 1) {
+      navigate(-1);
+    } else {
+      navigate("/work/additional-projects");
+    }
+  };
 
   if (!img) {
     return (
@@ -20,13 +33,14 @@ export default function AdditionalProjectDetail() {
   return (
     <div className="min-h-screen" style={{ backgroundColor: DARK, color: CREAM }}>
       <div className="px-6 md:px-10 pt-10">
-        <Link
-          to="/#work"
-          className="font-['DM_Mono',monospace] text-xs tracking-widest uppercase inline-flex items-center gap-1.5"
-          style={{ color: "rgba(246,242,236,0.6)" }}
+        <button
+          type="button"
+          onClick={handleBack}
+          className="font-['DM_Mono',monospace] text-xs tracking-widest uppercase inline-flex items-center gap-1.5 hover:opacity-60 transition-opacity"
+          style={{ color: "rgba(246,242,236,0.6)", background: "none", border: "none", cursor: "pointer", padding: 0 }}
         >
           ← Back
-        </Link>
+        </button>
       </div>
 
       <div className="px-6 md:px-10 pt-10 pb-6" style={{ background: "#1A1A18" }}>
@@ -56,6 +70,18 @@ export default function AdditionalProjectDetail() {
           </a>
         )}
       </div>
+
+      {img.extraImages && img.extraImages.length > 0 && (
+        <div className="px-6 md:px-10 pb-24 md:pb-32">
+          <div className="max-w-5xl mx-auto flex flex-col gap-3">
+            {img.extraImages.map((src) => (
+              <div key={src} className="overflow-hidden" style={{ background: "#1A1A18" }}>
+                <img src={src} alt="" className="w-full h-auto block" />
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

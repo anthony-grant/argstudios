@@ -273,6 +273,9 @@ export default async function handler(req, res) {
               description: (img.description || "").trim(),
               linkUrl: (img.linkUrl || "").trim(),
               linkLabel: (img.linkLabel || "").trim(),
+              extraImages: Array.isArray(img.extraImages)
+                ? img.extraImages.map((u) => (u || "").trim()).filter(Boolean)
+                : [],
             };
           })
           .filter((img) => img.src)

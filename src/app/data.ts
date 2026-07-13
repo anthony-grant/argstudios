@@ -146,7 +146,8 @@ export const additionalImages = [
     ],
     "description": "Provided multiple album cover designs for the independent recording label Voltage Music which has a focus on dub, reggae, and dancehall music.",
     "linkUrl": "https://www.tomaspalermo.com/label",
-    "linkLabel": ""
+    "linkLabel": "",
+    "extraImages": []
   },
   {
     "slug": "good-cigar-co",
@@ -158,7 +159,8 @@ export const additionalImages = [
     ],
     "description": "Provided the initial branding and packaging for an independent D2C cigar subscription product. Typographically driven, the simple yet striking logotype and package design was inspired by the 'smoke' that is emitted from a lit cigar. Launched by Will McQuain in 2016 this brand was acquired in 2019.",
     "linkUrl": "https://www.goodcigar.co",
-    "linkLabel": ""
+    "linkLabel": "",
+    "extraImages": []
   },
   {
     "slug": "dub-4-the-dancefloor",
@@ -170,7 +172,8 @@ export const additionalImages = [
     ],
     "description": "Album cover design for the independent recording label Voltage Music which has a focus on dub, reggae, and dancehall music.",
     "linkUrl": "https://www.tomaspalermo.com/label",
-    "linkLabel": ""
+    "linkLabel": "",
+    "extraImages": []
   },
   {
     "slug": "tilt",
@@ -183,7 +186,8 @@ export const additionalImages = [
     ],
     "description": "Remember those days when you were just starting out, and having total financial freedom was something you could only dream of? Tilt changed that dynamic by making it easy for groups of people to pool their money together to fund events, book trips, or pitch in to help someone in need. Although we were eventually acquired by Airbnb, Tilt was a deeply loved brand throughout its lifetime. I had the privilege of working alongside an insanely talented team—including sharp product managers, brilliant social media strategists, and a legendary copywriter—to take Tilt from a scrappy startup idea to a frat-household name.",
     "linkUrl": "",
-    "linkLabel": ""
+    "linkLabel": "",
+    "extraImages": []
   },
   {
     "slug": "jacquline-k",
@@ -192,7 +196,8 @@ export const additionalImages = [
     "tags": [],
     "description": "",
     "linkUrl": "",
-    "linkLabel": ""
+    "linkLabel": "",
+    "extraImages": []
   },
   {
     "slug": "seltz-co",
@@ -201,7 +206,8 @@ export const additionalImages = [
     "tags": [],
     "description": "",
     "linkUrl": "",
-    "linkLabel": ""
+    "linkLabel": "",
+    "extraImages": []
   },
   {
     "slug": "evil-jerk",
@@ -210,7 +216,8 @@ export const additionalImages = [
     "tags": [],
     "description": "",
     "linkUrl": "",
-    "linkLabel": ""
+    "linkLabel": "",
+    "extraImages": []
   },
   {
     "slug": "sf-green-film-festival",
@@ -219,7 +226,8 @@ export const additionalImages = [
     "tags": [],
     "description": "",
     "linkUrl": "",
-    "linkLabel": ""
+    "linkLabel": "",
+    "extraImages": []
   },
   {
     "slug": "good-cigar-co-box",
@@ -228,7 +236,8 @@ export const additionalImages = [
     "tags": [],
     "description": "",
     "linkUrl": "",
-    "linkLabel": ""
+    "linkLabel": "",
+    "extraImages": []
   },
   {
     "slug": "hetchy-vodka",
@@ -237,7 +246,8 @@ export const additionalImages = [
     "tags": [],
     "description": "",
     "linkUrl": "",
-    "linkLabel": ""
+    "linkLabel": "",
+    "extraImages": []
   },
   {
     "slug": "good-cigar-co-mailer",
@@ -246,7 +256,8 @@ export const additionalImages = [
     "tags": [],
     "description": "",
     "linkUrl": "",
-    "linkLabel": ""
+    "linkLabel": "",
+    "extraImages": []
   },
   {
     "slug": "weathertoons",
@@ -255,7 +266,8 @@ export const additionalImages = [
     "tags": [],
     "description": "",
     "linkUrl": "",
-    "linkLabel": ""
+    "linkLabel": "",
+    "extraImages": []
   },
   {
     "slug": "resonant-people",
@@ -264,7 +276,8 @@ export const additionalImages = [
     "tags": [],
     "description": "",
     "linkUrl": "",
-    "linkLabel": ""
+    "linkLabel": "",
+    "extraImages": []
   },
   {
     "slug": "silverlake-ramen",
@@ -273,7 +286,8 @@ export const additionalImages = [
     "tags": [],
     "description": "",
     "linkUrl": "",
-    "linkLabel": ""
+    "linkLabel": "",
+    "extraImages": []
   },
   {
     "slug": "eventbrite-sxsw",
@@ -282,7 +296,8 @@ export const additionalImages = [
     "tags": [],
     "description": "",
     "linkUrl": "",
-    "linkLabel": ""
+    "linkLabel": "",
+    "extraImages": []
   },
   {
     "slug": "livestop",
@@ -291,7 +306,8 @@ export const additionalImages = [
     "tags": [],
     "description": "",
     "linkUrl": "",
-    "linkLabel": ""
+    "linkLabel": "",
+    "extraImages": []
   },
   {
     "slug": "urban-fit-sf",
@@ -300,7 +316,8 @@ export const additionalImages = [
     "tags": [],
     "description": "",
     "linkUrl": "",
-    "linkLabel": ""
+    "linkLabel": "",
+    "extraImages": []
   },
   {
     "slug": "infinity-search-partners",
@@ -309,7 +326,8 @@ export const additionalImages = [
     "tags": [],
     "description": "",
     "linkUrl": "",
-    "linkLabel": ""
+    "linkLabel": "",
+    "extraImages": []
   },
   {
     "slug": "pillow-ai",
@@ -318,7 +336,8 @@ export const additionalImages = [
     "tags": [],
     "description": "",
     "linkUrl": "",
-    "linkLabel": ""
+    "linkLabel": "",
+    "extraImages": []
   },
   {
     "slug": "moonlighting-sf",
@@ -327,7 +346,8 @@ export const additionalImages = [
     "tags": [],
     "description": "",
     "linkUrl": "",
-    "linkLabel": ""
+    "linkLabel": "",
+    "extraImages": []
   },
   {
     "slug": "livestop-2",
@@ -336,7 +356,8 @@ export const additionalImages = [
     "tags": [],
     "description": "",
     "linkUrl": "",
-    "linkLabel": ""
+    "linkLabel": "",
+    "extraImages": []
   },
   {
     "slug": "editlift",
@@ -345,7 +366,8 @@ export const additionalImages = [
     "tags": [],
     "description": "",
     "linkUrl": "",
-    "linkLabel": ""
+    "linkLabel": "",
+    "extraImages": []
   },
   {
     "slug": "evil-jerk-food-truck",
@@ -354,7 +376,8 @@ export const additionalImages = [
     "tags": [],
     "description": "",
     "linkUrl": "",
-    "linkLabel": ""
+    "linkLabel": "",
+    "extraImages": []
   }
 ];
 

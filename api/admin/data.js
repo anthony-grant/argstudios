@@ -114,6 +114,7 @@ export default async function handler(req, res) {
       description: img.description || "",
       linkUrl: img.linkUrl || "",
       linkLabel: img.linkLabel || "",
+      extraImages: Array.isArray(img.extraImages) ? img.extraImages : [],
     }));
 
     const homeHero = data.homeHero || {};

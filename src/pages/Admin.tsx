@@ -39,6 +39,7 @@ type AdminGalleryImage = {
   description: string;
   linkUrl: string;
   linkLabel: string;
+  extraImages: string; // comma-separated URLs in the UI
 };
 
 type AdminAdditional = {
@@ -321,7 +322,7 @@ export default function Admin() {
       ...prev,
       images: [
         ...prev.images,
-        { clientId: newClientId(), slug: "", src: "", label: "", tags: "", description: "", linkUrl: "", linkLabel: "" },
+        { clientId: newClientId(), slug: "", src: "", label: "", tags: "", description: "", linkUrl: "", linkLabel: "", extraImages: "" },
       ],
     }));
   }
@@ -348,6 +349,30 @@ export default function Admin() {
     try {
       const url = await uploadFile(file);
       updateGalleryImage(clientId, { src: url });
+    } catch (err: any) {
+      setUploadError(err.message || "Upload failed");
+    } finally {
+      setUploadingKey(null);
+    }
+  }
+
+  async function handleExtraImagesUpload(clientId: string, files: FileList) {
+    const key = `extra:${clientId}`;
+    setUploadingKey(key);
+    setUploadError("");
+    try {
+      const urls: string[] = [];
+      for (const file of Array.from(files)) {
+        urls.push(await uploadFile(file));
+      }
+      setAdditional((prev) => ({
+        ...prev,
+        images: prev.images.map((img) =>
+          img.clientId === clientId
+            ? { ...img, extraImages: [img.extraImages, ...urls].filter(Boolean).join(", ") }
+            : img
+        ),
+      }));
     } catch (err: any) {
       setUploadError(err.message || "Upload failed");
     } finally {
@@ -400,6 +425,7 @@ export default function Admin() {
           description: img.description || "",
           linkUrl: img.linkUrl || "",
           linkLabel: img.linkLabel || "",
+          extraImages: (img.extraImages || []).join(", "),
         })),
       });
       setHomeHero({
@@ -501,6 +527,7 @@ export default function Admin() {
         description: img.description.trim(),
         linkUrl: img.linkUrl.trim(),
         linkLabel: img.linkLabel.trim(),
+        extraImages: img.extraImages.split(",").map((u) => u.trim()).filter(Boolean),
       }))
       .filter((img) => img.src);
 
@@ -924,6 +951,40 @@ export default function Admin() {
                         <input style={inputStyle} placeholder="e.g. View project" value={img.linkLabel} onChange={(e) => updateGalleryImage(img.clientId, { linkLabel: e.target.value })} />
                       </Field>
                     </div>
+
+                    <Field label="Additional images (optional — comma-separated URLs, shown as a gallery on the image's page below the description)">
+                      <textarea
+                        style={{ ...inputStyle, minHeight: 60 }}
+                        placeholder="https://..., https://..."
+                        value={img.extraImages}
+                        onChange={(e) => updateGalleryImage(img.clientId, { extraImages: e.target.value })}
+                      />
+                      <label
+                        className="inline-block mt-2 font-['DM_Mono',monospace] text-xs tracking-widest uppercase px-3 py-2 border cursor-pointer"
+                        style={{ color: "rgba(246,242,236,0.7)", borderColor: "rgba(246,242,236,0.2)" }}
+                      >
+                        {uploadingKey === `extra:${img.clientId}` ? "Uploading…" : "Upload images"}
+                        <input
+                          type="file"
+                          accept="image/png,image/jpeg,image/webp,image/gif,image/svg+xml"
+                          multiple
+                          className="hidden"
+                          disabled={uploadingKey === `extra:${img.clientId}`}
+                          onChange={(e) => {
+                            const files = e.target.files;
+                            if (files && files.length) void handleExtraImagesUpload(img.clientId, files);
+                            e.target.value = "";
+                          }}
+                        />
+                      </label>
+                      {img.extraImages && (
+                        <div className="flex flex-wrap gap-2 mt-2">
+                          {img.extraImages.split(",").map((u) => u.trim()).filter(Boolean).map((u) => (
+                            <img key={u} src={u} alt="" className="h-14 w-14 object-cover" style={{ background: "#1A1A18" }} />
+                          ))}
+                        </div>
+                      )}
+                    </Field>
                   </div>
                 ))}
               </div>
