@@ -110,7 +110,7 @@ export const projects = [
     "metric": null,
     "img": "/uploads/f8-sachin-1783987015852.jpg",
     "video": "",
-    "overlayColor": "#0061ff",
+    "overlayColor": "#001e57",
     "overlayOpacity": 0.9,
     "overlayBlendMode": "multiply",
     "backgroundColor": "",
