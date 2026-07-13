@@ -151,7 +151,7 @@ export const additionalImages = [
       "ai",
       "experimental publication"
     ],
-    "description": "Rejecting mass media and traditional gatekeepers, Slowfeed decentralizes publishing. Every zine is generated at the point of purchase, ensuring no two copies are identical. By removing editorial bottlenecks, it connects readers with unfiltered art—creating a unique artifact at the intersection of data and discovery.",
+    "description": "Rejecting mass media and traditional gatekeepers, Slowfeed decentralizes publishing. Every zine is generated at the point of purchase, ensuring no two copies are identical. By removing editorial bottlenecks, it connects readers with unfiltered art—creating a unique artifact at the intersection of data and discovery.\n\nFor this project I used AI to create a generator that randomly assembles submitted images into a PDF. I also used AI to build a multi-featured admin panel to approve, reject, edit layouts, assign tags, and generate social media images.",
     "linkUrl": "https://slowfeedzine.com",
     "linkLabel": "",
     "extraImages": [
