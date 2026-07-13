@@ -144,6 +144,21 @@ export const projects = [
 // the gallery and it gets its own page at /work/additional-projects/:slug.
 export const additionalImages = [
   {
+    "slug": "slowfeed-zine",
+    "src": "/uploads/hero-slowfeed-1783982232787.png",
+    "label": "slowfeed-zine",
+    "tags": [
+      "ai",
+      "experimental publication"
+    ],
+    "description": "Rejecting mass media and traditional gatekeepers, Slowfeed decentralizes publishing. Every zine is generated at the point of purchase, ensuring no two copies are identical. By removing editorial bottlenecks, it connects readers with unfiltered art—creating a unique artifact at the intersection of data and discovery.",
+    "linkUrl": "",
+    "linkLabel": "",
+    "extraImages": [
+      "https://www.instagram.com/reel/DZYjRJJv65X/?igsh=NTc4MTIwNjQ2YQ=="
+    ]
+  },
+  {
     "slug": "black-collagists-rebrand",
     "src": "/uploads/black-collagists-2x-1783978271170.png",
     "label": "Black Collagists Rebrand",
@@ -274,24 +289,6 @@ export const additionalImages = [
     ]
   },
   {
-    "slug": "weathertoons",
-    "src": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1451181065179-FT4UCR6PDO2W56QN0H2J/logos_illos_wt.png?format=750w",
-    "label": "WeatherToons",
-    "tags": [
-      "brand",
-      "iOS app"
-    ],
-    "description": "WeatherToons is an app that was available in the Appstore. This self initiated project was created to gain a better understanding of designing for iOS and managing a project geared towards consumers. My goal was to create a simple app that displayed the temperature and display an animation that corresponds to the current weather. My roles were visual designer, brand designer, illustrator, animator, product manager, and QA tester. After completing this project I learned that nothing is simple when it comes to development of any kind.  I am currently exploring ideas on how to update this app with the help of Claude.",
-    "linkUrl": "",
-    "linkLabel": "",
-    "extraImages": [
-      "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1450782177131-A5929HN6WSXV0T0NOXDP/WeatherToons?format=1000w",
-      "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1451114669229-N6POAVWWJRAS5XLF0N5C/image-asset.jpeg?format=1000w",
-      "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1451114253857-MG7H2I1X0WD32JHX95OI/image-asset.jpeg?format=1000w",
-      "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1543996772670-ND77OUDSGJF9FNM7PDBA/wt80t89v001sq.gif?format=1000w"
-    ]
-  },
-  {
     "slug": "silverlake-ramen",
     "src": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1539338961757-FYM7FV0M01283NHUYQ0B/logos_illos_slr.png?format=750w",
     "label": "Silverlake Ramen",
@@ -307,6 +304,24 @@ export const additionalImages = [
       "/uploads/slr-presentation-2-11-1783981021744.jpg",
       "/uploads/slr-presentation-2-19-1783980910995.png",
       "/uploads/slr-presentation-2-20-1783980925304.png"
+    ]
+  },
+  {
+    "slug": "weathertoons",
+    "src": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1451181065179-FT4UCR6PDO2W56QN0H2J/logos_illos_wt.png?format=750w",
+    "label": "WeatherToons",
+    "tags": [
+      "brand",
+      "iOS app"
+    ],
+    "description": "WeatherToons is an app that was available in the Appstore. This self initiated project was created to gain a better understanding of designing for iOS and managing a project geared towards consumers. My goal was to create a simple app that displayed the temperature and display an animation that corresponds to the current weather. My roles were visual designer, brand designer, illustrator, animator, product manager, and QA tester. After completing this project I learned that nothing is simple when it comes to development of any kind.  I am currently exploring ideas on how to update this app with the help of Claude.",
+    "linkUrl": "",
+    "linkLabel": "",
+    "extraImages": [
+      "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1450782177131-A5929HN6WSXV0T0NOXDP/WeatherToons?format=1000w",
+      "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1451114669229-N6POAVWWJRAS5XLF0N5C/image-asset.jpeg?format=1000w",
+      "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1451114253857-MG7H2I1X0WD32JHX95OI/image-asset.jpeg?format=1000w",
+      "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1543996772670-ND77OUDSGJF9FNM7PDBA/wt80t89v001sq.gif?format=1000w"
     ]
   },
   {
@@ -344,21 +359,6 @@ export const additionalImages = [
     "linkUrl": "",
     "linkLabel": "",
     "extraImages": []
-  },
-  {
-    "slug": "slowfeed-zine",
-    "src": "/uploads/hero-slowfeed-1783982232787.png",
-    "label": "slowfeed-zine",
-    "tags": [
-      "ai",
-      "experimental publication"
-    ],
-    "description": "Rejecting mass media and traditional gatekeepers, Slowfeed decentralizes publishing. Every zine is generated at the point of purchase, ensuring no two copies are identical. By removing editorial bottlenecks, it connects readers with unfiltered art—creating a unique artifact at the intersection of data and discovery.",
-    "linkUrl": "",
-    "linkLabel": "",
-    "extraImages": [
-      "https://www.instagram.com/reel/DZYjRJJv65X/?igsh=NTc4MTIwNjQ2YQ=="
-    ]
   }
 ];
 
