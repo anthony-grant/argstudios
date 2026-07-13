@@ -116,9 +116,9 @@ export const projects = [
     "title": "Additional Projects",
     "category": "Comms Design, Personal Projects",
     "description": "A collection of brand, illustration, and event work spanning a range of clients and collaborators.",
-    "img": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1451196243569-FIYRD1MXQRJVIO1QEUMQ/d4df.jpg?format=750w",
+    "img": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1450785721821-F7G39985U2EUUX9P5I72/dougpagan.jpg?format=750w",
     "video": "",
-    "overlayColor": "#263e0f",
+    "overlayColor": "#b51a00",
     "overlayOpacity": 0.98,
     "backgroundColor": "",
     "tags": [
@@ -137,10 +137,37 @@ export const projects = [
 // the gallery and it gets its own page at /work/additional-projects/:slug.
 export const additionalImages = [
   {
+    "slug": "voltage-records",
+    "src": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1450785721821-F7G39985U2EUUX9P5I72/dougpagan.jpg?format=750w",
+    "label": "Voltage Records",
+    "tags": [
+      "art direction",
+      "design"
+    ],
+    "description": "Provided multiple album cover designs for the independent recording label Voltage Music which has a focus on dub, reggae, and dancehall music.",
+    "linkUrl": "https://www.tomaspalermo.com/label",
+    "linkLabel": ""
+  },
+  {
+    "slug": "good-cigar-co",
+    "src": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1469425133957-G531IPLTDJMPID6ZY28M/logo_gcc_square_cream_text.png?format=750w",
+    "label": "Good Cigar Co.",
+    "tags": [
+      "brand",
+      "packaging"
+    ],
+    "description": "Provided the initial branding and packaging for an independent D2C cigar subscription product. Typographically driven, the simple yet striking logotype and package design was inspired by the 'smoke' that is emitted from a lit cigar. Launched by Will McQuain in 2016 this brand was acquired in 2019.",
+    "linkUrl": "https://www.goodcigar.co",
+    "linkLabel": ""
+  },
+  {
     "slug": "dub-4-the-dancefloor",
     "src": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1451196243569-FIYRD1MXQRJVIO1QEUMQ/d4df.jpg?format=750w",
     "label": "Dub 4 the Dancefloor",
-    "tags": [],
+    "tags": [
+      "art direction",
+      "design"
+    ],
     "description": "Album cover design for the independent recording label Voltage Music which has a focus on dub, reggae, and dancehall music.",
     "linkUrl": "https://www.tomaspalermo.com/label",
     "linkLabel": ""
@@ -149,27 +176,13 @@ export const additionalImages = [
     "slug": "tilt",
     "src": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1451179729878-1T0FFRA7DRAWECDH4JNG/logos_illos_tilt.png?format=750w",
     "label": "Tilt",
-    "tags": [],
-    "description": "",
+    "tags": [
+      "brand",
+      "comms",
+      "experiential marketing"
+    ],
+    "description": "Remember those days when you were just starting out, and having total financial freedom was something you could only dream of? Tilt changed that dynamic by making it easy for groups of people to pool their money together to fund events, book trips, or pitch in to help someone in need. Although we were eventually acquired by Airbnb, Tilt was a deeply loved brand throughout its lifetime. I had the privilege of working alongside an insanely talented team—including sharp product managers, brilliant social media strategists, and a legendary copywriter—to take Tilt from a scrappy startup idea to a frat-household name.",
     "linkUrl": "",
-    "linkLabel": ""
-  },
-  {
-    "slug": "voltage-records",
-    "src": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1450785721821-F7G39985U2EUUX9P5I72/dougpagan.jpg?format=750w",
-    "label": "Voltage Records",
-    "tags": [],
-    "description": "",
-    "linkUrl": "",
-    "linkLabel": ""
-  },
-  {
-    "slug": "good-cigar-co",
-    "src": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1469425133957-G531IPLTDJMPID6ZY28M/logo_gcc_square_cream_text.png?format=750w",
-    "label": "Good Cigar Co.",
-    "tags": [],
-    "description": "Provided the initial branding and packaging for an independent D2C cigar subscription product. Typographically driven, the simple yet striking logotype and package design was inspired by the 'smoke' that is emitted from a lit cigar. Launched by Will McQuain in 2016 this brand was acquired in 2019.",
-    "linkUrl": "https://www.goodcigar.co",
     "linkLabel": ""
   },
   {
