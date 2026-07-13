@@ -121,7 +121,7 @@ export const projects = [
     "slug": "additional-projects",
     "title": "Additional Projects",
     "category": "Comms Design, Personal Projects",
-    "description": "A collection of brand, illustration, and event work spanning a range of clients and collaborators.",
+    "description": "A collection of brand, illustration, experiential marketing, and personal experiments spanning a range of clients, collaborators, and interests.",
     "img": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1450785721821-F7G39985U2EUUX9P5I72/dougpagan.jpg?format=750w",
     "video": "",
     "overlayColor": "#b51a00",
@@ -216,6 +216,24 @@ export const additionalImages = [
     ]
   },
   {
+    "slug": "eventbrite",
+    "src": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1451179728518-422ED2NQV2REYDJNAO4Y/logos_illos_ebsxsw.png?format=750w",
+    "label": "Eventbrite",
+    "tags": [
+      "brand",
+      "comms",
+      "experiential marketing"
+    ],
+    "description": "When we can create experiences together, we become more empathetic, we learn from each other, and we have fun. Eventbrite’s mission is to bring the world together through live experiences. During my time there I made a ton of friends, learned from them, and had way too much fun. I think I did some work along the way too. I started out as a designer working with the marketing and sales team to create seamless event pages / customer experiences. Along the way I became a design manager who got his hands dirty creating everything from A to Z for live experiences, recruited and hired several team members, and collaborated with many other teams within the organization. This is a tiny sample of what I did.",
+    "linkUrl": "",
+    "linkLabel": "",
+    "extraImages": [
+      "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1450777606696-IHGSSUXJ5YMGM9VP6V4E/eb_sxsw2.jpg?format=1500w",
+      "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1450781141982-1R2X7N4S7XKDX041V16A/sxsw_poster.jpg?format=1000w",
+      "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1450777600538-270KYJ3M7PSPYL6SH3T8/eb_sxsw.jpg?format=1500w"
+    ]
+  },
+  {
     "slug": "seltz-co",
     "src": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1539296418435-LEKYIDWP0X6ILLXP57AN/logos_illos_seltz.png?format=750w",
     "label": "Seltz Co.",
@@ -304,24 +322,6 @@ export const additionalImages = [
     "extraImages": []
   },
   {
-    "slug": "eventbrite",
-    "src": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1451179728518-422ED2NQV2REYDJNAO4Y/logos_illos_ebsxsw.png?format=750w",
-    "label": "Eventbrite",
-    "tags": [
-      "brand",
-      "comms",
-      "experiential marketing"
-    ],
-    "description": "When we can create experiences together, we become more empathetic, we learn from each other, and we have fun. Eventbrite’s mission is to bring the world together through live experiences. During my time there I made a ton of friends, learned from them, and had way too much fun. I think I did some work along the way too. I started out as a designer working with the marketing and sales team to create seamless event pages / customer experiences. Along the way I became a design manager who got his hands dirty creating everything from A to Z for live experiences, recruited and hired several team members, and collaborated with many other teams within the organization. This is a tiny sample of what I did.",
-    "linkUrl": "",
-    "linkLabel": "",
-    "extraImages": [
-      "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1450777606696-IHGSSUXJ5YMGM9VP6V4E/eb_sxsw2.jpg?format=1500w",
-      "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1450781141982-1R2X7N4S7XKDX041V16A/sxsw_poster.jpg?format=1000w",
-      "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1450777600538-270KYJ3M7PSPYL6SH3T8/eb_sxsw.jpg?format=1500w"
-    ]
-  },
-  {
     "slug": "livestop",
     "src": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1556232862486-QU9WKSUSJ5S0RN0WRGXK/POV-Primary.png?format=750w",
     "label": "Livestop",
@@ -341,6 +341,19 @@ export const additionalImages = [
       "brand"
     ],
     "description": "",
+    "linkUrl": "",
+    "linkLabel": "",
+    "extraImages": []
+  },
+  {
+    "slug": "slowfeed-zine",
+    "src": "/uploads/hero-slowfeed-1783982232787.png",
+    "label": "slowfeed-zine",
+    "tags": [
+      "ai",
+      "experimental publication"
+    ],
+    "description": "Rejecting mass media and traditional gatekeepers, Slowfeed decentralizes publishing. Every zine is generated at the point of purchase, ensuring no two copies are identical. By removing editorial bottlenecks, it connects readers with unfiltered art—creating a unique artifact at the intersection of data and discovery.",
     "linkUrl": "",
     "linkLabel": "",
     "extraImages": []
