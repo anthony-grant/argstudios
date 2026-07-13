@@ -286,10 +286,15 @@ export const additionalImages = [
       "brand",
       "comms"
     ],
-    "description": "",
+    "description": "One of those projects that did not go as far as I would have liked but it was more about the journey and creating something that I have always wanted to create—a restaurant brand. Did I have dreams of flying (coach) to LA for a weekend of art and yummy ramen—yes but I created a yummy case study instead.",
     "linkUrl": "",
     "linkLabel": "",
-    "extraImages": []
+    "extraImages": [
+      "/uploads/slr-presentation-2-19-1783980910995.png",
+      "/uploads/slr-presentation-2-20-1783980925304.png",
+      "/uploads/slr-presentation-2-6-1783980961622.png",
+      "/uploads/slr-presentation-2-11-1783981021744.jpg"
+    ]
   },
   {
     "slug": "eventbrite-sxsw",
