@@ -248,9 +248,9 @@ export const additionalImages = [
       "brand",
       "comms"
     ],
-    "description": "I swear—I only tasted the product a few times to get inspired:) Available throughout Northern California and beyond.",
-    "linkUrl": "",
-    "linkLabel": "",
+    "description": "I swear—I only tasted the product a few times to get inspired:) Available in fine stores throughout Northern California and beyond.",
+    "linkUrl": "https://woodencork.com/products/hetchy-vodka?srsltid=AfmBOor7eoLWRzyJVKN1iy7PrdBGHFGtL9mduioQh3krnTnY6utcptBh",
+    "linkLabel": "Grab a bottle or two",
     "extraImages": []
   },
   {
@@ -261,22 +261,15 @@ export const additionalImages = [
       "brand",
       "iOS app"
     ],
-    "description": "",
+    "description": "WeatherToons is an app that was available in the Appstore. This self initiated project was created to gain a better understanding of designing for iOS and managing a project geared towards consumers. My goal was to create a simple app that displayed the temperature and display an animation that corresponds to the current weather. My roles were visual designer, brand designer, illustrator, animator, product manager, and QA tester. After completing this project I learned that nothing is simple when it comes to development of any kind.  I am currently exploring ideas on how to update this app with the help of Claude.",
     "linkUrl": "",
     "linkLabel": "",
-    "extraImages": []
-  },
-  {
-    "slug": "resonant-people",
-    "src": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1539338961595-899VPQ9DBWVIGFJYU6JG/logos_illos_resonantpeople.png?format=750w",
-    "label": "Resonant People",
-    "tags": [
-      "brand"
-    ],
-    "description": "",
-    "linkUrl": "",
-    "linkLabel": "",
-    "extraImages": []
+    "extraImages": [
+      "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1450782177131-A5929HN6WSXV0T0NOXDP/WeatherToons?format=1000w",
+      "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1451114669229-N6POAVWWJRAS5XLF0N5C/image-asset.jpeg?format=1000w",
+      "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1451114253857-MG7H2I1X0WD32JHX95OI/image-asset.jpeg?format=1000w",
+      "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1543996772670-ND77OUDSGJF9FNM7PDBA/wt80t89v001sq.gif?format=1000w"
+    ]
   },
   {
     "slug": "silverlake-ramen",
@@ -295,6 +288,18 @@ export const additionalImages = [
       "/uploads/slr-presentation-2-19-1783980910995.png",
       "/uploads/slr-presentation-2-20-1783980925304.png"
     ]
+  },
+  {
+    "slug": "resonant-people",
+    "src": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1539338961595-899VPQ9DBWVIGFJYU6JG/logos_illos_resonantpeople.png?format=750w",
+    "label": "Resonant People",
+    "tags": [
+      "brand"
+    ],
+    "description": "",
+    "linkUrl": "",
+    "linkLabel": "",
+    "extraImages": []
   },
   {
     "slug": "eventbrite",
@@ -332,43 +337,6 @@ export const additionalImages = [
     "label": "Urban Fit SF",
     "tags": [
       "brand"
-    ],
-    "description": "",
-    "linkUrl": "",
-    "linkLabel": "",
-    "extraImages": []
-  },
-  {
-    "slug": "infinity-search-partners",
-    "src": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1451179728986-LZI2A71411SVXI2WSC2E/logos_illos_infinitysearch.png?format=750w",
-    "label": "Infinity Search Partners",
-    "tags": [
-      "brand"
-    ],
-    "description": "",
-    "linkUrl": "",
-    "linkLabel": "",
-    "extraImages": []
-  },
-  {
-    "slug": "pillow-ai",
-    "src": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1465961226086-21QO13QV9SMGBLDGEXQ6/pillow_ai_logo_c5_a__c5_a_.png?format=750w",
-    "label": "Pillow.ai",
-    "tags": [
-      "brand"
-    ],
-    "description": "",
-    "linkUrl": "",
-    "linkLabel": "",
-    "extraImages": []
-  },
-  {
-    "slug": "moonlighting-sf",
-    "src": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1451974923620-F3676AIAVS9LYCEIXMRZ/logos_illos_moonlighting.png?format=750w",
-    "label": "Moonlighting SF",
-    "tags": [
-      "brand",
-      "comms"
     ],
     "description": "",
     "linkUrl": "",
