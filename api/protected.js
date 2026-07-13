@@ -64,18 +64,29 @@ const PROTECTED = {
     "content": {
       "description": "Shaped the product design direction for UJET's cloud contact-center platform — agent tooling, customer-facing flows, and omnichannel interaction design.",
       "role": "",
-      "approach": "",
+      "approach": "UJET is the innovation leader in cloud-based customer support SAAS. As their first design hire, I created all of the UI for each product, implemented design processes with the team and improved on those processes as we grew. Our product had several facets including an admin portal, embed-able widgets, a customer-facing chat widget, and a mobile SDK for both iOS and Android. Each product had to be highly configurable and user friendly.\n\nI worked cross-functionally with product managers, engineers ,QA, and our customer success team to deliver a best-in-class experience for our clients which included Nest, Noon, Anovo, SpotHero, and Fitbit.",
       "outcome": "",
       "metric": null,
-      "img": "https://images.unsplash.com/photo-1686061592689-312bbfb5c055?w=800&h=600&fit=crop&auto=format",
+      "img": "/uploads/ujet-general-flow-1783985191982.png",
       "video": "",
       "overlayColor": "",
       "overlayOpacity": 0,
       "overlayBlendMode": "normal",
       "backgroundColor": "",
-      "gallery": [],
-      "galleryModal": false,
-      "demos": []
+      "gallery": [
+        "/uploads/aw-buttons-1783985202908.png",
+        "/uploads/typography-from-sketch-1783985204072.png",
+        "/uploads/colors-1783985205329.png",
+        "/uploads/icons-1783985206353.png",
+        "/uploads/navigation-1783985207385.png"
+      ],
+      "galleryModal": true,
+      "demos": [
+        {
+          "url": "https://www.figma.com/deck/OtFRXSOvE8wqfWjMkF3Ogf/UJET-Web-SDK?node-id=1-510&t=HNXyaNdW5sK4zb1d-1",
+          "label": "View project"
+        }
+      ]
     }
   }
 };
