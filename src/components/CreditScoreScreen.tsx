@@ -377,7 +377,7 @@ export default function CreditScoreScreen() {
                         ))}
                       </svg>
                       <div style={{ position: "absolute", left: 0, right: 0, top: 58, display: "flex", flexDirection: "column", alignItems: "center" }}>
-                        <div style={{ fontSize: 50, fontWeight: 800, color: "oklch(25% 0.02 250)", letterSpacing: -1, fontVariantNumeric: "tabular-nums" }}>{displayScore}</div>
+                        <div style={{ fontSize: 50, fontWeight: 800, color: "oklch(25% 0.02 250)", letterSpacing: -1, fontVariantNumeric: "tabular-nums", lineHeight: 1 }}>{displayScore}</div>
                         <div style={{ marginTop: 8, padding: "6px 16px", borderRadius: 999, fontSize: 12, fontWeight: 700, color: "#fff", background: categoryColor }}>{category}</div>
                       </div>
 
