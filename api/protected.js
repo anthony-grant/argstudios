@@ -30,8 +30,10 @@ const PROTECTED = {
         "value": "30 million",
         "label": "Downloads"
       },
-      "img": "https://images.unsplash.com/photo-1607705703571-c5a8695f18f6?w=800&h=600&fit=crop&auto=format",
-      "gallery": [],
+      "img": "/uploads/placeholder-1783905482300.jpg",
+      "gallery": [
+        "/uploads/img-3412-edited-2-1783905518883.jpg"
+      ],
       "demo": {
         "url": "/work/branch/credit-score",
         "label": "Try the interactive credit score animation"
