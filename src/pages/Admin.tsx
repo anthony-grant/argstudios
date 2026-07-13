@@ -21,6 +21,8 @@ type AdminProject = {
   metricLabel: string;
   img: string;
   gallery: string; // newline-separated in the UI
+  demoUrl: string;
+  demoLabel: string;
 };
 
 type AdminGalleryImage = {
@@ -68,12 +70,15 @@ function fromApi(p: any): AdminProject {
     metricLabel: p.metric?.label || "",
     img: p.img || "",
     gallery: (p.gallery || []).join("\n"),
+    demoUrl: p.demo?.url || "",
+    demoLabel: p.demo?.label || "",
   };
 }
 
 function toApi(p: AdminProject) {
   const metric: Metric =
     p.metricValue.trim() ? { value: p.metricValue.trim(), label: p.metricLabel.trim() } : null;
+  const demo = p.demoUrl.trim() ? { url: p.demoUrl.trim(), label: p.demoLabel.trim() } : null;
   return {
     slug: p.slug.trim(),
     title: p.title.trim(),
@@ -88,6 +93,7 @@ function toApi(p: AdminProject) {
     metric,
     img: p.img.trim(),
     gallery: p.gallery.split("\n").map((g) => g.trim()).filter(Boolean),
+    demo,
   };
 }
 
@@ -518,6 +524,15 @@ export default function Admin() {
                     </Field>
                     <Field label="Metric label">
                       <input style={inputStyle} placeholder="e.g. drop in abandonment" value={p.metricLabel} onChange={(e) => updateProject(p.clientId, { metricLabel: e.target.value })} />
+                    </Field>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4">
+                    <Field label="Demo link URL (optional)">
+                      <input style={inputStyle} placeholder="e.g. /work/branch/credit-score" value={p.demoUrl} onChange={(e) => updateProject(p.clientId, { demoUrl: e.target.value })} />
+                    </Field>
+                    <Field label="Demo link label">
+                      <input style={inputStyle} placeholder="e.g. Try the interactive prototype" value={p.demoLabel} onChange={(e) => updateProject(p.clientId, { demoLabel: e.target.value })} />
                     </Field>
                   </div>
 

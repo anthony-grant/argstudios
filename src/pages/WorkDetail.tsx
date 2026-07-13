@@ -52,6 +52,7 @@ export default function WorkDetail() {
     metric?: { value: string; label: string } | null;
     img: string;
     gallery?: string[];
+    demo?: { url: string; label: string } | null;
   };
   const [unlocked, setUnlocked] = useState<CaseStudyContent | null>(null);
   const [passwordInput, setPasswordInput] = useState("");
@@ -206,12 +207,23 @@ export default function WorkDetail() {
               )}
             </form>
           ) : (
-            <p
-              className="font-['Epilogue',sans-serif] font-light leading-relaxed"
-              style={{ fontSize: "clamp(1.1rem, 2vw, 1.5rem)", color: "rgba(246,242,236,0.7)", maxWidth: "60ch" }}
-            >
-              {content?.description}
-            </p>
+            <>
+              <p
+                className="font-['Epilogue',sans-serif] font-light leading-relaxed"
+                style={{ fontSize: "clamp(1.1rem, 2vw, 1.5rem)", color: "rgba(246,242,236,0.7)", maxWidth: "60ch" }}
+              >
+                {content?.description}
+              </p>
+              {content?.demo && (
+                <Link
+                  to={content.demo.url}
+                  className="inline-flex items-center gap-2 mt-8 font-['DM_Mono',monospace] text-xs tracking-widest uppercase px-5 py-3 border transition-colors hover:opacity-80"
+                  style={{ color: DARK, backgroundColor: CORAL, borderColor: CORAL }}
+                >
+                  {content.demo.label} →
+                </Link>
+              )}
+            </>
           )}
         </div>
       </section>

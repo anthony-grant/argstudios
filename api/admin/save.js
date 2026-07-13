@@ -120,6 +120,11 @@ function cleanMetric(m) {
   return { value: m.value, label: m.label || "" };
 }
 
+function cleanDemo(d) {
+  if (!d || !d.url) return null;
+  return { url: d.url, label: d.label || "View interactive prototype" };
+}
+
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     res.status(405).json({ error: "Method not allowed" });
@@ -194,6 +199,7 @@ export default async function handler(req, res) {
             metric: cleanMetric(p.metric),
             img: p.img || "",
             gallery: Array.isArray(p.gallery) ? p.gallery : [],
+            demo: cleanDemo(p.demo),
           },
         };
         newDataProjects.push({ ...base, protected: true });
@@ -207,6 +213,7 @@ export default async function handler(req, res) {
           metric: cleanMetric(p.metric),
           img: p.img || "",
           gallery: Array.isArray(p.gallery) ? p.gallery : [],
+          demo: cleanDemo(p.demo),
         });
       }
     });

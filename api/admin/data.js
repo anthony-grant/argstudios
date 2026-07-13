@@ -86,6 +86,7 @@ export default async function handler(req, res) {
           metric: contentSource.metric || null,
           img: contentSource.img || "",
           gallery: contentSource.gallery || [],
+          demo: contentSource.demo || null,
         };
       });
 

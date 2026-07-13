@@ -15,7 +15,8 @@ const PROTECTED = {
       "outcome": "",
       "metric": null,
       "img": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop&auto=format",
-      "gallery": []
+      "gallery": [],
+      "demo": null
     }
   },
   "branch": {
@@ -27,7 +28,8 @@ const PROTECTED = {
       "outcome": "",
       "metric": null,
       "img": "https://images.unsplash.com/photo-1607705703571-c5a8695f18f6?w=800&h=600&fit=crop&auto=format",
-      "gallery": []
+      "gallery": [],
+      "demo": { "url": "/work/branch/credit-score", "label": "Try the interactive credit score animation" }
     }
   },
   "ujet": {
@@ -39,7 +41,8 @@ const PROTECTED = {
       "outcome": "",
       "metric": null,
       "img": "https://images.unsplash.com/photo-1686061592689-312bbfb5c055?w=800&h=600&fit=crop&auto=format",
-      "gallery": []
+      "gallery": [],
+      "demo": null
     }
   }
 };
