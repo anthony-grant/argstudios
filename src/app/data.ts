@@ -119,7 +119,7 @@ export const projects = [
     "img": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1451196243569-FIYRD1MXQRJVIO1QEUMQ/d4df.jpg?format=750w",
     "video": "",
     "overlayColor": "#263e0f",
-    "overlayOpacity": 0.85,
+    "overlayOpacity": 0.98,
     "backgroundColor": "",
     "tags": [
       "Brand",
