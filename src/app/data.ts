@@ -141,7 +141,7 @@ export const additionalImages = [
     "src": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1451196243569-FIYRD1MXQRJVIO1QEUMQ/d4df.jpg?format=750w",
     "label": "Dub 4 the Dancefloor",
     "tags": [],
-    "description": "",
+    "description": "Album cover design for the independent recording label Voltage Music which has a focus on dub, reggae, and dancehall music.",
     "linkUrl": "https://www.tomaspalermo.com/label",
     "linkLabel": ""
   },
