@@ -154,7 +154,9 @@ export const additionalImages = [
     "description": "Provided multiple album cover designs for the independent recording label Voltage Music which has a focus on dub, reggae, and dancehall music.",
     "linkUrl": "https://www.tomaspalermo.com/label",
     "linkLabel": "",
-    "extraImages": []
+    "extraImages": [
+      "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1451196243569-FIYRD1MXQRJVIO1QEUMQ/d4df.jpg?format=750w"
+    ]
   },
   {
     "slug": "good-cigar-co",
@@ -173,19 +175,6 @@ export const additionalImages = [
     ]
   },
   {
-    "slug": "dub-4-the-dancefloor",
-    "src": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1451196243569-FIYRD1MXQRJVIO1QEUMQ/d4df.jpg?format=750w, https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1539341604989-XT8CX3IH8LQSSH6RBMR1/gcc_box.jpg?format=2500w",
-    "label": "Dub 4 the Dancefloor",
-    "tags": [
-      "art direction",
-      "design"
-    ],
-    "description": "Album cover design for the independent recording label Voltage Music which has a focus on dub, reggae, and dancehall music.",
-    "linkUrl": "https://www.tomaspalermo.com/label",
-    "linkLabel": "",
-    "extraImages": []
-  },
-  {
     "slug": "tilt",
     "src": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1451179729878-1T0FFRA7DRAWECDH4JNG/logos_illos_tilt.png?format=750w",
     "label": "Tilt",
@@ -195,19 +184,6 @@ export const additionalImages = [
       "experiential marketing"
     ],
     "description": "Remember those days when you were just starting out, and having total financial freedom was something you could only dream of? Tilt changed that dynamic by making it easy for groups of people to pool their money together to fund events, book trips, or pitch in to help someone in need. Although we were eventually acquired by Airbnb, Tilt was a deeply loved brand throughout its lifetime. I had the privilege of working alongside an insanely talented team—including sharp product managers, brilliant social media strategists, and a legendary copywriter—to take Tilt from a scrappy startup idea to a frat-household name.",
-    "linkUrl": "",
-    "linkLabel": "",
-    "extraImages": []
-  },
-  {
-    "slug": "jacquline-k",
-    "src": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1451075952093-FMZHMWBX768ABOGQKQ70/jacqulinek.jpg?format=750w",
-    "label": "Jacquline K",
-    "tags": [
-      "art direction",
-      "design"
-    ],
-    "description": "",
     "linkUrl": "",
     "linkLabel": "",
     "extraImages": []
@@ -357,19 +333,6 @@ export const additionalImages = [
     "tags": [
       "brand",
       "comms"
-    ],
-    "description": "",
-    "linkUrl": "",
-    "linkLabel": "",
-    "extraImages": []
-  },
-  {
-    "slug": "livestop-2",
-    "src": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1451179729440-ODZI3BXG9L7SHOHPS0II/logos_illos_livestop.png?format=750w",
-    "label": "Livestop",
-    "tags": [
-      "brans",
-      "web development"
     ],
     "description": "",
     "linkUrl": "",
