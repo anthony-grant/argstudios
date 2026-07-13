@@ -9,7 +9,7 @@ const PROTECTED = {
   "meta": {
     "password": "parrot",
     "content": {
-      "description": "Product Design Lead across multiple surfaces — translating complex social infrastructure and platform features into clear, usable experiences at scale.",
+      "description": "• Lead Product Designer for Ads Integration Portal—a governance tool used by 100+ teams to review and approve every feature launch into Ads Manager before it reaches advertisers.\n• Reduced TTM from 56 days to 9 days—an 84% improvement over four years. \n• Led and contributed to multiple product and process improvements",
       "role": "",
       "approach": "",
       "outcome": "",
