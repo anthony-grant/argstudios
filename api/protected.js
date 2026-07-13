@@ -40,7 +40,7 @@ const PROTECTED = {
       "img": "/uploads/hero-branch-1783976880696.png",
       "video": "",
       "overlayColor": "#19355e",
-      "overlayOpacity": 0.98,
+      "overlayOpacity": 0.38,
       "backgroundColor": "#19355e",
       "gallery": [
         "/uploads/work-branch-1-1783965043976.png",
