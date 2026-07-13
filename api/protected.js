@@ -37,8 +37,8 @@ const PROTECTED = {
     "content": {
       "description": "Designed core lending and financial product flows for Branch's mobile-first platform serving emerging markets across Africa and India.",
       "role": "Lead Product and Brand Designer",
-      "approach": "123",
-      "outcome": "",
+      "approach": "Branch provides its customers store funds in its Wallet product, access to loans with favorable terms, and high-yield investment. Branch is one of the most downloaded mobile banking apps in Africa and India with over 20 million and counting.\n\nDuring my tenure I launched credit scoring, savings, investments, and physical debit card products. I also conducted user interviews, brainstorming sessions, prototyping, and managed designers Kenya, Nigeria, and Mumbai.",
+      "outcome": "Evolved Branch app from a single to a multi product offering with full-service banking  features for emerging markets in Kenya, Nigeria, Tanzania, and Mumbai—downloaded by over 30 million people.",
       "metric": {
         "value": "30 million",
         "label": "Downloads"
