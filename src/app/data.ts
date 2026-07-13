@@ -251,7 +251,9 @@ export const additionalImages = [
     "description": "I swear—I only tasted the product a few times to get inspired:) Available in fine stores throughout Northern California and beyond.",
     "linkUrl": "https://woodencork.com/products/hetchy-vodka?srsltid=AfmBOor7eoLWRzyJVKN1iy7PrdBGHFGtL9mduioQh3krnTnY6utcptBh",
     "linkLabel": "Grab a bottle or two",
-    "extraImages": []
+    "extraImages": [
+      "/uploads/hetchy-vodka-in-situ-1783982017203.jpg"
+    ]
   },
   {
     "slug": "weathertoons",
