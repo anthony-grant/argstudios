@@ -23,13 +23,19 @@ const PROTECTED = {
     "password": "parrot",
     "content": {
       "description": "Designed core lending and financial product flows for Branch's mobile-first platform serving emerging markets across Africa and India.",
-      "role": "",
+      "role": "Lead Product Designer",
       "approach": "",
       "outcome": "",
-      "metric": null,
+      "metric": {
+        "value": "30 million",
+        "label": "Downloads"
+      },
       "img": "https://images.unsplash.com/photo-1607705703571-c5a8695f18f6?w=800&h=600&fit=crop&auto=format",
       "gallery": [],
-      "demo": { "url": "/work/branch/credit-score", "label": "Try the interactive credit score animation" }
+      "demo": {
+        "url": "/work/branch/credit-score",
+        "label": "Try the interactive credit score animation"
+      }
     }
   },
   "ujet": {
