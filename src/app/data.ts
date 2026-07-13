@@ -102,7 +102,7 @@ export const projects = [
     "index": "07",
     "slug": "additional-projects",
     "title": "Additional Projects",
-    "category": "Comms Design",
+    "category": "Comms Design, Personal Projects",
     "description": "A collection of brand, illustration, and event work spanning a range of clients and collaborators.",
     "img": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1451196243569-FIYRD1MXQRJVIO1QEUMQ/d4df.jpg?format=750w",
     "tags": [
