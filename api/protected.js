@@ -22,7 +22,12 @@ const PROTECTED = {
       "backgroundColor": "",
       "gallery": [],
       "galleryModal": false,
-      "demos": []
+      "demos": [
+        {
+          "url": "https://www.figma.com/deck/ZrwFGy6HwrfosmznoZlpzJ/Balancing-efficiency-and-velocity?node-id=2-1487&t=F2yVll2M1y5HgzwH-1",
+          "label": "View case study"
+        }
+      ]
     }
   },
   "branch": {
