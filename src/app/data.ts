@@ -112,7 +112,7 @@ export const projects = [
     "video": "",
     "overlayColor": "#0061ff",
     "overlayOpacity": 0.9,
-    "overlayBlendMode": "normal",
+    "overlayBlendMode": "multiply",
     "backgroundColor": "",
     "gallery": [],
     "galleryModal": false,
