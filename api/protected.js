@@ -71,7 +71,7 @@ const PROTECTED = {
       "video": "",
       "overlayColor": "#0042aa",
       "overlayOpacity": 0.99,
-      "overlayBlendMode": "overlay",
+      "overlayBlendMode": "darken",
       "backgroundColor": "",
       "gallery": [
         "/uploads/aw-buttons-1783985202908.png",
