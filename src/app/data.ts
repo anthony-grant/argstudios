@@ -52,18 +52,20 @@ export const projects = [
       "Identity"
     ],
     "description": "Brand communications, visual systems, and design collateral spanning decks, campaigns, and identity assets for one of the world's leading event platforms.",
-    "role": "",
-    "approach": "",
+    "role": "Lead Brand Communication Designer, Manager",
+    "approach": "When we can create experiences together, we become more empathetic, we learn from each other, and we have fun. Eventbrite’s mission is to bring the world together through live experiences. During my time there I made a ton of friends, learned from them, and had way too much fun. I think I did some work along the way too. I started out as a designer working with the marketing and sales team to create seamless event pages / customer experiences. Along the way I became a design manager who got his hands dirty creating everything from A to Z for live experiences, recruited and hired several team members, and collaborated with many other teams within the organization. This is a tiny sample of what I did.",
     "outcome": "",
     "metric": null,
-    "img": "https://images.unsplash.com/photo-1762365189058-7be5b07e038b?w=800&h=600&fit=crop&auto=format",
+    "img": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1450777600538-270KYJ3M7PSPYL6SH3T8/eb_sxsw.jpg?format=2500w",
     "video": "",
     "overlayColor": "",
     "overlayOpacity": 0,
     "overlayBlendMode": "normal",
     "backgroundColor": "",
-    "gallery": [],
-    "galleryModal": false,
+    "gallery": [
+      "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1450781141982-1R2X7N4S7XKDX041V16A/sxsw_poster.jpg?format=1000w, https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1450777606696-IHGSSUXJ5YMGM9VP6V4E/eb_sxsw2.jpg?format=2500w, https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1450777894335-1TMRPD9RGTMNRIUC9N0C/_sxsw_app_Email.png?format=750w, https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1450781017596-5GCT2EF82NYBFA9YM673/tribkln_poster.jpg?format=1000w"
+    ],
+    "galleryModal": true,
     "demos": []
   },
   {
