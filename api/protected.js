@@ -18,7 +18,7 @@ const PROTECTED = {
       "gallery": [],
       "demo": {
         "url": "https://www.figma.com/deck/ZrwFGy6HwrfosmznoZlpzJ/Balancing-efficiency-and-quality-presentation?node-id=0-1&t=F2yVll2M1y5HgzwH-1",
-        "label": "View interactive prototype"
+        "label": "View Project Presentation"
       }
     }
   },
@@ -26,7 +26,7 @@ const PROTECTED = {
     "password": "parrot",
     "content": {
       "description": "Designed core lending and financial product flows for Branch's mobile-first platform serving emerging markets across Africa and India.",
-      "role": "Lead Product Designer",
+      "role": "Lead Product and Brand Designer",
       "approach": "123",
       "outcome": "",
       "metric": {
