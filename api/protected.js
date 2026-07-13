@@ -56,27 +56,22 @@ const PROTECTED = {
         "/uploads/work-branch-2-1783965061157.png"
       ],
       "galleryModal": true,
-      "demos": [
-        {
-          "url": "/work/branch/credit-score",
-          "label": "Try the interactive credit score animation"
-        }
-      ]
+      "demos": []
     }
   },
   "ujet": {
     "password": "parrot",
     "content": {
       "description": "Shaped the product design direction for UJET's cloud contact-center platform — agent tooling, customer-facing flows, and omnichannel interaction design.",
-      "role": "",
+      "role": "Lead Product Designer",
       "approach": "UJET is the innovation leader in cloud-based customer support SAAS. As their first design hire, I created all of the UI for each product, implemented design processes with the team and improved on those processes as we grew. Our product had several facets including an admin portal, embed-able widgets, a customer-facing chat widget, and a mobile SDK for both iOS and Android. Each product had to be highly configurable and user friendly.\n\nI worked cross-functionally with product managers, engineers ,QA, and our customer success team to deliver a best-in-class experience for our clients which included Nest, Noon, Anovo, SpotHero, and Fitbit.",
       "outcome": "",
       "metric": null,
       "img": "/uploads/ujet-general-flow-1783985191982.png",
       "video": "",
-      "overlayColor": "",
-      "overlayOpacity": 0,
-      "overlayBlendMode": "normal",
+      "overlayColor": "#215f89",
+      "overlayOpacity": 0.92,
+      "overlayBlendMode": "multiply",
       "backgroundColor": "",
       "gallery": [
         "/uploads/aw-buttons-1783985202908.png",
