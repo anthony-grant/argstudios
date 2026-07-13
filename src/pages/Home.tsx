@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router";
 import { Lock } from "lucide-react";
-import imgPortrait from "@/imports/ContentBlock1/portrait.webp";
-import { CORAL, DARK, CREAM, projects } from "@/app/data";
+import { CORAL, DARK, CREAM, projects, homeHero } from "@/app/data";
+import { renderLinkedText } from "@/lib/linkedText";
 
 // ─── Shared components ────────────────────────────────────────────────────────
 
@@ -22,11 +22,7 @@ function ArgLogo({ color }: { color: string }) {
 function Nav({ activeSection }: { activeSection: string }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const links = [
-    { id: "work", label: "Work" },
-    { id: "about", label: "About" },
-    { id: "contact", label: "Contact" },
-  ];
+  const links = homeHero.navLinks;
 
   const scrollTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
@@ -122,11 +118,26 @@ function Hero() {
   const scrollToWork = () => document.getElementById("work")?.scrollIntoView({ behavior: "smooth" });
   const { outerRef, innerRef, textRef } = useFitText(true);
 
+  const [tooltipVisible, setTooltipVisible] = useState(false);
+  const tooltipTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const showTooltip = () => {
+    setTooltipVisible(true);
+    if (tooltipTimeout.current) clearTimeout(tooltipTimeout.current);
+    tooltipTimeout.current = setTimeout(() => setTooltipVisible(false), 3000);
+  };
+  const hideTooltip = () => {
+    setTooltipVisible(false);
+    if (tooltipTimeout.current) clearTimeout(tooltipTimeout.current);
+  };
+
+  useEffect(() => () => { if (tooltipTimeout.current) clearTimeout(tooltipTimeout.current); }, []);
+
   return (
     <section
       id="hero"
       className="relative min-h-screen md:h-screen flex flex-col overflow-hidden"
-      style={{ backgroundColor: CORAL, padding: "0 clamp(1.5rem, 4vw, 60px)" }}
+      style={{ backgroundColor: homeHero.backgroundColor || CORAL, padding: "0 clamp(1.5rem, 4vw, 60px)" }}
     >
       <div ref={outerRef} className="w-full" style={{ height: "60vh", paddingTop: "clamp(130px, 15vh, 180px)" }}>
         <div ref={innerRef} className="w-full h-full overflow-hidden">
@@ -135,11 +146,7 @@ function Hero() {
             className="font-['Space_Grotesk',sans-serif] text-white leading-[1.05] tracking-[-0.02em] w-full"
             style={{ fontWeight: 300, whiteSpace: "normal" }}
           >
-            <span style={{ fontWeight: 700 }}>anthony grant</span>
-            {" "}is a Designer of user interfaces
-            <span className="opacity-60"> / </span>brands
-            <span className="opacity-60"> / </span>visual artist
-            <span className="opacity-60"> / </span>living &amp; creating in the Bay Area, California.
+            {homeHero.introText}
           </h1>
         </div>
       </div>
@@ -156,6 +163,22 @@ function Hero() {
         </button>
 
         <div className="relative shrink-0" style={{ width: "clamp(80px, 18vh, 200px)", height: "clamp(80px, 18vh, 200px)" }}>
+          {homeHero.profileTooltip && (
+            <div
+              className="absolute bottom-full right-0 mb-3 px-3 py-2 whitespace-nowrap transition-opacity duration-300 pointer-events-none"
+              style={{
+                background: DARK,
+                color: CREAM,
+                fontSize: "0.7rem",
+                fontFamily: "'DM Mono', monospace",
+                letterSpacing: "0.02em",
+                opacity: tooltipVisible ? 1 : 0,
+                pointerEvents: tooltipVisible ? "auto" : "none",
+              }}
+            >
+              {renderLinkedText(homeHero.profileTooltip, undefined, { color: CORAL })}
+            </div>
+          )}
           <svg width="0" height="0" className="absolute">
             <defs>
               <clipPath id="portrait-clip" clipPathUnits="objectBoundingBox">
@@ -163,7 +186,15 @@ function Hero() {
               </clipPath>
             </defs>
           </svg>
-          <img src={imgPortrait} alt="Anthony Grant" className="w-full h-full object-cover" style={{ clipPath: "url(#portrait-clip)" }} />
+          <img
+            src={homeHero.profileImage}
+            alt="Anthony Grant"
+            className="w-full h-full object-cover cursor-pointer"
+            style={{ clipPath: "url(#portrait-clip)" }}
+            onMouseEnter={showTooltip}
+            onMouseLeave={hideTooltip}
+            onClick={showTooltip}
+          />
         </div>
       </div>
     </section>

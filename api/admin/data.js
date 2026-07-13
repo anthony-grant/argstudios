@@ -28,7 +28,7 @@ async function ghGet(path) {
 // to get real objects back instead of hand-rolling a parser.
 function parseDataTs(text) {
   const body = text.replace(/export const/g, "const");
-  const fn = new Function(`${body}\nreturn { projects, additionalImages };`);
+  const fn = new Function(`${body}\nreturn { projects, additionalImages, homeHero };`);
   return fn();
 }
 
@@ -85,6 +85,10 @@ export default async function handler(req, res) {
           outcome: contentSource.outcome || "",
           metric: contentSource.metric || null,
           img: contentSource.img || "",
+          video: contentSource.video || "",
+          overlayColor: contentSource.overlayColor || "",
+          overlayOpacity: typeof contentSource.overlayOpacity === "number" ? contentSource.overlayOpacity : 0,
+          backgroundColor: contentSource.backgroundColor || "",
           gallery: contentSource.gallery || [],
           demo: contentSource.demo || null,
         };
@@ -96,15 +100,32 @@ export default async function handler(req, res) {
       category: pinned.category || "",
       description: pinned.description || "",
       img: pinned.img || "",
+      video: pinned.video || "",
+      overlayColor: pinned.overlayColor || "",
+      overlayOpacity: typeof pinned.overlayOpacity === "number" ? pinned.overlayOpacity : 0,
+      backgroundColor: pinned.backgroundColor || "",
       tags: pinned.tags || [],
     };
     const additionalImages = (data.additionalImages || []).map((img) => ({
+      slug: img.slug || "",
       src: img.src || "",
       label: img.label || "",
       tags: img.tags || [],
+      description: img.description || "",
+      linkUrl: img.linkUrl || "",
+      linkLabel: img.linkLabel || "",
     }));
 
-    res.status(200).json({ projects, additionalProjects, additionalImages });
+    const homeHero = data.homeHero || {};
+    const homeHeroOut = {
+      introText: homeHero.introText || "",
+      backgroundColor: homeHero.backgroundColor || "",
+      navLinks: Array.isArray(homeHero.navLinks) ? homeHero.navLinks : [],
+      profileImage: homeHero.profileImage || "",
+      profileTooltip: homeHero.profileTooltip || "",
+    };
+
+    res.status(200).json({ projects, additionalProjects, additionalImages, homeHero: homeHeroOut });
   } catch (err) {
     res.status(500).json({ error: err.message || "Failed to load project data" });
   }

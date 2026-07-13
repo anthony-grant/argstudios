@@ -53,8 +53,16 @@ async function ghPut(path, content, sha, message) {
 
 function parseDataTs(text) {
   const body = text.replace(/export const/g, "const");
-  const fn = new Function(`${body}\nreturn { projects, additionalImages };`);
+  const fn = new Function(`${body}\nreturn { projects, additionalImages, homeHero };`);
   return fn();
+}
+
+function slugify(label) {
+  return (label || "")
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "") || "item";
 }
 
 function parseProtected(text) {
@@ -64,7 +72,7 @@ function parseProtected(text) {
   return fn();
 }
 
-function renderDataTs(projects, additionalImages) {
+function renderDataTs(projects, additionalImages, homeHero) {
   return `export const CORAL = "#FF5A5F";
 export const DARK = "#0C0C0B";
 export const CREAM = "#F6F2EC";
@@ -77,7 +85,11 @@ export const projects = ${JSON.stringify(projects, null, 2)};
 // "Art Direction", "Package Design"). Tags populate the filter toggles on the
 // Additional Projects page automatically — a toggle only appears once at least
 // one image uses that tag. To tag an image, just add strings to its \`tags\` array.
+// When an image has a \`description\`, its label renders as a clickable button on
+// the gallery and it gets its own page at /work/additional-projects/:slug.
 export const additionalImages = ${JSON.stringify(additionalImages, null, 2)};
+
+export const homeHero = ${JSON.stringify(homeHero, null, 2)};
 `;
 }
 
@@ -125,6 +137,15 @@ function cleanDemo(d) {
   return { url: d.url, label: d.label || "View interactive prototype" };
 }
 
+function bgFields(p) {
+  return {
+    video: p.video || "",
+    overlayColor: p.overlayColor || "",
+    overlayOpacity: typeof p.overlayOpacity === "number" ? p.overlayOpacity : 0,
+    backgroundColor: p.backgroundColor || "",
+  };
+}
+
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     res.status(405).json({ error: "Method not allowed" });
@@ -140,7 +161,7 @@ export default async function handler(req, res) {
     return;
   }
 
-  const { password, projects: incoming, additionalProjects, additionalImages } = req.body || {};
+  const { password, projects: incoming, additionalProjects, additionalImages, homeHero: incomingHomeHero } = req.body || {};
   if (password !== process.env.ADMIN_PASSWORD) {
     res.status(401).json({ error: "Incorrect password" });
     return;
@@ -198,6 +219,7 @@ export default async function handler(req, res) {
             outcome: p.outcome || "",
             metric: cleanMetric(p.metric),
             img: p.img || "",
+            ...bgFields(p),
             gallery: Array.isArray(p.gallery) ? p.gallery : [],
             demo: cleanDemo(p.demo),
           },
@@ -212,6 +234,7 @@ export default async function handler(req, res) {
           outcome: p.outcome || "",
           metric: cleanMetric(p.metric),
           img: p.img || "",
+          ...bgFields(p),
           gallery: Array.isArray(p.gallery) ? p.gallery : [],
           demo: cleanDemo(p.demo),
         });
@@ -225,20 +248,46 @@ export default async function handler(req, res) {
       category: pinnedSource.category || "",
       description: pinnedSource.description || "",
       img: pinnedSource.img || "",
+      ...bgFields(pinnedSource),
       tags: Array.isArray(pinnedSource.tags) ? pinnedSource.tags : [],
     });
 
+    const usedSlugs = new Set();
     const newAdditionalImages = Array.isArray(additionalImages)
       ? additionalImages
-          .map((img) => ({
-            src: (img.src || "").trim(),
-            label: (img.label || "").trim(),
-            tags: Array.isArray(img.tags) ? img.tags : [],
-          }))
+          .map((img) => {
+            const src = (img.src || "").trim();
+            const label = (img.label || "").trim();
+            let slug = (img.slug || "").trim() || slugify(label);
+            let candidate = slug;
+            let n = 2;
+            while (usedSlugs.has(candidate)) {
+              candidate = `${slug}-${n++}`;
+            }
+            usedSlugs.add(candidate);
+            return {
+              slug: candidate,
+              src,
+              label,
+              tags: Array.isArray(img.tags) ? img.tags : [],
+              description: (img.description || "").trim(),
+              linkUrl: (img.linkUrl || "").trim(),
+              linkLabel: (img.linkLabel || "").trim(),
+            };
+          })
           .filter((img) => img.src)
       : oldData.additionalImages || [];
 
-    const newDataTs = renderDataTs(newDataProjects, newAdditionalImages);
+    const oldHomeHero = oldData.homeHero || {};
+    const newHomeHero = {
+      introText: (incomingHomeHero?.introText ?? oldHomeHero.introText) || "",
+      backgroundColor: (incomingHomeHero?.backgroundColor ?? oldHomeHero.backgroundColor) || "",
+      navLinks: Array.isArray(incomingHomeHero?.navLinks) ? incomingHomeHero.navLinks : (oldHomeHero.navLinks || []),
+      profileImage: (incomingHomeHero?.profileImage ?? oldHomeHero.profileImage) || "",
+      profileTooltip: (incomingHomeHero?.profileTooltip ?? oldHomeHero.profileTooltip) || "",
+    };
+
+    const newDataTs = renderDataTs(newDataProjects, newAdditionalImages, newHomeHero);
     const newProtectedJs = renderProtectedJs(newProtected);
 
     await ghPut("src/app/data.ts", newDataTs, dataFile.sha, "Admin panel: update project data");

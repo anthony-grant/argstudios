@@ -2,6 +2,38 @@ import { useParams, Link, useNavigate } from "react-router";
 import { useEffect, useMemo, useState } from "react";
 import { CORAL, DARK, CREAM, projects, additionalImages } from "@/app/data";
 
+// Recognizes YouTube/Vimeo links and returns an embeddable, chrome-free
+// background URL; anything else is treated as a direct video file URL.
+function getBackgroundVideoInfo(url?: string | null): { type: "embed" | "file"; src: string } | null {
+  if (!url) return null;
+  const yt = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([a-zA-Z0-9_-]{6,})/);
+  if (yt) {
+    const id = yt[1];
+    return {
+      type: "embed",
+      src: `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&mute=1&loop=1&playlist=${id}&controls=0&showinfo=0&modestbranding=1&playsinline=1&rel=0`,
+    };
+  }
+  const vimeo = url.match(/vimeo\.com\/(?:video\/)?(\d+)/);
+  if (vimeo) {
+    const id = vimeo[1];
+    return { type: "embed", src: `https://player.vimeo.com/video/${id}?autoplay=1&muted=1&loop=1&background=1` };
+  }
+  return { type: "file", src: url };
+}
+
+function hexToRgba(hex?: string | null, opacity = 0): string | undefined {
+  if (!hex) return undefined;
+  const clean = hex.replace("#", "");
+  const full = clean.length === 3 ? clean.split("").map((c) => c + c).join("") : clean;
+  const num = parseInt(full, 16);
+  if (Number.isNaN(num) || full.length !== 6) return undefined;
+  const r = (num >> 16) & 255;
+  const g = (num >> 8) & 255;
+  const b = num & 255;
+  return `rgba(${r},${g},${b},${opacity})`;
+}
+
 function ArgLogo({ color }: { color: string }) {
   return (
     <svg
@@ -54,6 +86,10 @@ export default function WorkDetail() {
     outcome?: string;
     metric?: { value: string; label: string } | null;
     img: string;
+    video?: string;
+    overlayColor?: string;
+    overlayOpacity?: number;
+    backgroundColor?: string;
     gallery?: string[];
     demo?: { url: string; label: string } | null;
   };
@@ -130,6 +166,9 @@ export default function WorkDetail() {
     ? unlocked
     : (project as unknown as CaseStudyContent);
   const hasWriteup = Boolean(content?.role || content?.approach || content?.outcome);
+  const videoInfo = getBackgroundVideoInfo(content?.video);
+  const hasBackgroundMedia = Boolean(videoInfo || content?.img);
+  const overlayBg = hexToRgba(content?.overlayColor, content?.overlayOpacity ?? 0);
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: DARK, fontFamily: "'Epilogue', sans-serif" }}>
@@ -149,9 +188,56 @@ export default function WorkDetail() {
         </Link>
       </nav>
 
-      {/* Hero */}
-      <section className="min-h-screen flex flex-col justify-end px-6 md:px-10 pb-16 md:pb-24 pt-40" style={{ backgroundColor: DARK }}>
-        <div className="max-w-5xl">
+      {/* Hero — a full-bleed background image or video (with an optional
+          tint overlay for legibility) sits behind everything; falls back to
+          a solid color, or DARK if none is set. */}
+      <section
+        className="relative min-h-screen flex flex-col justify-end px-6 md:px-10 pb-16 md:pb-24 pt-40 overflow-hidden"
+        style={{ backgroundColor: content?.backgroundColor || DARK }}
+      >
+        {hasBackgroundMedia && (
+          <div className="absolute inset-0" style={{ zIndex: 0 }}>
+            {videoInfo?.type === "file" ? (
+              <video
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="w-full h-full object-cover"
+                src={videoInfo.src}
+              />
+            ) : videoInfo?.type === "embed" ? (
+              <div className="absolute inset-0 overflow-hidden">
+                <iframe
+                  src={videoInfo.src}
+                  allow="autoplay; fullscreen"
+                  title="Background video"
+                  style={{
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    transform: "translate(-50%, -50%)",
+                    width: "100vw",
+                    height: "56.25vw",
+                    minHeight: "100vh",
+                    minWidth: "177.78vh",
+                    border: "none",
+                    pointerEvents: "none",
+                  }}
+                />
+              </div>
+            ) : (
+              content?.img && (
+                <img src={content.img} alt="" className="w-full h-full object-cover" />
+              )
+            )}
+          </div>
+        )}
+        {hasBackgroundMedia && overlayBg && (
+          <div className="absolute inset-0" style={{ zIndex: 1, background: overlayBg }} />
+        )}
+
+        <div className="max-w-5xl relative" style={{ zIndex: 2 }}>
           <div className="flex items-center gap-4 mb-8">
             <span className="font-['DM_Mono',monospace] text-xs tracking-widest uppercase" style={{ color: "rgba(246,242,236,0.3)" }}>
               {project.index}
@@ -260,34 +346,52 @@ export default function WorkDetail() {
             </div>
           )}
           <div style={{ columns: "3 280px", columnGap: "12px" }}>
-            {filteredImages.map((img) => (
-              <div key={img.src} className="mb-3 overflow-hidden group cursor-pointer" style={{ breakInside: "avoid" }}>
-                <div className="relative overflow-hidden" style={{ background: "#1A1A18" }}>
-                  <img src={img.src} alt={img.label} className="w-full h-auto block transition-transform duration-500 group-hover:scale-105" />
-                  <div
-                    className="absolute inset-0 flex items-end p-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                    style={{ background: "linear-gradient(to top, rgba(12,12,11,0.85) 0%, transparent 60%)" }}
-                  >
+            {filteredImages.map((img) => {
+              const hasPage = Boolean(img.description);
+              const overlay = (
+                <div
+                  className="absolute inset-0 flex items-end p-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  style={{ background: "linear-gradient(to top, rgba(12,12,11,0.85) 0%, transparent 60%)" }}
+                >
+                  {hasPage ? (
+                    <span
+                      className="inline-flex items-center gap-1.5 font-['DM_Mono',monospace] text-xs tracking-widest px-3 py-1.5 border"
+                      style={{ color: DARK, backgroundColor: CORAL, borderColor: CORAL }}
+                    >
+                      {img.label} <span aria-hidden>→</span>
+                    </span>
+                  ) : (
                     <span className="font-['DM_Mono',monospace] text-xs tracking-widest" style={{ color: "rgba(246,242,236,0.9)" }}>
                       {img.label}
                     </span>
-                  </div>
+                  )}
                 </div>
-              </div>
-            ))}
+              );
+              const tile = (
+                <div className="relative overflow-hidden" style={{ background: "#1A1A18" }}>
+                  <img src={img.src} alt={img.label} className="w-full h-auto block transition-transform duration-500 group-hover:scale-105" />
+                  {overlay}
+                </div>
+              );
+              return hasPage ? (
+                <Link
+                  key={img.slug || img.src}
+                  to={`/work/additional-projects/${img.slug}`}
+                  className="block mb-3 overflow-hidden group cursor-pointer"
+                  style={{ breakInside: "avoid" }}
+                >
+                  {tile}
+                </Link>
+              ) : (
+                <div key={img.slug || img.src} className="mb-3 overflow-hidden group" style={{ breakInside: "avoid" }}>
+                  {tile}
+                </div>
+              );
+            })}
           </div>
         </section>
       ) : isLocked ? null : (
         <>
-          {/* Cover image — only rendered when one is actually set */}
-          {content?.img && (
-            <section className="px-6 md:px-10 py-2">
-              <div className="w-full overflow-hidden" style={{ aspectRatio: "16/9", background: "#1A1A18" }}>
-                <img src={content.img} alt={project.title} className="w-full h-full object-cover opacity-80" />
-              </div>
-            </section>
-          )}
-
           <section className="px-6 md:px-10 py-24 md:py-32">
             {hasWriteup ? (
               <>

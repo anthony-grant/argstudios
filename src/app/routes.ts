@@ -4,6 +4,7 @@ import WorkDetail from "../pages/WorkDetail";
 import Admin from "../pages/Admin";
 import CreditScoreDemo from "../pages/CreditScoreDemo";
 import MetaPresentation from "../pages/MetaPresentation";
+import AdditionalProjectDetail from "../pages/AdditionalProjectDetail";
 import NotFound from "../pages/NotFound";
 
 export const router = createBrowserRouter([
@@ -18,6 +19,10 @@ export const router = createBrowserRouter([
   {
     path: "/work/meta/presentation",
     Component: MetaPresentation,
+  },
+  {
+    path: "/work/additional-projects/:slug",
+    Component: AdditionalProjectDetail,
   },
   {
     path: "/work/:slug",

@@ -15,6 +15,10 @@ const PROTECTED = {
       "outcome": "Reduced TTM by 84% over four years and increased peer reviewer capacity by 83%",
       "metric": null,
       "img": "",
+      "video": "",
+      "overlayColor": "",
+      "overlayOpacity": 0,
+      "backgroundColor": "",
       "gallery": [],
       "demo": {
         "url": "https://www.figma.com/deck/ZrwFGy6HwrfosmznoZlpzJ/Balancing-efficiency-and-quality-presentation?node-id=0-1&t=F2yVll2M1y5HgzwH-1",
@@ -34,6 +38,10 @@ const PROTECTED = {
         "label": "Downloads"
       },
       "img": "",
+      "video": "",
+      "overlayColor": "",
+      "overlayOpacity": 0,
+      "backgroundColor": "",
       "gallery": [],
       "demo": {
         "url": "/work/branch/credit-score",
@@ -50,6 +58,10 @@ const PROTECTED = {
       "outcome": "",
       "metric": null,
       "img": "https://images.unsplash.com/photo-1686061592689-312bbfb5c055?w=800&h=600&fit=crop&auto=format",
+      "video": "",
+      "overlayColor": "",
+      "overlayOpacity": 0,
+      "backgroundColor": "",
       "gallery": [],
       "demo": null
     }
