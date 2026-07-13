@@ -42,8 +42,11 @@ export default function WorkDetail() {
   const isGallery = project.slug === "additional-projects";
 
   // Password-protected projects: the real content never ships in the client
-  // bundle. It's fetched from api/protected.js only after a correct
-  // password, then cached in sessionStorage for the tab.
+  // bundle. It's fetched fresh from api/protected.js every time the page
+  // loads. Only the *password* is cached in sessionStorage (not the
+  // content), so a returning visitor in the same tab isn't re-prompted, but
+  // they always see the current content — including any edits made via the
+  // admin panel since they last unlocked it.
   type CaseStudyContent = {
     description: string;
     role?: string;
@@ -60,20 +63,31 @@ export default function WorkDetail() {
   const [checking, setChecking] = useState(false);
   const isLocked = Boolean(project.protected) && !unlocked;
 
+  async function fetchProtectedContent(pw: string): Promise<boolean> {
+    const res = await fetch("/api/protected", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ slug, password: pw }),
+    });
+    if (!res.ok) return false;
+    const data = await res.json();
+    setUnlocked(data);
+    return true;
+  }
+
   useEffect(() => {
     setUnlocked(null);
     setPasswordInput("");
     setAuthError("");
     if (project.protected) {
-      const cached = sessionStorage.getItem(`unlocked:${slug}`);
-      if (cached) {
-        try {
-          setUnlocked(JSON.parse(cached));
-        } catch {
-          sessionStorage.removeItem(`unlocked:${slug}`);
-        }
+      const cachedPassword = sessionStorage.getItem(`password:${slug}`);
+      if (cachedPassword) {
+        fetchProtectedContent(cachedPassword).then((ok) => {
+          if (!ok) sessionStorage.removeItem(`password:${slug}`);
+        });
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [slug]);
 
   async function handleUnlock(e: React.FormEvent) {
@@ -81,19 +95,12 @@ export default function WorkDetail() {
     setChecking(true);
     setAuthError("");
     try {
-      const res = await fetch("/api/protected", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ slug, password: passwordInput }),
-      });
-      if (!res.ok) {
-        const data = await res.json().catch(() => ({}));
-        setAuthError(data.error || "Incorrect password");
+      const ok = await fetchProtectedContent(passwordInput);
+      if (!ok) {
+        setAuthError("Incorrect password");
         return;
       }
-      const data = await res.json();
-      sessionStorage.setItem(`unlocked:${slug}`, JSON.stringify(data));
-      setUnlocked(data);
+      sessionStorage.setItem(`password:${slug}`, passwordInput);
     } catch {
       setAuthError("Something went wrong. Try again.");
     } finally {
