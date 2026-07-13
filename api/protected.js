@@ -20,7 +20,9 @@ const PROTECTED = {
       "overlayOpacity": 0,
       "overlayBlendMode": "normal",
       "backgroundColor": "",
-      "gallery": [],
+      "gallery": [
+        "/uploads/meta-case-study-1783984058713.png"
+      ],
       "galleryModal": false,
       "demos": [
         {
