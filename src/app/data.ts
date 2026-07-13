@@ -105,18 +105,31 @@ export const projects = [
     ],
     "description": "Transformed engineering-heavy technical content into accessible narratives for Facebook's flagship developer conference — covering infrastructure, media, and Android performance.",
     "role": "",
-    "approach": "",
+    "approach": "For Facebook’s F8 conference I worked directly with presenters to craft complex technical jargon into easily digestible stories that a wide audience could understand and appreciate.",
     "outcome": "",
     "metric": null,
-    "img": "https://images.unsplash.com/photo-1560439514-0fc9d2cd5e1b?w=800&h=600&fit=crop&auto=format",
+    "img": "/uploads/f8-sachin-1783987015852.jpg",
     "video": "",
-    "overlayColor": "",
-    "overlayOpacity": 0,
+    "overlayColor": "#0061ff",
+    "overlayOpacity": 0.9,
     "overlayBlendMode": "normal",
     "backgroundColor": "",
     "gallery": [],
     "galleryModal": false,
-    "demos": []
+    "demos": [
+      {
+        "url": "https://developers.facebook.com/videos/f8-2016/inside-facebooks-infrastructure-part-1-the-system-that-serves-billions/",
+        "label": "Video 1"
+      },
+      {
+        "url": "https://developers.facebook.com/videos/f8-2016/inside-facebooks-infrastructure-part-2-meet-the-system-watchdogs/",
+        "label": "Video 2"
+      },
+      {
+        "url": "https://developers.facebook.com/videos/f8-2016/inside-look-at-facebook-media-infrastructure/",
+        "label": "Video 3"
+      }
+    ]
   },
   {
     "index": "07",
