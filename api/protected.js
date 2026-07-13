@@ -69,9 +69,9 @@ const PROTECTED = {
       "metric": null,
       "img": "/uploads/ujet-general-flow-1783985191982.png",
       "video": "",
-      "overlayColor": "#0042aa",
+      "overlayColor": "#002e7a",
       "overlayOpacity": 0.99,
-      "overlayBlendMode": "darken",
+      "overlayBlendMode": "multiply",
       "backgroundColor": "",
       "gallery": [
         "/uploads/aw-buttons-1783985202908.png",
