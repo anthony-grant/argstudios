@@ -168,8 +168,8 @@ export const additionalImages = [
     "src": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1469425133957-G531IPLTDJMPID6ZY28M/logo_gcc_square_cream_text.png?format=750w",
     "label": "Good Cigar Co.",
     "tags": [],
-    "description": "",
-    "linkUrl": "",
+    "description": "Provided the initial branding and packaging for an independent D2C cigar subscription product. Typographically driven, the simple yet striking logotype and package design was inspired by the 'smoke' that is emitted from a lit cigar. Launched by Will McQuain in 2016 this brand was acquired in 2019.",
+    "linkUrl": "https://www.goodcigar.co",
     "linkLabel": ""
   },
   {
