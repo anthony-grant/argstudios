@@ -144,6 +144,29 @@ export const projects = [
 // the gallery and it gets its own page at /work/additional-projects/:slug.
 export const additionalImages = [
   {
+    "slug": "black-collagists-rebrand",
+    "src": "/uploads/black-collagists-2x-1783978271170.png",
+    "label": "Black Collagists Rebrand",
+    "tags": [
+      "brand"
+    ],
+    "description": "Black Collagists is a community founded by acclaimed writer / curator Teri Henderson which creates \nspace enabling artists to be showcased in virtual and physical spaces.",
+    "linkUrl": "https://www.instagram.com/blackcollagists/",
+    "linkLabel": "",
+    "extraImages": [
+      "/uploads/black-collagists-2023-edited-1-1783979269498.png",
+      "/uploads/black-collagists-2023-edited-10-1783979270669.png",
+      "/uploads/black-collagists-2023-edited-9-1783979272399.png",
+      "/uploads/black-collagists-2023-edited-8-1783979273796.png",
+      "/uploads/black-collagists-2023-edited-7-1783979275550.png",
+      "/uploads/black-collagists-2023-edited-6-1783979278214.png",
+      "/uploads/black-collagists-2023-edited-5-1783979281174.png",
+      "/uploads/black-collagists-2023-edited-4-1783979282713.png",
+      "/uploads/black-collagists-2023-edited-3-1783979284010.png",
+      "/uploads/black-collagists-2023-edited-2-1783979285308.png"
+    ]
+  },
+  {
     "slug": "voltage-records",
     "src": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1450785721821-F7G39985U2EUUX9P5I72/dougpagan.jpg?format=750w",
     "label": "Voltage Records",
@@ -186,7 +209,11 @@ export const additionalImages = [
     "description": "Remember those days when you were just starting out, and having total financial freedom was something you could only dream of? Tilt changed that dynamic by making it easy for groups of people to pool their money together to fund events, book trips, or pitch in to help someone in need. Although we were eventually acquired by Airbnb, Tilt was a deeply loved brand throughout its lifetime. I had the privilege of working alongside an insanely talented team—including sharp product managers, brilliant social media strategists, and a legendary copywriter—to take Tilt from a scrappy startup idea to a frat-household name.",
     "linkUrl": "",
     "linkLabel": "",
-    "extraImages": []
+    "extraImages": [
+      "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1539301440919-7G56XFCO2NC75AC8D4O6/funding_awesome.jpg?format=2500w",
+      "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1539321593211-D0RYH36WC4PER6GY98ZR/Tilt_Tour_%402x.jpg?format=2500w",
+      "https://youtu.be/UTlh0f8_ZTA?si=_Cv3gO1cjE06kj4a"
+    ]
   },
   {
     "slug": "seltz-co",
@@ -338,29 +365,6 @@ export const additionalImages = [
     "linkUrl": "",
     "linkLabel": "",
     "extraImages": []
-  },
-  {
-    "slug": "black-collagists-rebrand",
-    "src": "/uploads/black-collagists-2x-1783978271170.png",
-    "label": "Black Collagists Rebrand",
-    "tags": [
-      "brand"
-    ],
-    "description": "Black Collagists is a community founded by acclaimed writer / curator Teri Henderson which creates \nspace enabling artists to be showcased in virtual and physical spaces.",
-    "linkUrl": "https://www.instagram.com/blackcollagists/",
-    "linkLabel": "",
-    "extraImages": [
-      "/uploads/black-collagists-2023-edited-1-1783979269498.png",
-      "/uploads/black-collagists-2023-edited-10-1783979270669.png",
-      "/uploads/black-collagists-2023-edited-9-1783979272399.png",
-      "/uploads/black-collagists-2023-edited-8-1783979273796.png",
-      "/uploads/black-collagists-2023-edited-7-1783979275550.png",
-      "/uploads/black-collagists-2023-edited-6-1783979278214.png",
-      "/uploads/black-collagists-2023-edited-5-1783979281174.png",
-      "/uploads/black-collagists-2023-edited-4-1783979282713.png",
-      "/uploads/black-collagists-2023-edited-3-1783979284010.png",
-      "/uploads/black-collagists-2023-edited-2-1783979285308.png"
-    ]
   }
 ];
 
