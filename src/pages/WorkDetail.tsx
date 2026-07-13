@@ -79,6 +79,7 @@ export default function WorkDetail() {
   // content), so a returning visitor in the same tab isn't re-prompted, but
   // they always see the current content — including any edits made via the
   // admin panel since they last unlocked it.
+  type DemoLink = { url: string; label: string };
   type CaseStudyContent = {
     description: string;
     role?: string;
@@ -89,11 +90,14 @@ export default function WorkDetail() {
     video?: string;
     overlayColor?: string;
     overlayOpacity?: number;
+    overlayBlendMode?: string;
     backgroundColor?: string;
     gallery?: string[];
-    demo?: { url: string; label: string } | null;
+    galleryModal?: boolean;
+    demos?: DemoLink[];
   };
   const [unlocked, setUnlocked] = useState<CaseStudyContent | null>(null);
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const [passwordInput, setPasswordInput] = useState("");
   const [authError, setAuthError] = useState("");
   const [checking, setChecking] = useState(false);
@@ -169,6 +173,19 @@ export default function WorkDetail() {
   const videoInfo = getBackgroundVideoInfo(content?.video);
   const hasBackgroundMedia = Boolean(videoInfo || content?.img);
   const overlayBg = hexToRgba(content?.overlayColor, content?.overlayOpacity ?? 0);
+  const galleryImages = content?.gallery || [];
+
+  useEffect(() => {
+    if (lightboxIndex === null || galleryImages.length === 0) return;
+    function onKey(e: KeyboardEvent) {
+      if (e.key === "Escape") setLightboxIndex(null);
+      else if (e.key === "ArrowLeft") setLightboxIndex((i) => (i === null ? null : (i - 1 + galleryImages.length) % galleryImages.length));
+      else if (e.key === "ArrowRight") setLightboxIndex((i) => (i === null ? null : (i + 1) % galleryImages.length));
+    }
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [lightboxIndex, galleryImages.length]);
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: DARK, fontFamily: "'Epilogue', sans-serif" }}>
@@ -234,7 +251,14 @@ export default function WorkDetail() {
           </div>
         )}
         {hasBackgroundMedia && overlayBg && (
-          <div className="absolute inset-0" style={{ zIndex: 1, background: overlayBg }} />
+          <div
+            className="absolute inset-0"
+            style={{
+              zIndex: 1,
+              background: overlayBg,
+              mixBlendMode: (content?.overlayBlendMode || "normal") as React.CSSProperties["mixBlendMode"],
+            }}
+          />
         )}
 
         <div className="max-w-5xl relative" style={{ zIndex: 2 }}>
@@ -307,14 +331,24 @@ export default function WorkDetail() {
               >
                 {content?.description}
               </p>
-              {content?.demo && (
-                <Link
-                  to={content.demo.url}
-                  className="inline-flex items-center gap-2 mt-8 font-['DM_Mono',monospace] text-xs tracking-widest uppercase px-5 py-3 border transition-colors hover:opacity-80"
-                  style={{ color: DARK, backgroundColor: CORAL, borderColor: CORAL }}
-                >
-                  {content.demo.label} →
-                </Link>
+              {content?.demos && content.demos.length > 0 && (
+                <div className="flex flex-col md:flex-row gap-3 mt-8">
+                  {content.demos.slice(0, 3).map((d, i) => {
+                    const isExternal = /^https?:\/\//i.test(d.url);
+                    const btnClass =
+                      "inline-flex items-center justify-center gap-2 font-['DM_Mono',monospace] text-xs tracking-widest uppercase px-5 py-3 border transition-colors hover:opacity-80";
+                    const btnStyle = { color: DARK, backgroundColor: CORAL, borderColor: CORAL };
+                    return isExternal ? (
+                      <a key={i} href={d.url} target="_blank" rel="noopener noreferrer" className={btnClass} style={btnStyle}>
+                        {d.label} →
+                      </a>
+                    ) : (
+                      <Link key={i} to={d.url} className={btnClass} style={btnStyle}>
+                        {d.label} →
+                      </Link>
+                    );
+                  })}
+                </div>
               )}
             </>
           )}
@@ -458,14 +492,28 @@ export default function WorkDetail() {
                   </div>
                 )}
 
-                {/* Gallery — flexible, 0 to many images */}
-                {content?.gallery && content.gallery.length > 0 && (
+                {/* Gallery — flexible, 0 to many images. When galleryModal is
+                    enabled, images open a one-at-a-time lightbox instead of
+                    just sitting in the masonry grid. */}
+                {galleryImages.length > 0 && (
                   <div style={{ columns: "2 320px", columnGap: "12px" }}>
-                    {content.gallery.map((src) => (
-                      <div key={src} className="mb-3 overflow-hidden" style={{ breakInside: "avoid", background: "#1A1A18" }}>
-                        <img src={src} alt="" className="w-full h-auto block" />
-                      </div>
-                    ))}
+                    {galleryImages.map((src, i) =>
+                      content?.galleryModal ? (
+                        <button
+                          key={src}
+                          type="button"
+                          onClick={() => setLightboxIndex(i)}
+                          className="mb-3 block w-full overflow-hidden cursor-pointer"
+                          style={{ breakInside: "avoid", background: "#1A1A18", border: "none", padding: 0 }}
+                        >
+                          <img src={src} alt="" className="w-full h-auto block" />
+                        </button>
+                      ) : (
+                        <div key={src} className="mb-3 overflow-hidden" style={{ breakInside: "avoid", background: "#1A1A18" }}>
+                          <img src={src} alt="" className="w-full h-auto block" />
+                        </div>
+                      )
+                    )}
                   </div>
                 )}
               </>
@@ -490,6 +538,63 @@ export default function WorkDetail() {
             )}
           </section>
         </>
+      )}
+
+      {/* Gallery lightbox — one image at a time, with pagination controls
+          centered at the bottom of the modal. */}
+      {lightboxIndex !== null && galleryImages.length > 0 && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center p-6"
+          style={{ background: "rgba(12,12,11,0.92)" }}
+          onClick={() => setLightboxIndex(null)}
+        >
+          <button
+            type="button"
+            onClick={(e) => { e.stopPropagation(); setLightboxIndex(null); }}
+            aria-label="Close"
+            className="absolute top-6 right-6 font-['DM_Mono',monospace] text-2xl hover:opacity-60 transition-opacity"
+            style={{ color: "#F6F2EC", background: "none", border: "none", cursor: "pointer", lineHeight: 1 }}
+          >
+            ✕
+          </button>
+
+          <img
+            src={galleryImages[lightboxIndex]}
+            alt=""
+            onClick={(e) => e.stopPropagation()}
+            className="max-w-full max-h-[80vh] object-contain"
+          />
+
+          {galleryImages.length > 1 && (
+            <div
+              onClick={(e) => e.stopPropagation()}
+              className="absolute bottom-8 left-1/2 flex items-center gap-5"
+              style={{ transform: "translateX(-50%)" }}
+            >
+              <button
+                type="button"
+                onClick={() => setLightboxIndex((i) => (i === null ? null : (i - 1 + galleryImages.length) % galleryImages.length))}
+                aria-label="Previous image"
+                className="font-['DM_Mono',monospace] text-lg hover:opacity-60 transition-opacity"
+                style={{ color: "#F6F2EC", background: "none", border: "none", cursor: "pointer" }}
+              >
+                ←
+              </button>
+              <span className="font-['DM_Mono',monospace] text-xs tracking-widest" style={{ color: "rgba(246,242,236,0.7)" }}>
+                {lightboxIndex + 1} / {galleryImages.length}
+              </span>
+              <button
+                type="button"
+                onClick={() => setLightboxIndex((i) => (i === null ? null : (i + 1) % galleryImages.length))}
+                aria-label="Next image"
+                className="font-['DM_Mono',monospace] text-lg hover:opacity-60 transition-opacity"
+                style={{ color: "#F6F2EC", background: "none", border: "none", cursor: "pointer" }}
+              >
+                →
+              </button>
+            </div>
+          )}
+        </div>
       )}
 
       {/* Next project */}

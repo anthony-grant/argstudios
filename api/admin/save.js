@@ -132,9 +132,13 @@ function cleanMetric(m) {
   return { value: m.value, label: m.label || "" };
 }
 
-function cleanDemo(d) {
-  if (!d || !d.url) return null;
-  return { url: d.url, label: d.label || "View interactive prototype" };
+// Up to 3 demo link buttons per project.
+function cleanDemos(list) {
+  if (!Array.isArray(list)) return [];
+  return list
+    .filter((d) => d && d.url)
+    .slice(0, 3)
+    .map((d) => ({ url: d.url, label: d.label || "View" }));
 }
 
 function bgFields(p) {
@@ -142,6 +146,7 @@ function bgFields(p) {
     video: p.video || "",
     overlayColor: p.overlayColor || "",
     overlayOpacity: typeof p.overlayOpacity === "number" ? p.overlayOpacity : 0,
+    overlayBlendMode: p.overlayBlendMode || "normal",
     backgroundColor: p.backgroundColor || "",
   };
 }
@@ -221,7 +226,8 @@ export default async function handler(req, res) {
             img: p.img || "",
             ...bgFields(p),
             gallery: Array.isArray(p.gallery) ? p.gallery : [],
-            demo: cleanDemo(p.demo),
+            galleryModal: Boolean(p.galleryModal),
+            demos: cleanDemos(p.demos),
           },
         };
         newDataProjects.push({ ...base, protected: true });
@@ -236,7 +242,8 @@ export default async function handler(req, res) {
           img: p.img || "",
           ...bgFields(p),
           gallery: Array.isArray(p.gallery) ? p.gallery : [],
-          demo: cleanDemo(p.demo),
+          galleryModal: Boolean(p.galleryModal),
+          demos: cleanDemos(p.demos),
         });
       }
     });

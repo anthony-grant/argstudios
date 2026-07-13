@@ -4,6 +4,27 @@ import { CORAL, DARK } from "@/app/data";
 
 type Metric = { value: string; label: string } | null;
 
+type AdminDemoLink = { url: string; label: string };
+
+const BLEND_MODES = [
+  { value: "normal", label: "Normal" },
+  { value: "multiply", label: "Multiply" },
+  { value: "screen", label: "Screen" },
+  { value: "overlay", label: "Overlay" },
+  { value: "darken", label: "Darken" },
+  { value: "lighten", label: "Lighten" },
+  { value: "color-dodge", label: "Color Dodge" },
+  { value: "color-burn", label: "Color Burn" },
+  { value: "hard-light", label: "Hard Light" },
+  { value: "soft-light", label: "Soft Light" },
+  { value: "difference", label: "Difference" },
+  { value: "exclusion", label: "Exclusion" },
+  { value: "hue", label: "Hue" },
+  { value: "saturation", label: "Saturation" },
+  { value: "color", label: "Color" },
+  { value: "luminosity", label: "Luminosity" },
+];
+
 type AdminProject = {
   clientId: string;
   slug: string;
@@ -23,10 +44,11 @@ type AdminProject = {
   video: string;
   overlayColor: string;
   overlayOpacity: number;
+  overlayBlendMode: string;
   backgroundColor: string;
   gallery: string; // newline-separated in the UI
-  demoUrl: string;
-  demoLabel: string;
+  galleryModal: boolean;
+  demos: AdminDemoLink[]; // max 3
   collapsed: boolean; // client-only UI state, not sent to the API
 };
 
@@ -40,6 +62,7 @@ type AdminGalleryImage = {
   linkUrl: string;
   linkLabel: string;
   extraImages: string; // comma-separated URLs in the UI
+  collapsed: boolean; // client-only UI state, not sent to the API
 };
 
 type AdminAdditional = {
@@ -50,6 +73,7 @@ type AdminAdditional = {
   video: string;
   overlayColor: string;
   overlayOpacity: number;
+  overlayBlendMode: string;
   backgroundColor: string;
   tags: string; // comma-separated in the UI
   images: AdminGalleryImage[];
@@ -102,10 +126,15 @@ function fromApi(p: any): AdminProject {
     video: p.video || "",
     overlayColor: p.overlayColor || "",
     overlayOpacity: typeof p.overlayOpacity === "number" ? p.overlayOpacity : 0,
+    overlayBlendMode: p.overlayBlendMode || "normal",
     backgroundColor: p.backgroundColor || "",
     gallery: (p.gallery || []).join("\n"),
-    demoUrl: p.demo?.url || "",
-    demoLabel: p.demo?.label || "",
+    galleryModal: Boolean(p.galleryModal),
+    demos: Array.isArray(p.demos)
+      ? p.demos.slice(0, 3).map((d: any) => ({ url: d.url || "", label: d.label || "" }))
+      : p.demo
+      ? [{ url: p.demo.url || "", label: p.demo.label || "" }]
+      : [],
     collapsed: false,
   };
 }
@@ -113,7 +142,10 @@ function fromApi(p: any): AdminProject {
 function toApi(p: AdminProject) {
   const metric: Metric =
     p.metricValue.trim() ? { value: p.metricValue.trim(), label: p.metricLabel.trim() } : null;
-  const demo = p.demoUrl.trim() ? { url: p.demoUrl.trim(), label: p.demoLabel.trim() } : null;
+  const demos = p.demos
+    .map((d) => ({ url: d.url.trim(), label: d.label.trim() }))
+    .filter((d) => d.url)
+    .slice(0, 3);
   return {
     slug: p.slug.trim(),
     title: p.title.trim(),
@@ -130,9 +162,11 @@ function toApi(p: AdminProject) {
     video: p.video.trim(),
     overlayColor: p.overlayColor.trim(),
     overlayOpacity: p.overlayOpacity,
+    overlayBlendMode: p.overlayBlendMode || "normal",
     backgroundColor: p.backgroundColor.trim(),
     gallery: p.gallery.split("\n").map((g) => g.trim()).filter(Boolean),
-    demo,
+    galleryModal: p.galleryModal,
+    demos,
   };
 }
 
@@ -187,6 +221,7 @@ export default function Admin() {
     video: "",
     overlayColor: "",
     overlayOpacity: 0,
+    overlayBlendMode: "normal",
     backgroundColor: "",
     tags: "",
     images: [],
@@ -310,6 +345,41 @@ export default function Admin() {
     setProjects((prev) => prev.map((p) => ({ ...p, collapsed: false })));
   }
 
+  function addDemo(clientId: string) {
+    setProjects((prev) =>
+      prev.map((p) => (p.clientId === clientId && p.demos.length < 3 ? { ...p, demos: [...p.demos, { url: "", label: "" }] } : p))
+    );
+  }
+
+  function updateDemo(clientId: string, index: number, patch: Partial<AdminDemoLink>) {
+    setProjects((prev) =>
+      prev.map((p) =>
+        p.clientId === clientId ? { ...p, demos: p.demos.map((d, i) => (i === index ? { ...d, ...patch } : d)) } : p
+      )
+    );
+  }
+
+  function removeDemo(clientId: string, index: number) {
+    setProjects((prev) =>
+      prev.map((p) => (p.clientId === clientId ? { ...p, demos: p.demos.filter((_, i) => i !== index) } : p))
+    );
+  }
+
+  function toggleImageCollapsed(clientId: string) {
+    setAdditional((prev) => ({
+      ...prev,
+      images: prev.images.map((img) => (img.clientId === clientId ? { ...img, collapsed: !img.collapsed } : img)),
+    }));
+  }
+
+  function collapseAllImages() {
+    setAdditional((prev) => ({ ...prev, images: prev.images.map((img) => ({ ...img, collapsed: true })) }));
+  }
+
+  function expandAllImages() {
+    setAdditional((prev) => ({ ...prev, images: prev.images.map((img) => ({ ...img, collapsed: false })) }));
+  }
+
   function updateGalleryImage(clientId: string, patch: Partial<AdminGalleryImage>) {
     setAdditional((prev) => ({
       ...prev,
@@ -322,7 +392,7 @@ export default function Admin() {
       ...prev,
       images: [
         ...prev.images,
-        { clientId: newClientId(), slug: "", src: "", label: "", tags: "", description: "", linkUrl: "", linkLabel: "", extraImages: "" },
+        { clientId: newClientId(), slug: "", src: "", label: "", tags: "", description: "", linkUrl: "", linkLabel: "", extraImages: "", collapsed: false },
       ],
     }));
   }
@@ -414,6 +484,7 @@ export default function Admin() {
         video: data.additionalProjects?.video || "",
         overlayColor: data.additionalProjects?.overlayColor || "",
         overlayOpacity: typeof data.additionalProjects?.overlayOpacity === "number" ? data.additionalProjects.overlayOpacity : 0,
+        overlayBlendMode: data.additionalProjects?.overlayBlendMode || "normal",
         backgroundColor: data.additionalProjects?.backgroundColor || "",
         tags: (data.additionalProjects?.tags || []).join(", "),
         images: (data.additionalImages || []).map((img: any) => ({
@@ -426,6 +497,7 @@ export default function Admin() {
           linkUrl: img.linkUrl || "",
           linkLabel: img.linkLabel || "",
           extraImages: (img.extraImages || []).join(", "),
+          collapsed: false,
         })),
       });
       setHomeHero({
@@ -515,6 +587,7 @@ export default function Admin() {
       video: additional.video.trim(),
       overlayColor: additional.overlayColor.trim(),
       overlayOpacity: additional.overlayOpacity,
+      overlayBlendMode: additional.overlayBlendMode || "normal",
       backgroundColor: additional.backgroundColor.trim(),
       tags: additional.tags.split(",").map((t) => t.trim()).filter(Boolean),
     };
@@ -713,13 +786,38 @@ export default function Admin() {
                         </Field>
                       </div>
 
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4">
-                        <Field label="Demo link URL (optional)">
-                          <input style={inputStyle} placeholder="e.g. /work/branch/credit-score" value={p.demoUrl} onChange={(e) => updateProject(p.clientId, { demoUrl: e.target.value })} />
-                        </Field>
-                        <Field label="Demo link label">
-                          <input style={inputStyle} placeholder="e.g. Try the interactive prototype" value={p.demoLabel} onChange={(e) => updateProject(p.clientId, { demoLabel: e.target.value })} />
-                        </Field>
+                      <div className="mb-3">
+                        <p style={labelStyle}>Demo links (up to 3 — shown as buttons, side by side on desktop and stacked on mobile)</p>
+                        {p.demos.map((d, i) => (
+                          <div key={i} className="grid grid-cols-1 md:grid-cols-2 gap-x-4 mb-2 pb-2" style={{ borderBottom: "1px solid rgba(246,242,236,0.08)" }}>
+                            <Field label={`Link ${i + 1} URL`}>
+                              <input style={inputStyle} placeholder="e.g. https://... or /work/branch/credit-score" value={d.url} onChange={(e) => updateDemo(p.clientId, i, { url: e.target.value })} />
+                            </Field>
+                            <div className="flex gap-2 items-end">
+                              <Field label="Label">
+                                <input style={inputStyle} placeholder="e.g. Try the interactive prototype" value={d.label} onChange={(e) => updateDemo(p.clientId, i, { label: e.target.value })} />
+                              </Field>
+                              <button
+                                type="button"
+                                onClick={() => removeDemo(p.clientId, i)}
+                                className="font-['DM_Mono',monospace] text-xs tracking-widest uppercase mb-3.5"
+                                style={{ color: CORAL, background: "none", border: "none", cursor: "pointer" }}
+                              >
+                                Remove
+                              </button>
+                            </div>
+                          </div>
+                        ))}
+                        {p.demos.length < 3 && (
+                          <button
+                            type="button"
+                            onClick={() => addDemo(p.clientId)}
+                            className="font-['DM_Mono',monospace] text-xs tracking-widest uppercase px-3 py-2 border"
+                            style={{ color: "rgba(246,242,236,0.7)", borderColor: "rgba(246,242,236,0.2)" }}
+                          >
+                            + Add demo link
+                          </button>
+                        )}
                       </div>
 
                       <Field label="Cover image">
@@ -755,12 +853,19 @@ export default function Admin() {
                         Intro background priority: video, then cover image, then the solid background color below. If none are set, the page falls back to the default dark background.
                       </p>
 
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-x-4">
+                      <div className="grid grid-cols-1 md:grid-cols-4 gap-x-4">
                         <Field label="Overlay color (optional)">
                           <input style={{ ...inputStyle, height: 38 }} type="color" value={p.overlayColor || "#000000"} onChange={(e) => updateProject(p.clientId, { overlayColor: e.target.value })} />
                         </Field>
                         <Field label="Overlay opacity (0–1)">
                           <input style={inputStyle} type="number" min={0} max={1} step={0.05} value={p.overlayOpacity} onChange={(e) => updateProject(p.clientId, { overlayOpacity: Number(e.target.value) || 0 })} />
+                        </Field>
+                        <Field label="Overlay blend mode">
+                          <select style={inputStyle} value={p.overlayBlendMode} onChange={(e) => updateProject(p.clientId, { overlayBlendMode: e.target.value })}>
+                            {BLEND_MODES.map((m) => (
+                              <option key={m.value} value={m.value}>{m.label}</option>
+                            ))}
+                          </select>
                         </Field>
                         <Field label="Solid background color">
                           <input style={{ ...inputStyle, height: 38 }} type="color" value={p.backgroundColor || "#0C0C0B"} onChange={(e) => updateProject(p.clientId, { backgroundColor: e.target.value })} />
@@ -788,6 +893,18 @@ export default function Admin() {
                           />
                         </label>
                       </Field>
+
+                      <div className="flex items-center gap-2 mb-3 mt-2">
+                        <input
+                          type="checkbox"
+                          id={`gallery-modal-${p.clientId}`}
+                          checked={p.galleryModal}
+                          onChange={(e) => updateProject(p.clientId, { galleryModal: e.target.checked })}
+                        />
+                        <label htmlFor={`gallery-modal-${p.clientId}`} style={{ ...labelStyle, marginBottom: 0 }}>
+                          Open gallery images in a modal (one at a time, with pagination)
+                        </label>
+                      </div>
 
                       <div className="flex items-center gap-2 mb-3 mt-2">
                         <input
@@ -871,12 +988,19 @@ export default function Admin() {
                   <input style={inputStyle} placeholder="e.g. https://youtube.com/watch?v=... or a .mp4 URL" value={additional.video} onChange={(e) => setAdditional((prev) => ({ ...prev, video: e.target.value }))} />
                 </Field>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-x-4">
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-x-4">
                   <Field label="Overlay color (optional)">
                     <input style={{ ...inputStyle, height: 38 }} type="color" value={additional.overlayColor || "#000000"} onChange={(e) => setAdditional((prev) => ({ ...prev, overlayColor: e.target.value }))} />
                   </Field>
                   <Field label="Overlay opacity (0–1)">
                     <input style={inputStyle} type="number" min={0} max={1} step={0.05} value={additional.overlayOpacity} onChange={(e) => setAdditional((prev) => ({ ...prev, overlayOpacity: Number(e.target.value) || 0 }))} />
+                  </Field>
+                  <Field label="Overlay blend mode">
+                    <select style={inputStyle} value={additional.overlayBlendMode} onChange={(e) => setAdditional((prev) => ({ ...prev, overlayBlendMode: e.target.value }))}>
+                      {BLEND_MODES.map((m) => (
+                        <option key={m.value} value={m.value}>{m.label}</option>
+                      ))}
+                    </select>
                   </Field>
                   <Field label="Solid background color">
                     <input style={{ ...inputStyle, height: 38 }} type="color" value={additional.backgroundColor || "#0C0C0B"} onChange={(e) => setAdditional((prev) => ({ ...prev, backgroundColor: e.target.value }))} />
@@ -884,15 +1008,38 @@ export default function Admin() {
                 </div>
               </div>
 
-              <p className="font-['DM_Mono',monospace] text-xs tracking-widest uppercase mb-4" style={{ color: "rgba(246,242,236,0.4)" }}>
-                Gallery images ({additional.images.length})
-              </p>
+              <div className="flex items-center justify-between mb-4">
+                <p className="font-['DM_Mono',monospace] text-xs tracking-widest uppercase" style={{ color: "rgba(246,242,236,0.4)" }}>
+                  Gallery images ({additional.images.length})
+                </p>
+                <div className="flex items-center gap-4">
+                  <button type="button" onClick={expandAllImages} className="font-['DM_Mono',monospace] text-xs tracking-widest uppercase hover:opacity-60" style={{ color: "rgba(246,242,236,0.5)" }}>
+                    Expand all
+                  </button>
+                  <button type="button" onClick={collapseAllImages} className="font-['DM_Mono',monospace] text-xs tracking-widest uppercase hover:opacity-60" style={{ color: "rgba(246,242,236,0.5)" }}>
+                    Collapse all
+                  </button>
+                </div>
+              </div>
 
               <div className="space-y-4 mb-6">
                 {additional.images.map((img, i) => (
                   <div key={img.clientId} className="border p-4" style={{ borderColor: "rgba(246,242,236,0.12)" }}>
                     <div className="flex items-center justify-between mb-3">
-                      <span className="font-['DM_Mono',monospace] text-xs" style={{ color: "rgba(246,242,236,0.4)" }}>Image {i + 1}</span>
+                      <button
+                        type="button"
+                        onClick={() => toggleImageCollapsed(img.clientId)}
+                        className="flex items-center gap-3"
+                        style={{ background: "none", border: "none", cursor: "pointer", padding: 0 }}
+                      >
+                        <span className="font-['DM_Mono',monospace] text-xs" style={{ color: "rgba(246,242,236,0.4)" }}>Image {i + 1}</span>
+                        <span className="font-['DM_Mono',monospace] text-xs tracking-widest uppercase" style={{ color: "rgba(246,242,236,0.5)" }}>
+                          {img.label || "Untitled"}
+                        </span>
+                        <span className="font-['DM_Mono',monospace] text-xs" style={{ color: "rgba(246,242,236,0.4)" }}>
+                          {img.collapsed ? "▸" : "▾"}
+                        </span>
+                      </button>
                       <div className="flex gap-3">
                         <button type="button" onClick={() => moveGalleryImage(img.clientId, -1)} disabled={i === 0} className="font-['DM_Mono',monospace] text-xs disabled:opacity-20" style={{ color: "rgba(246,242,236,0.5)" }}>↑</button>
                         <button type="button" onClick={() => moveGalleryImage(img.clientId, 1)} disabled={i === additional.images.length - 1} className="font-['DM_Mono',monospace] text-xs disabled:opacity-20" style={{ color: "rgba(246,242,236,0.5)" }}>↓</button>
@@ -900,6 +1047,8 @@ export default function Admin() {
                       </div>
                     </div>
 
+                    {!img.collapsed && (
+                    <>
                     <Field label="Image">
                       <div className="flex gap-2 items-start">
                         <input style={inputStyle} placeholder="Image URL, or upload one" value={img.src} onChange={(e) => updateGalleryImage(img.clientId, { src: e.target.value })} />
@@ -985,6 +1134,8 @@ export default function Admin() {
                         </div>
                       )}
                     </Field>
+                    </>
+                    )}
                   </div>
                 ))}
               </div>

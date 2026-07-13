@@ -88,9 +88,17 @@ export default async function handler(req, res) {
           video: contentSource.video || "",
           overlayColor: contentSource.overlayColor || "",
           overlayOpacity: typeof contentSource.overlayOpacity === "number" ? contentSource.overlayOpacity : 0,
+          overlayBlendMode: contentSource.overlayBlendMode || "normal",
           backgroundColor: contentSource.backgroundColor || "",
           gallery: contentSource.gallery || [],
-          demo: contentSource.demo || null,
+          galleryModal: Boolean(contentSource.galleryModal),
+          // Back-compat: older content may still have a single `demo` object
+          // instead of a `demos` array.
+          demos: Array.isArray(contentSource.demos)
+            ? contentSource.demos
+            : contentSource.demo
+            ? [contentSource.demo]
+            : [],
         };
       });
 
@@ -103,6 +111,7 @@ export default async function handler(req, res) {
       video: pinned.video || "",
       overlayColor: pinned.overlayColor || "",
       overlayOpacity: typeof pinned.overlayOpacity === "number" ? pinned.overlayOpacity : 0,
+      overlayBlendMode: pinned.overlayBlendMode || "normal",
       backgroundColor: pinned.backgroundColor || "",
       tags: pinned.tags || [],
     };

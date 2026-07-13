@@ -20,10 +20,14 @@ const PROTECTED = {
       "overlayOpacity": 0,
       "backgroundColor": "",
       "gallery": [],
-      "demo": {
-        "url": "https://www.figma.com/deck/ZrwFGy6HwrfosmznoZlpzJ/Balancing-efficiency-and-quality-presentation?node-id=0-1&t=F2yVll2M1y5HgzwH-1",
-        "label": "View Project Presentation"
-      }
+      "overlayBlendMode": "normal",
+      "galleryModal": false,
+      "demos": [
+        {
+          "url": "https://www.figma.com/deck/ZrwFGy6HwrfosmznoZlpzJ/Balancing-efficiency-and-quality-presentation?node-id=0-1&t=F2yVll2M1y5HgzwH-1",
+          "label": "View Project Presentation"
+        }
+      ]
     }
   },
   "branch": {
@@ -48,10 +52,14 @@ const PROTECTED = {
         "/uploads/work-branch-3-1783965056615.png",
         "/uploads/work-branch-2-1783965061157.png"
       ],
-      "demo": {
-        "url": "/work/branch/credit-score",
-        "label": "Try the interactive credit score animation"
-      }
+      "overlayBlendMode": "normal",
+      "galleryModal": false,
+      "demos": [
+        {
+          "url": "/work/branch/credit-score",
+          "label": "Try the interactive credit score animation"
+        }
+      ]
     }
   },
   "ujet": {
@@ -68,7 +76,9 @@ const PROTECTED = {
       "overlayOpacity": 0,
       "backgroundColor": "",
       "gallery": [],
-      "demo": null
+      "overlayBlendMode": "normal",
+      "galleryModal": false,
+      "demos": []
     }
   }
 };

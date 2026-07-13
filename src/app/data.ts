@@ -62,7 +62,9 @@ export const projects = [
     "overlayOpacity": 0,
     "backgroundColor": "",
     "gallery": [],
-    "demo": null
+    "overlayBlendMode": "normal",
+    "galleryModal": false,
+    "demos": []
   },
   {
     "index": "05",
@@ -85,7 +87,9 @@ export const projects = [
     "overlayOpacity": 0,
     "backgroundColor": "",
     "gallery": [],
-    "demo": null
+    "overlayBlendMode": "normal",
+    "galleryModal": false,
+    "demos": []
   },
   {
     "index": "06",
@@ -108,7 +112,9 @@ export const projects = [
     "overlayOpacity": 0,
     "backgroundColor": "",
     "gallery": [],
-    "demo": null
+    "overlayBlendMode": "normal",
+    "galleryModal": false,
+    "demos": []
   },
   {
     "index": "07",
@@ -125,7 +131,8 @@ export const projects = [
       "Brand",
       "Illustration",
       "Collection"
-    ]
+    ],
+    "overlayBlendMode": "normal"
   }
 ];
 
