@@ -33,10 +33,8 @@ const PROTECTED = {
         "value": "30 million",
         "label": "Downloads"
       },
-      "img": "/uploads/placeholder-1783905482300.jpg",
-      "gallery": [
-        "/uploads/img-3412-edited-2-1783905518883.jpg"
-      ],
+      "img": "",
+      "gallery": [],
       "demo": {
         "url": "/work/branch/credit-score",
         "label": "Try the interactive credit score animation"
