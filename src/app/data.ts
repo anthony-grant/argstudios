@@ -145,17 +145,17 @@ export const projects = [
 export const additionalImages = [
   {
     "slug": "slowfeed-zine",
-    "src": "/uploads/hero-slowfeed-1783982232787.png",
+    "src": "/uploads/slowfeed-zines-1783983262071.jpg/uploads/hero-slowfeed-1783982232787.png",
     "label": "slowfeed-zine",
     "tags": [
       "ai",
       "experimental publication"
     ],
     "description": "Rejecting mass media and traditional gatekeepers, Slowfeed decentralizes publishing. Every zine is generated at the point of purchase, ensuring no two copies are identical. By removing editorial bottlenecks, it connects readers with unfiltered art—creating a unique artifact at the intersection of data and discovery.",
-    "linkUrl": "",
+    "linkUrl": "https://slowfeedzine.com",
     "linkLabel": "",
     "extraImages": [
-      "https://www.instagram.com/reel/DZYjRJJv65X/?igsh=NTc4MTIwNjQ2YQ=="
+      "/uploads/slowfeed-zines-1783983305058.jpg"
     ]
   },
   {
