@@ -70,7 +70,7 @@ const PROTECTED = {
       "img": "/uploads/ujet-general-flow-1783985191982.png",
       "video": "",
       "overlayColor": "#0042aa",
-      "overlayOpacity": 0.92,
+      "overlayOpacity": 0.975,
       "overlayBlendMode": "multiply",
       "backgroundColor": "",
       "gallery": [
