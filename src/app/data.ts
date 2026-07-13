@@ -57,7 +57,8 @@ export const projects = [
     "outcome": "",
     "metric": null,
     "img": "https://images.unsplash.com/photo-1762365189058-7be5b07e038b?w=800&h=600&fit=crop&auto=format",
-    "gallery": []
+    "gallery": [],
+    "demo": null
   },
   {
     "index": "05",
@@ -75,7 +76,8 @@ export const projects = [
     "outcome": "",
     "metric": null,
     "img": "https://images.unsplash.com/photo-1563281295-2a381fe5fed0?w=800&h=600&fit=crop&auto=format",
-    "gallery": []
+    "gallery": [],
+    "demo": null
   },
   {
     "index": "06",
@@ -93,7 +95,8 @@ export const projects = [
     "outcome": "",
     "metric": null,
     "img": "https://images.unsplash.com/photo-1560439514-0fc9d2cd5e1b?w=800&h=600&fit=crop&auto=format",
-    "gallery": []
+    "gallery": [],
+    "demo": null
   },
   {
     "index": "07",
