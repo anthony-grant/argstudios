@@ -319,6 +319,16 @@ export default function Admin() {
     }
   }
 
+  function handleLogout() {
+    sessionStorage.removeItem("adminPassword");
+    setAuthed(false);
+    setPassword("");
+    setProjects([]);
+    setAuthError("");
+    setSaveError("");
+    setSaveMessage("");
+  }
+
   function updateProject(clientId: string, patch: Partial<AdminProject>) {
     setProjects((prev) => prev.map((p) => (p.clientId === clientId ? { ...p, ...patch } : p)));
   }
@@ -397,7 +407,11 @@ export default function Admin() {
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) {
-        setSaveError(data.error || "Save failed");
+        if (res.status === 401) {
+          setSaveError('Incorrect password — if the admin password changed since you logged in, click "Log out" above and log back in with the current one.');
+        } else {
+          setSaveError(data.error || "Save failed");
+        }
         return;
       }
       setSaveMessage("Saved. Vercel is rebuilding — changes go live in about a minute.");
@@ -464,9 +478,19 @@ export default function Admin() {
               Edit case studies
             </p>
           </div>
-          <Link to="/" className="font-['DM_Mono',monospace] text-xs tracking-widest uppercase hover:opacity-60 transition-opacity" style={{ color: "rgba(246,242,236,0.4)" }}>
-            ← Site
-          </Link>
+          <div className="flex items-center gap-6">
+            <button
+              type="button"
+              onClick={handleLogout}
+              className="font-['DM_Mono',monospace] text-xs tracking-widest uppercase hover:opacity-60 transition-opacity"
+              style={{ color: "rgba(246,242,236,0.4)", background: "none", border: "none", cursor: "pointer", padding: 0 }}
+            >
+              Log out
+            </button>
+            <Link to="/" className="font-['DM_Mono',monospace] text-xs tracking-widest uppercase hover:opacity-60 transition-opacity" style={{ color: "rgba(246,242,236,0.4)" }}>
+              ← Site
+            </Link>
+          </div>
         </div>
 
         {loading ? (
