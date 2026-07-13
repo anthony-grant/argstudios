@@ -12,7 +12,7 @@ export const projects = [
     "category": "Product Design",
     "tags": [
       "Product",
-      "Systems",
+      "Governance",
       "Lead"
     ],
     "protected": true
