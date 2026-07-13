@@ -118,8 +118,8 @@ export const projects = [
     "description": "A collection of brand, illustration, and event work spanning a range of clients and collaborators.",
     "img": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1451196243569-FIYRD1MXQRJVIO1QEUMQ/d4df.jpg?format=750w",
     "video": "",
-    "overlayColor": "",
-    "overlayOpacity": 80,
+    "overlayColor": "#263e0f",
+    "overlayOpacity": 1,
     "backgroundColor": "",
     "tags": [
       "Brand",
