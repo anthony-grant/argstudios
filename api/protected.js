@@ -42,7 +42,12 @@ const PROTECTED = {
       "overlayColor": "",
       "overlayOpacity": 0,
       "backgroundColor": "",
-      "gallery": [],
+      "gallery": [
+        "/uploads/work-branch-1-1783965043976.png",
+        "/uploads/work-branch-4-1783965053000.png",
+        "/uploads/work-branch-3-1783965056615.png",
+        "/uploads/work-branch-2-1783965061157.png"
+      ],
       "demo": {
         "url": "/work/branch/credit-score",
         "label": "Try the interactive credit score animation"
