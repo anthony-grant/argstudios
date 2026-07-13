@@ -297,18 +297,22 @@ export const additionalImages = [
     ]
   },
   {
-    "slug": "eventbrite-sxsw",
+    "slug": "eventbrite",
     "src": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1451179728518-422ED2NQV2REYDJNAO4Y/logos_illos_ebsxsw.png?format=750w",
-    "label": "Eventbrite SXSW",
+    "label": "Eventbrite",
     "tags": [
       "brand",
       "comms",
       "experiential marketing"
     ],
-    "description": "",
+    "description": "When we can create experiences together, we become more empathetic, we learn from each other, and we have fun. Eventbrite’s mission is to bring the world together through live experiences. During my time there I made a ton of friends, learned from them, and had way too much fun. I think I did some work along the way too. I started out as a designer working with the marketing and sales team to create seamless event pages / customer experiences. Along the way I became a design manager who got his hands dirty creating everything from A to Z for live experiences, recruited and hired several team members, and collaborated with many other teams within the organization. This is a tiny sample of what I did.",
     "linkUrl": "",
     "linkLabel": "",
-    "extraImages": []
+    "extraImages": [
+      "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1450777606696-IHGSSUXJ5YMGM9VP6V4E/eb_sxsw2.jpg?format=1500w",
+      "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1450781141982-1R2X7N4S7XKDX041V16A/sxsw_poster.jpg?format=1000w",
+      "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1450777600538-270KYJ3M7PSPYL6SH3T8/eb_sxsw.jpg?format=1500w"
+    ]
   },
   {
     "slug": "livestop",
