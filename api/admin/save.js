@@ -210,6 +210,17 @@ export default async function handler(req, res) {
         tags: Array.isArray(p.tags) ? p.tags : [],
       };
 
+      // Defensive: if a request comes from a browser tab that still has an
+      // older admin bundle loaded (e.g. mid-deploy), it won't know about
+      // newer fields and will simply omit them from the payload. Falling
+      // back to the previously saved value in that case — rather than
+      // treating "field not sent" the same as "field cleared" — avoids
+      // silently wiping content like demo links on an unrelated save.
+      const oldContentForSlug = p.protected
+        ? oldProtected[slug]?.content || {}
+        : oldData.projects.find((op) => op.slug === slug) || {};
+      const demosToUse = Array.isArray(p.demos) ? p.demos : oldContentForSlug.demos || [];
+
       if (p.protected) {
         const pw = p.newPassword || oldProtected[slug]?.password;
         if (!pw) {
@@ -227,7 +238,7 @@ export default async function handler(req, res) {
             ...bgFields(p),
             gallery: Array.isArray(p.gallery) ? p.gallery : [],
             galleryModal: Boolean(p.galleryModal),
-            demos: cleanDemos(p.demos),
+            demos: cleanDemos(demosToUse),
           },
         };
         newDataProjects.push({ ...base, protected: true });
@@ -243,7 +254,7 @@ export default async function handler(req, res) {
           ...bgFields(p),
           gallery: Array.isArray(p.gallery) ? p.gallery : [],
           galleryModal: Boolean(p.galleryModal),
-          demos: cleanDemos(p.demos),
+          demos: cleanDemos(demosToUse),
         });
       }
     });
