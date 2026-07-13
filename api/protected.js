@@ -55,7 +55,7 @@ const PROTECTED = {
         "/uploads/work-branch-3-1783965056615.png",
         "/uploads/work-branch-2-1783965061157.png"
       ],
-      "galleryModal": false,
+      "galleryModal": true,
       "demos": []
     }
   },
