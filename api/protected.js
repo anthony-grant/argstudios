@@ -16,7 +16,10 @@ const PROTECTED = {
       "metric": null,
       "img": "",
       "gallery": [],
-      "demo": null
+      "demo": {
+        "url": "https://www.figma.com/deck/ZrwFGy6HwrfosmznoZlpzJ/Balancing-efficiency-and-quality-presentation?node-id=0-1&t=F2yVll2M1y5HgzwH-1",
+        "label": "View interactive prototype"
+      }
     }
   },
   "branch": {
