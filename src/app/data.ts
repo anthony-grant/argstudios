@@ -160,11 +160,13 @@ export const additionalImages = [
     "description": "Provided the initial branding and packaging for an independent D2C cigar subscription product. Typographically driven, the simple yet striking logotype and package design was inspired by the 'smoke' that is emitted from a lit cigar. Launched by Will McQuain in 2016 this brand was acquired in 2019.",
     "linkUrl": "https://www.goodcigar.co",
     "linkLabel": "",
-    "extraImages": []
+    "extraImages": [
+      "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1539341602778-49A5PLXY2266UEC4W28R/good_cigar_pouch_mock.jpg?format=750w"
+    ]
   },
   {
     "slug": "dub-4-the-dancefloor",
-    "src": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1451196243569-FIYRD1MXQRJVIO1QEUMQ/d4df.jpg?format=750w",
+    "src": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1451196243569-FIYRD1MXQRJVIO1QEUMQ/d4df.jpg?format=750w, https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1539341604989-XT8CX3IH8LQSSH6RBMR1/gcc_box.jpg?format=2500w",
     "label": "Dub 4 the Dancefloor",
     "tags": [
       "art direction",
@@ -193,7 +195,10 @@ export const additionalImages = [
     "slug": "jacquline-k",
     "src": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1451075952093-FMZHMWBX768ABOGQKQ70/jacqulinek.jpg?format=750w",
     "label": "Jacquline K",
-    "tags": [],
+    "tags": [
+      "art direction",
+      "design"
+    ],
     "description": "",
     "linkUrl": "",
     "linkLabel": "",
@@ -203,17 +208,9 @@ export const additionalImages = [
     "slug": "seltz-co",
     "src": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1539296418435-LEKYIDWP0X6ILLXP57AN/logos_illos_seltz.png?format=750w",
     "label": "Seltz Co.",
-    "tags": [],
-    "description": "",
-    "linkUrl": "",
-    "linkLabel": "",
-    "extraImages": []
-  },
-  {
-    "slug": "evil-jerk",
-    "src": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1451078848830-1TOI7UCOGHNOPQXOD95A/eviljerk_spices.jpg?format=750w",
-    "label": "Evil Jerk",
-    "tags": [],
+    "tags": [
+      "brand"
+    ],
     "description": "",
     "linkUrl": "",
     "linkLabel": "",
@@ -223,17 +220,10 @@ export const additionalImages = [
     "slug": "sf-green-film-festival",
     "src": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1451179729693-TN31TH67VB46MQW59IY4/logos_illos_sfgff.png?format=750w",
     "label": "SF Green Film Festival",
-    "tags": [],
-    "description": "",
-    "linkUrl": "",
-    "linkLabel": "",
-    "extraImages": []
-  },
-  {
-    "slug": "good-cigar-co-box",
-    "src": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1539341604989-XT8CX3IH8LQSSH6RBMR1/gcc_box.jpg?format=750w",
-    "label": "Good Cigar Co. Box",
-    "tags": [],
+    "tags": [
+      "brand",
+      "comms"
+    ],
     "description": "",
     "linkUrl": "",
     "linkLabel": "",
@@ -243,8 +233,11 @@ export const additionalImages = [
     "slug": "hetchy-vodka",
     "src": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1539296743152-IDEEM830TYNAZJ3RDH0T/logos_illos_hetchy.png?format=750w",
     "label": "Hetchy Vodka",
-    "tags": [],
-    "description": "",
+    "tags": [
+      "brand",
+      "comms"
+    ],
+    "description": "I swear—I only tasted the product a few times to get inspired:) Available throughout Northern California and beyond.",
     "linkUrl": "",
     "linkLabel": "",
     "extraImages": []
