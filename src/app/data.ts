@@ -290,10 +290,10 @@ export const additionalImages = [
     "linkUrl": "",
     "linkLabel": "",
     "extraImages": [
-      "/uploads/slr-presentation-2-19-1783980910995.png",
-      "/uploads/slr-presentation-2-20-1783980925304.png",
       "/uploads/slr-presentation-2-6-1783980961622.png",
-      "/uploads/slr-presentation-2-11-1783981021744.jpg"
+      "/uploads/slr-presentation-2-11-1783981021744.jpg",
+      "/uploads/slr-presentation-2-19-1783980910995.png",
+      "/uploads/slr-presentation-2-20-1783980925304.png"
     ]
   },
   {
