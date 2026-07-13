@@ -356,7 +356,9 @@ export const additionalImages = [
     "description": "Rejecting mass media and traditional gatekeepers, Slowfeed decentralizes publishing. Every zine is generated at the point of purchase, ensuring no two copies are identical. By removing editorial bottlenecks, it connects readers with unfiltered art—creating a unique artifact at the intersection of data and discovery.",
     "linkUrl": "",
     "linkLabel": "",
-    "extraImages": []
+    "extraImages": [
+      "https://www.instagram.com/reel/DZYjRJJv65X/?igsh=NTc4MTIwNjQ2YQ=="
+    ]
   }
 ];
 
