@@ -92,8 +92,11 @@ export const projects = [
     "overlayOpacity": 0.99,
     "overlayBlendMode": "multiply",
     "backgroundColor": "",
-    "gallery": [],
-    "galleryModal": false,
+    "gallery": [
+      "/uploads/funding-awesome-1783988352303.jpg",
+      "/uploads/tilt-tour-2x-1783988354023.jpg"
+    ],
+    "galleryModal": true,
     "demos": []
   },
   {
