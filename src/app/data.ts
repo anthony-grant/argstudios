@@ -111,7 +111,7 @@ export const projects = [
     "img": "/uploads/f8-sachin-1783987015852.jpg",
     "video": "",
     "overlayColor": "#001e57",
-    "overlayOpacity": 0.9,
+    "overlayOpacity": 0.99,
     "overlayBlendMode": "multiply",
     "backgroundColor": "",
     "gallery": [],
