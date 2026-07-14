@@ -389,7 +389,7 @@ export const additionalImages = [
     "tags": [
       "type design"
     ],
-    "description": "",
+    "description": "A typeface with main character vibes. Monospaced upper and lower case glyphs with varying widths and lots of rhythm.",
     "linkUrl": "https://argstudios.gumroad.com/l/monogrant",
     "linkLabel": "Get Monogrant",
     "extraImages": [
