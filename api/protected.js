@@ -78,7 +78,8 @@ const PROTECTED = {
         "/uploads/typography-from-sketch-1783985204072.png",
         "/uploads/colors-1783985205329.png",
         "/uploads/icons-1783985206353.png",
-        "/uploads/navigation-1783985207385.png"
+        "/uploads/navigation-1783985207385.png",
+        "/uploads/configurator-1783987708746.png"
       ],
       "galleryModal": true,
       "demos": [
