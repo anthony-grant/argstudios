@@ -56,7 +56,12 @@ const PROTECTED = {
         "/uploads/work-branch-2-1783965061157.png"
       ],
       "galleryModal": true,
-      "demos": []
+      "demos": [
+        {
+          "url": "/work/branch/credit-score",
+          "label": "Try the interactive credit score animation"
+        }
+      ]
     }
   },
   "ujet": {

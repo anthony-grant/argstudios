@@ -239,6 +239,22 @@ export default function Admin() {
   const [saveError, setSaveError] = useState("");
   const [uploadingKey, setUploadingKey] = useState<string | null>(null);
   const [uploadError, setUploadError] = useState("");
+  const [loadedAt, setLoadedAt] = useState<number | null>(null);
+  const [now, setNow] = useState(() => Date.now());
+
+  // If this tab has been sitting open a while, its in-memory copy of the
+  // data can drift behind what's actually on the server (e.g. edits made
+  // from another tab or device, or a fix pushed directly). Saving from a
+  // stale tab silently overwrites those changes — this is exactly what
+  // wiped Branch's demo link twice. Surface a warning instead of staying
+  // silent about it.
+  const STALE_AFTER_MS = 3 * 60 * 1000;
+  const isStale = Boolean(authed && loadedAt && now - loadedAt > STALE_AFTER_MS);
+
+  useEffect(() => {
+    const id = setInterval(() => setNow(Date.now()), 15000);
+    return () => clearInterval(id);
+  }, []);
 
   function readAsDataUrl(file: File): Promise<string> {
     return new Promise((resolve, reject) => {
@@ -510,6 +526,8 @@ export default function Admin() {
         profileTooltip: data.homeHero?.profileTooltip || "",
       });
       setAuthed(true);
+      setLoadedAt(Date.now());
+      setNow(Date.now());
       sessionStorage.setItem("adminPassword", pw);
     } catch {
       setAuthError("Something went wrong. Try again.");
@@ -524,6 +542,7 @@ export default function Admin() {
     setAuthed(false);
     setPassword("");
     setProjects([]);
+    setLoadedAt(null);
     setAuthError("");
     setSaveError("");
     setSaveMessage("");
@@ -703,6 +722,26 @@ export default function Admin() {
             </Link>
           </div>
         </div>
+
+        {isStale && !loading && (
+          <div
+            className="flex items-center justify-between gap-4 mb-8 px-4 py-3"
+            style={{ background: "rgba(255,90,95,0.1)", border: "1px solid rgba(255,90,95,0.3)" }}
+          >
+            <p className="font-['DM_Mono',monospace] text-xs" style={{ color: "#F6F2EC" }}>
+              This page has been open a while — if changes were made elsewhere since, saving now could overwrite them. Reload first if you're not sure.
+            </p>
+            <button
+              type="button"
+              onClick={() => void loadData(password)}
+              disabled={checking}
+              className="font-['DM_Mono',monospace] text-xs tracking-widest uppercase px-3 py-2 border whitespace-nowrap disabled:opacity-50"
+              style={{ color: DARK, backgroundColor: CORAL, borderColor: CORAL }}
+            >
+              {checking ? "Reloading…" : "Reload data"}
+            </button>
+          </div>
+        )}
 
         {loading ? (
           <p className="font-['DM_Mono',monospace] text-xs" style={{ color: "rgba(246,242,236,0.4)" }}>Loading…</p>
