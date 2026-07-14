@@ -56,17 +56,17 @@ export const projects = [
     "approach": "When we can create experiences together, we become more empathetic, we learn from each other, and we have fun. Eventbrite’s mission is to bring the world together through live experiences. During my time there I made a ton of friends, learned from them, and had way too much fun. I think I did some work along the way too. I started out as a designer working with the marketing and sales team to create seamless event pages / customer experiences. Along the way I became a design manager who got his hands dirty creating everything from A to Z for live experiences, recruited and hired several team members, and collaborated with many other teams within the organization. This is a tiny sample of what I did.",
     "outcome": "",
     "metric": null,
-    "img": "/uploads/1450777600538-eb-sxsw.jpg",
+    "img": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1450777600538-270KYJ3M7PSPYL6SH3T8/eb_sxsw.jpg?format=2500w",
     "video": "",
     "overlayColor": "#7c2a00",
     "overlayOpacity": 0.9,
     "overlayBlendMode": "multiply",
     "backgroundColor": "",
     "gallery": [
-      "/uploads/1450781141982-sxsw-poster.jpg",
-      "/uploads/1450777606696-eb-sxsw2.jpg",
-      "/uploads/1450777894335-sxsw-app-email.png",
-      "/uploads/1450781017596-tribkln-poster.jpg"
+      "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1450781141982-1R2X7N4S7XKDX041V16A/sxsw_poster.jpg?format=1000w,",
+      "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1450777606696-IHGSSUXJ5YMGM9VP6V4E/eb_sxsw2.jpg?format=2500w,",
+      "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1450777894335-1TMRPD9RGTMNRIUC9N0C/_sxsw_app_Email.png?format=750w,",
+      "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1450781017596-5GCT2EF82NYBFA9YM673/tribkln_poster.jpg?format=1000w"
     ],
     "galleryModal": true,
     "demos": []
@@ -143,7 +143,7 @@ export const projects = [
     "title": "Additional Projects",
     "category": "Comms Design, Personal Projects",
     "description": "A collection of brand, illustration, experiential marketing, and personal experiments spanning a range of clients, collaborators, and interests.",
-    "img": "/uploads/1450785721821-dougpagan.webp",
+    "img": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1450785721821-F7G39985U2EUUX9P5I72/dougpagan.jpg?format=750w",
     "video": "",
     "overlayColor": "#b51a00",
     "overlayOpacity": 0.98,
@@ -180,6 +180,73 @@ export const additionalImages = [
     ]
   },
   {
+    "slug": "voltage-records",
+    "src": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1450785721821-F7G39985U2EUUX9P5I72/dougpagan.jpg?format=750w",
+    "label": "Voltage Records",
+    "tags": [
+      "art direction",
+      "design"
+    ],
+    "description": "Provided multiple album cover designs for the independent recording label Voltage Music which has a focus on dub, reggae, and dancehall music.",
+    "linkUrl": "https://www.tomaspalermo.com/label",
+    "linkLabel": "",
+    "extraImages": [
+      "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1451196243569-FIYRD1MXQRJVIO1QEUMQ/d4df.jpg?format=750w"
+    ]
+  },
+  {
+    "slug": "good-cigar-co",
+    "src": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1469425133957-G531IPLTDJMPID6ZY28M/logo_gcc_square_cream_text.png?format=750w",
+    "label": "Good Cigar Co.",
+    "tags": [
+      "brand",
+      "packaging"
+    ],
+    "description": "Provided the initial branding and packaging for an independent D2C cigar subscription product. Typographically driven, the simple yet striking logotype and package design was inspired by the 'smoke' that is emitted from a lit cigar. Launched by Will McQuain in 2016 this brand was acquired in 2019.",
+    "linkUrl": "https://www.goodcigar.co",
+    "linkLabel": "",
+    "extraImages": [
+      "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1539341602778-49A5PLXY2266UEC4W28R/good_cigar_pouch_mock.jpg?format=750w",
+      "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1539341604989-XT8CX3IH8LQSSH6RBMR1/gcc_box.jpg?format=2500w"
+    ]
+  },
+  {
+    "slug": "tilt",
+    "src": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1451179729878-1T0FFRA7DRAWECDH4JNG/logos_illos_tilt.png?format=750w",
+    "label": "Tilt",
+    "tags": [
+      "brand",
+      "comms",
+      "experiential marketing"
+    ],
+    "description": "Remember those days when you were just starting out, and having total financial freedom was something you could only dream of? Tilt changed that dynamic by making it easy for groups of people to pool their money together to fund events, book trips, or pitch in to help someone in need. Although we were eventually acquired by Airbnb, Tilt was a deeply loved brand throughout its lifetime. I had the privilege of working alongside an insanely talented team—including sharp product managers, brilliant social media strategists, and a legendary copywriter—to take Tilt from a scrappy startup idea to a frat-household name.",
+    "linkUrl": "",
+    "linkLabel": "",
+    "extraImages": [
+      "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1539301440919-7G56XFCO2NC75AC8D4O6/funding_awesome.jpg?format=2500w",
+      "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1539321593211-D0RYH36WC4PER6GY98ZR/Tilt_Tour_%402x.jpg?format=2500w",
+      "https://youtu.be/UTlh0f8_ZTA?si=_Cv3gO1cjE06kj4a"
+    ]
+  },
+  {
+    "slug": "eventbrite",
+    "src": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1451179728518-422ED2NQV2REYDJNAO4Y/logos_illos_ebsxsw.png?format=750w",
+    "label": "Eventbrite",
+    "tags": [
+      "brand",
+      "comms",
+      "experiential marketing"
+    ],
+    "description": "When we can create experiences together, we become more empathetic, we learn from each other, and we have fun. Eventbrite’s mission is to bring the world together through live experiences. During my time there I made a ton of friends, learned from them, and had way too much fun. I think I did some work along the way too. I started out as a designer working with the marketing and sales team to create seamless event pages / customer experiences. Along the way I became a design manager who got his hands dirty creating everything from A to Z for live experiences, recruited and hired several team members, and collaborated with many other teams within the organization. This is a tiny sample of what I did.",
+    "linkUrl": "",
+    "linkLabel": "",
+    "extraImages": [
+      "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1450777606696-IHGSSUXJ5YMGM9VP6V4E/eb_sxsw2.jpg?format=1500w",
+      "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1450781141982-1R2X7N4S7XKDX041V16A/sxsw_poster.jpg?format=1000w",
+      "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1450777600538-270KYJ3M7PSPYL6SH3T8/eb_sxsw.jpg?format=1500w"
+    ]
+  },
+  {
     "slug": "black-collagists-rebrand",
     "src": "/uploads/black-collagists-2x-1783978271170.png",
     "label": "Black Collagists Rebrand",
@@ -203,75 +270,8 @@ export const additionalImages = [
     ]
   },
   {
-    "slug": "voltage-records",
-    "src": "/uploads/1450785721821-dougpagan.webp",
-    "label": "Voltage Records",
-    "tags": [
-      "art direction",
-      "design"
-    ],
-    "description": "Provided multiple album cover designs for the independent recording label Voltage Music which has a focus on dub, reggae, and dancehall music.",
-    "linkUrl": "https://www.tomaspalermo.com/label",
-    "linkLabel": "",
-    "extraImages": [
-      "/uploads/1451196243569-d4df.webp"
-    ]
-  },
-  {
-    "slug": "good-cigar-co",
-    "src": "/uploads/1469425133957-logo-gcc-square-cream-text.webp",
-    "label": "Good Cigar Co.",
-    "tags": [
-      "brand",
-      "packaging"
-    ],
-    "description": "Provided the initial branding and packaging for an independent D2C cigar subscription product. Typographically driven, the simple yet striking logotype and package design was inspired by the 'smoke' that is emitted from a lit cigar. Launched by Will McQuain in 2016 this brand was acquired in 2019.",
-    "linkUrl": "https://www.goodcigar.co",
-    "linkLabel": "",
-    "extraImages": [
-      "/uploads/1539341602778-good-cigar-pouch-mock.jpg",
-      "/uploads/1539341604989-gcc-box.jpg"
-    ]
-  },
-  {
-    "slug": "tilt",
-    "src": "/uploads/1451179729878-logos-illos-tilt.webp",
-    "label": "Tilt",
-    "tags": [
-      "brand",
-      "comms",
-      "experiential marketing"
-    ],
-    "description": "Remember those days when you were just starting out, and having total financial freedom was something you could only dream of? Tilt changed that dynamic by making it easy for groups of people to pool their money together to fund events, book trips, or pitch in to help someone in need. Although we were eventually acquired by Airbnb, Tilt was a deeply loved brand throughout its lifetime. I had the privilege of working alongside an insanely talented team—including sharp product managers, brilliant social media strategists, and a legendary copywriter—to take Tilt from a scrappy startup idea to a frat-household name.",
-    "linkUrl": "",
-    "linkLabel": "",
-    "extraImages": [
-      "/uploads/1539301440919-funding-awesome.webp",
-      "/uploads/1539321593211-tilt-tour-2x.jpg",
-      "https://youtu.be/UTlh0f8_ZTA?si=_Cv3gO1cjE06kj4a"
-    ]
-  },
-  {
-    "slug": "eventbrite",
-    "src": "/uploads/1451179728518-logos-illos-ebsxsw.png",
-    "label": "Eventbrite",
-    "tags": [
-      "brand",
-      "comms",
-      "experiential marketing"
-    ],
-    "description": "When we can create experiences together, we become more empathetic, we learn from each other, and we have fun. Eventbrite’s mission is to bring the world together through live experiences. During my time there I made a ton of friends, learned from them, and had way too much fun. I think I did some work along the way too. I started out as a designer working with the marketing and sales team to create seamless event pages / customer experiences. Along the way I became a design manager who got his hands dirty creating everything from A to Z for live experiences, recruited and hired several team members, and collaborated with many other teams within the organization. This is a tiny sample of what I did.",
-    "linkUrl": "",
-    "linkLabel": "",
-    "extraImages": [
-      "/uploads/1450777606696-eb-sxsw2.jpg",
-      "/uploads/1450781141982-sxsw-poster.jpg",
-      "/uploads/1450777600538-eb-sxsw.jpg"
-    ]
-  },
-  {
     "slug": "seltz-co",
-    "src": "/uploads/1539296418435-logos-illos-seltz.webp",
+    "src": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1539296418435-LEKYIDWP0X6ILLXP57AN/logos_illos_seltz.png?format=750w",
     "label": "Seltz Co.",
     "tags": [
       "brand"
@@ -283,7 +283,7 @@ export const additionalImages = [
   },
   {
     "slug": "sf-green-film-festival",
-    "src": "/uploads/1451179729693-logos-illos-sfgff.webp",
+    "src": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1451179729693-TN31TH67VB46MQW59IY4/logos_illos_sfgff.png?format=750w",
     "label": "SF Green Film Festival",
     "tags": [
       "brand",
@@ -296,7 +296,7 @@ export const additionalImages = [
   },
   {
     "slug": "hetchy-vodka",
-    "src": "/uploads/1539296743152-logos-illos-hetchy.webp",
+    "src": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1539296743152-IDEEM830TYNAZJ3RDH0T/logos_illos_hetchy.png?format=750w",
     "label": "Hetchy Vodka",
     "tags": [
       "brand",
@@ -311,7 +311,7 @@ export const additionalImages = [
   },
   {
     "slug": "silverlake-ramen",
-    "src": "/uploads/1539338961757-logos-illos-slr.webp",
+    "src": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1539338961757-FYM7FV0M01283NHUYQ0B/logos_illos_slr.png?format=750w",
     "label": "Silverlake Ramen",
     "tags": [
       "brand",
@@ -329,7 +329,7 @@ export const additionalImages = [
   },
   {
     "slug": "weathertoons",
-    "src": "/uploads/1451181065179-logos-illos-wt.webp",
+    "src": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1451181065179-FT4UCR6PDO2W56QN0H2J/logos_illos_wt.png?format=750w",
     "label": "WeatherToons",
     "tags": [
       "brand",
@@ -339,15 +339,15 @@ export const additionalImages = [
     "linkUrl": "",
     "linkLabel": "",
     "extraImages": [
-      "/uploads/1450782177131-weathertoons.jpg",
-      "/uploads/1451114669229-image-asset.webp",
-      "/uploads/1451114253857-image-asset.jpeg",
-      "/uploads/1543996772670-wt80t89v001sq.gif"
+      "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1450782177131-A5929HN6WSXV0T0NOXDP/WeatherToons?format=1000w",
+      "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1451114669229-N6POAVWWJRAS5XLF0N5C/image-asset.jpeg?format=1000w",
+      "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1451114253857-MG7H2I1X0WD32JHX95OI/image-asset.jpeg?format=1000w",
+      "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1543996772670-ND77OUDSGJF9FNM7PDBA/wt80t89v001sq.gif?format=1000w"
     ]
   },
   {
     "slug": "resonant-people",
-    "src": "/uploads/1539338961595-logos-illos-resonantpeople.png",
+    "src": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1539338961595-899VPQ9DBWVIGFJYU6JG/logos_illos_resonantpeople.png?format=750w",
     "label": "Resonant People",
     "tags": [
       "brand"
@@ -359,7 +359,7 @@ export const additionalImages = [
   },
   {
     "slug": "livestop",
-    "src": "/uploads/1556232862486-pov-primary.webp",
+    "src": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1556232862486-QU9WKSUSJ5S0RN0WRGXK/POV-Primary.png?format=750w",
     "label": "Livestop",
     "tags": [
       "brand"
@@ -371,7 +371,7 @@ export const additionalImages = [
   },
   {
     "slug": "urban-fit-sf",
-    "src": "/uploads/1539296002131-logos-illos-urbanfitsf.webp",
+    "src": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1539296002131-F0TWJMB0L1RDDEHUJKKF/logos_illos_urbanfitsf.png?format=750w",
     "label": "Urban Fit SF",
     "tags": [
       "brand"
