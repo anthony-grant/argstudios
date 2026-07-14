@@ -143,7 +143,7 @@ export const projects = [
     "title": "Additional Projects",
     "category": "Comms Design, Personal Projects",
     "description": "A collection of brand, illustration, experiential marketing, and personal experiments spanning a range of clients, collaborators, and interests.",
-    "img": "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1450785721821-F7G39985U2EUUX9P5I72/dougpagan.jpg?format=750w",
+    "img": "/uploads/vlt013-f1-1784002034921.jpg",
     "video": "",
     "overlayColor": "#b51a00",
     "overlayOpacity": 0.98,
