@@ -381,6 +381,20 @@ export const additionalImages = [
     "linkUrl": "",
     "linkLabel": "",
     "extraImages": []
+  },
+  {
+    "slug": "monogrant",
+    "src": "/uploads/monogrant-promos-mg-ig001-1784053056989.png",
+    "label": "monogrant",
+    "tags": [
+      "type design"
+    ],
+    "description": "",
+    "linkUrl": "https://argstudios.gumroad.com/l/monogrant",
+    "linkLabel": "Get Monogrant",
+    "extraImages": [
+      "/uploads/monogrant-promos-mg-gr003-1784053156462.png"
+    ]
   }
 ];
 
