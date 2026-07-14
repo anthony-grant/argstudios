@@ -294,7 +294,7 @@ function About() {
 
         <div className="md:col-span-7">
           <p className="font-['Bricolage_Grotesque',sans-serif] font-bold leading-[1.05] tracking-tight mb-12" style={{ fontSize: "clamp(2rem, 5vw, 5rem)", color: DARK }}>
-            Interfaces that feel inevitable. Brands that earn recognition. Art that refuses easy explanation.
+            Anthony is a Product Designer who advocates for users, is mission driven, and identifies key opportunities to create differentiated experiences that impact business goals.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
@@ -303,7 +303,14 @@ function About() {
                 Anthony Grant is a San Francisco Bay Area designer and visual artist. His design practice spans UI/UX product design, brand identity, and visual systems — work that finds the intersection of human intuition and organizational clarity.
               </p>
               <p className="font-['Epilogue',sans-serif] font-light leading-relaxed" style={{ fontSize: "1.05rem", color: "rgba(12,12,11,0.8)" }}>
-                Outside the screen, Anthony maintains an active studio practice in painting and mixed media, exhibited through his fine art site and ongoing collaborations with Bay Area cultural institutions.
+                Outside the screen, Anthony maintains an{" "}
+                <a href="https://anthonyrichardgrant.com" target="_blank" rel="noreferrer" className="underline hover:opacity-60 transition-opacity" style={{ color: DARK }}>
+                  active studio practice
+                </a>{" "}
+                in painting, mixed media, and applies AI to create{" "}
+                <a href="https://slowfeedzine.com" target="_blank" rel="noreferrer" className="underline hover:opacity-60 transition-opacity" style={{ color: DARK }}>
+                  experimental publications
+                </a>.
               </p>
             </div>
 
