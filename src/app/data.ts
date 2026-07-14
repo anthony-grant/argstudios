@@ -63,7 +63,7 @@ export const projects = [
     "overlayBlendMode": "multiply",
     "backgroundColor": "",
     "gallery": [
-      "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1450781141982-1R2X7N4S7XKDX041V16A/sxsw_poster.jpg?format=1000w, https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1450777606696-IHGSSUXJ5YMGM9VP6V4E/eb_sxsw2.jpg?format=2500w, https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1450777894335-1TMRPD9RGTMNRIUC9N0C/_sxsw_app_Email.png?format=750w, https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1450781017596-5GCT2EF82NYBFA9YM673/tribkln_poster.jpg?format=1000w"
+      "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1450777606696-IHGSSUXJ5YMGM9VP6V4E/eb_sxsw2.jpg?format=2500w, https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1450777894335-1TMRPD9RGTMNRIUC9N0C/_sxsw_app_Email.png?format=750w"
     ],
     "galleryModal": true,
     "demos": []
