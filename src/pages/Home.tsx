@@ -354,7 +354,7 @@ function Contact() {
     <section id="contact" className="relative min-h-[70vh] flex flex-col justify-between px-6 md:px-10 py-16 md:py-24 overflow-hidden" style={{ backgroundColor: CORAL }}>
       <div>
         <span className="font-['DM_Mono',monospace] text-xs tracking-widest uppercase mb-8 block" style={{ color: "#7C1515" }}>Contact</span>
-        <a href="mailto:hello@argstudios.com" className="group block">
+        <a href="mailto:argstudios@gmail.com" className="group block">
           <h2 className="font-['Bricolage_Grotesque',sans-serif] font-extrabold text-white leading-none tracking-tighter transition-opacity hover:opacity-70" style={{ fontSize: "clamp(3rem, 12vw, 12rem)" }}>
             Let's work<br />together.
           </h2>
@@ -364,7 +364,7 @@ function Contact() {
       <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-8 mt-20">
         <div className="flex flex-col gap-3">
           {[
-            { label: "Email", value: "hello@argstudios.com", href: "mailto:hello@argstudios.com" },
+            { label: "Email", value: "argstudios@gmail.com", href: "mailto:argstudios@gmail.com" },
             { label: "Studio", value: "argstudios.com", href: "https://argstudios.com" },
             { label: "Art", value: "anthonyrichardgrant.com", href: "https://anthonyrichardgrant.com" },
             { label: "Instagram", value: "@anthony.r.grant", href: "https://instagram.com/anthony.r.grant" },
