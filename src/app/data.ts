@@ -147,7 +147,7 @@ export const projects = [
     "video": "",
     "overlayColor": "#b51a00",
     "overlayOpacity": 0.98,
-    "overlayBlendMode": "normal",
+    "overlayBlendMode": "multiply",
     "backgroundColor": "",
     "tags": [
       "Brand",
