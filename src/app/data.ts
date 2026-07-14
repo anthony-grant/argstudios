@@ -191,7 +191,8 @@ export const additionalImages = [
     "linkUrl": "https://www.tomaspalermo.com/label",
     "linkLabel": "",
     "extraImages": [
-      "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1451196243569-FIYRD1MXQRJVIO1QEUMQ/d4df.jpg?format=750w"
+      "https://images.squarespace-cdn.com/content/v1/5284525fe4b0ae1002390661/1451196243569-FIYRD1MXQRJVIO1QEUMQ/d4df.jpg?format=750w",
+      "/uploads/vlt013-f1-1784001891688.jpg"
     ]
   },
   {
