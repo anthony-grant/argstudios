@@ -318,7 +318,7 @@ export const additionalImages = [
       "brand",
       "comms"
     ],
-    "description": "This was one of those projects that did not launch but the journey and opportunity to create explorations for an LA-based restaurant was fun and engaging. Did I have dreams of flying (coach) to LA for a weekend of art and out-of-this-world ramen—yes but I was happy to create this yummy case study.",
+    "description": "This was one of those projects that did not launch but the journey and opportunity to create explorations for an LA-based restaurant was fun and engaging. Did I have dreams of flying (coach) to LA for a weekend of art and out-of-this-world ramen—yes but I was happy to create this yummy case study instead.",
     "linkUrl": "",
     "linkLabel": "",
     "extraImages": [
