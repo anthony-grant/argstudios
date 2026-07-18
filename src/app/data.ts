@@ -416,5 +416,5 @@ export const homeHero = {
     }
   ],
   "profileImage": "/uploads/portrait-default.webp",
-  "profileTooltip": "Photo by [Olivia Chen](https://www.carolchen.org/photography)"
+  "profileTooltip": "Photo by Olivia Chen"
 };
