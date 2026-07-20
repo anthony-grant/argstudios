@@ -82,6 +82,7 @@ type AdminAdditional = {
 type AdminNavLink = { id: string; label: string };
 
 type AdminHomeHero = {
+  siteTitle: string;
   introText: string;
   backgroundColor: string;
   navLinks: AdminNavLink[];
@@ -227,6 +228,7 @@ export default function Admin() {
     images: [],
   });
   const [homeHero, setHomeHero] = useState<AdminHomeHero>({
+    siteTitle: "",
     introText: "",
     backgroundColor: "",
     navLinks: defaultNavLinks,
@@ -517,6 +519,7 @@ export default function Admin() {
         })),
       });
       setHomeHero({
+        siteTitle: data.homeHero?.siteTitle || "",
         introText: data.homeHero?.introText || "",
         backgroundColor: data.homeHero?.backgroundColor || "",
         navLinks: Array.isArray(data.homeHero?.navLinks) && data.homeHero.navLinks.length
@@ -1192,10 +1195,18 @@ export default function Admin() {
             <div className="mb-10 pt-10" style={{ borderTop: "1px solid rgba(246,242,236,0.1)" }}>
               <h2 className="font-['Bricolage_Grotesque',sans-serif] font-bold text-white text-2xl mb-1">Homepage</h2>
               <p className="font-['DM_Mono',monospace] text-xs tracking-widest uppercase mb-6" style={{ color: "rgba(246,242,236,0.4)" }}>
-                Hero text, background, navigation and profile photo
+                Browser tab title, hero text, background, navigation and profile photo
               </p>
 
               <div className="border p-5" style={{ borderColor: "rgba(246,242,236,0.12)" }}>
+                <Field label="Browser tab title (shown in the browser tab, bookmarks, and search results)">
+                  <input
+                    style={inputStyle}
+                    value={homeHero.siteTitle}
+                    onChange={(e) => setHomeHero((prev) => ({ ...prev, siteTitle: e.target.value }))}
+                  />
+                </Field>
+
                 <Field label="Hero intro text">
                   <textarea
                     style={{ ...inputStyle, minHeight: 80 }}

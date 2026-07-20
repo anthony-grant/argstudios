@@ -301,6 +301,7 @@ export default async function handler(req, res) {
 
     const oldHomeHero = oldData.homeHero || {};
     const newHomeHero = {
+      siteTitle: (incomingHomeHero?.siteTitle ?? oldHomeHero.siteTitle) || "",
       introText: (incomingHomeHero?.introText ?? oldHomeHero.introText) || "",
       backgroundColor: (incomingHomeHero?.backgroundColor ?? oldHomeHero.backgroundColor) || "",
       navLinks: Array.isArray(incomingHomeHero?.navLinks) ? incomingHomeHero.navLinks : (oldHomeHero.navLinks || []),

@@ -399,6 +399,7 @@ export const additionalImages = [
 ];
 
 export const homeHero = {
+  "siteTitle": "Anthony Grant — Product Designer",
   "introText": "anthony grant is a Designer of user interfaces / brands / visual artist / living & creating in the Bay Area, California.",
   "backgroundColor": "#FF5A5F",
   "navLinks": [
