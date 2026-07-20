@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, type ReactNode } from "react";
+import { useState, useEffect, useRef, type ReactNode, type MouseEvent as ReactMouseEvent } from "react";
 import { Link } from "react-router";
 import { Lock } from "lucide-react";
 import { CORAL, DARK, CREAM, projects, homeHero } from "@/app/data";
@@ -117,11 +117,20 @@ function useFitText(active: boolean) {
 // ─── Hero ─────────────────────────────────────────────────────────────────────
 
 // Wraps specific known phrases in the (admin-editable) hero intro text with
-// links: "user interfaces" scrolls to the Work section, "brands" navigates to
-// the Additional Projects page, and "visual artist" opens Anthony's fine art
-// site in a new tab. Anything not matching one of these phrases renders as
-// plain text, unchanged.
-function renderHeroIntro(text: string, scrollToWork: () => void): ReactNode[] {
+// links: "user interfaces" scrolls to the Work section, "brands" lazy-scrolls
+// to the Additional Projects row within Work, and "visual artist" opens
+// Anthony's fine art site in a background tab (surfacing a "stay here" toast)
+// without navigating this tab away. Anything not matching one of these
+// phrases renders as plain text, unchanged.
+function renderHeroIntro(
+  text: string,
+  handlers_: {
+    scrollToWork: () => void;
+    scrollToAdditionalProjects: () => void;
+    onArtLinkClick: (e: ReactMouseEvent<HTMLAnchorElement>) => void;
+  }
+): ReactNode[] {
+  const { scrollToWork, scrollToAdditionalProjects, onArtLinkClick } = handlers_;
   const handlers: { match: string; render: (label: string, key: number) => ReactNode }[] = [
     {
       match: "user interfaces",
@@ -139,14 +148,14 @@ function renderHeroIntro(text: string, scrollToWork: () => void): ReactNode[] {
     {
       match: "brands",
       render: (label, key) => (
-        <Link
+        <button
           key={key}
-          to="/work/additional-projects"
+          onClick={scrollToAdditionalProjects}
           className="underline decoration-2 underline-offset-4 hover:opacity-70 transition-opacity"
-          style={{ color: "inherit" }}
+          style={{ font: "inherit", color: "inherit", background: "none", border: "none", padding: 0, cursor: "pointer", display: "inline" }}
         >
           {label}
-        </Link>
+        </button>
       ),
     },
     {
@@ -157,6 +166,7 @@ function renderHeroIntro(text: string, scrollToWork: () => void): ReactNode[] {
           href="https://anthonyrichardgrant.com"
           target="_blank"
           rel="noreferrer"
+          onClick={onArtLinkClick}
           className="underline decoration-2 underline-offset-4 hover:opacity-70 transition-opacity"
           style={{ color: "inherit" }}
         >
@@ -187,6 +197,7 @@ function renderHeroIntro(text: string, scrollToWork: () => void): ReactNode[] {
 
 function Hero() {
   const scrollToWork = () => document.getElementById("work")?.scrollIntoView({ behavior: "smooth" });
+  const scrollToAdditionalProjects = () => document.getElementById("additional-projects")?.scrollIntoView({ behavior: "smooth", block: "center" });
   const { outerRef, innerRef, textRef } = useFitText(true);
 
   const [tooltipVisible, setTooltipVisible] = useState(false);
@@ -202,7 +213,28 @@ function Hero() {
     if (tooltipTimeout.current) clearTimeout(tooltipTimeout.current);
   };
 
-  useEffect(() => () => { if (tooltipTimeout.current) clearTimeout(tooltipTimeout.current); }, []);
+  // "Visual artist" opens Anthony's fine art site in a new tab without
+  // pulling focus away from this one, and surfaces a brief toast confirming
+  // that so people aren't left wondering where the click went.
+  const [artTabToastVisible, setArtTabToastVisible] = useState(false);
+  const artTabToastTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const onArtLinkClick = (e: ReactMouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    window.open("https://anthonyrichardgrant.com", "_blank", "noopener,noreferrer");
+    // Best-effort: browsers give focus to the tab a user just opened, so
+    // immediately reclaim it to keep people on this page.
+    window.focus();
+
+    setArtTabToastVisible(true);
+    if (artTabToastTimeout.current) clearTimeout(artTabToastTimeout.current);
+    artTabToastTimeout.current = setTimeout(() => setArtTabToastVisible(false), 2800);
+  };
+
+  useEffect(() => () => {
+    if (tooltipTimeout.current) clearTimeout(tooltipTimeout.current);
+    if (artTabToastTimeout.current) clearTimeout(artTabToastTimeout.current);
+  }, []);
 
   return (
     <section
@@ -217,9 +249,24 @@ function Hero() {
             className="font-['Space_Grotesk',sans-serif] text-white leading-[1.05] tracking-[-0.02em] w-full"
             style={{ fontWeight: 300, whiteSpace: "normal" }}
           >
-            {renderHeroIntro(homeHero.introText, scrollToWork)}
+            {renderHeroIntro(homeHero.introText, { scrollToWork, scrollToAdditionalProjects, onArtLinkClick })}
           </h1>
         </div>
+      </div>
+
+      <div
+        className="fixed bottom-8 left-1/2 -translate-x-1/2 z-[70] px-4 py-2 whitespace-nowrap transition-opacity duration-300"
+        style={{
+          background: DARK,
+          color: CREAM,
+          fontSize: "0.7rem",
+          fontFamily: "'DM Mono', monospace",
+          letterSpacing: "0.02em",
+          opacity: artTabToastVisible ? 1 : 0,
+          pointerEvents: "none",
+        }}
+      >
+        Link opened in new tab — you're still here
       </div>
 
       <div
@@ -278,7 +325,7 @@ function WorkRow({ project }: { project: typeof projects[0] }) {
   const [hovered, setHovered] = useState(false);
 
   return (
-    <Link to={`/work/${project.slug}`} className="block">
+    <Link to={`/work/${project.slug}`} className="block" id={project.slug === "additional-projects" ? "additional-projects" : undefined}>
       <div
         className="relative border-t py-8 md:py-10 cursor-pointer overflow-hidden"
         style={{ borderColor: "rgba(246,242,236,0.1)" }}
