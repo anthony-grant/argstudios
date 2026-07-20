@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, type ReactNode } from "react";
 import { Link } from "react-router";
 import { Lock } from "lucide-react";
 import { CORAL, DARK, CREAM, projects, homeHero } from "@/app/data";
@@ -43,8 +43,10 @@ function Nav({ activeSection }: { activeSection: string }) {
           <button
             key={l.id}
             onClick={() => scrollTo(l.id)}
-            className="font-['DM_Mono',monospace] text-xs tracking-widest uppercase transition-opacity hover:opacity-50"
-            style={{ color: navTextColor, opacity: activeSection === l.id ? 1 : 0.5 }}
+            className="font-['DM_Mono',monospace] font-semibold text-xs tracking-widest uppercase transition-colors duration-200"
+            style={{ color: activeSection === l.id ? CORAL : navTextColor, opacity: activeSection === l.id ? 1 : 0.85 }}
+            onMouseEnter={(e) => { e.currentTarget.style.color = CORAL; }}
+            onMouseLeave={(e) => { e.currentTarget.style.color = activeSection === l.id ? CORAL : navTextColor; }}
           >
             {l.label}
           </button>
@@ -114,6 +116,75 @@ function useFitText(active: boolean) {
 
 // ─── Hero ─────────────────────────────────────────────────────────────────────
 
+// Wraps specific known phrases in the (admin-editable) hero intro text with
+// links: "user interfaces" scrolls to the Work section, "brands" navigates to
+// the Additional Projects page, and "visual artist" opens Anthony's fine art
+// site in a new tab. Anything not matching one of these phrases renders as
+// plain text, unchanged.
+function renderHeroIntro(text: string, scrollToWork: () => void): ReactNode[] {
+  const handlers: { match: string; render: (label: string, key: number) => ReactNode }[] = [
+    {
+      match: "user interfaces",
+      render: (label, key) => (
+        <button
+          key={key}
+          onClick={scrollToWork}
+          className="underline decoration-2 underline-offset-4 hover:opacity-70 transition-opacity"
+          style={{ font: "inherit", color: "inherit", background: "none", border: "none", padding: 0, cursor: "pointer", display: "inline" }}
+        >
+          {label}
+        </button>
+      ),
+    },
+    {
+      match: "brands",
+      render: (label, key) => (
+        <Link
+          key={key}
+          to="/work/additional-projects"
+          className="underline decoration-2 underline-offset-4 hover:opacity-70 transition-opacity"
+          style={{ color: "inherit" }}
+        >
+          {label}
+        </Link>
+      ),
+    },
+    {
+      match: "visual artist",
+      render: (label, key) => (
+        <a
+          key={key}
+          href="https://anthonyrichardgrant.com"
+          target="_blank"
+          rel="noreferrer"
+          className="underline decoration-2 underline-offset-4 hover:opacity-70 transition-opacity"
+          style={{ color: "inherit" }}
+        >
+          {label}
+        </a>
+      ),
+    },
+  ];
+
+  if (!text) return [];
+  const pattern = new RegExp(handlers.map((h) => h.match.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|"), "g");
+  const parts: ReactNode[] = [];
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
+  let key = 0;
+
+  while ((match = pattern.exec(text)) !== null) {
+    if (match.index > lastIndex) parts.push(text.slice(lastIndex, match.index));
+    const matched = match[0];
+    const handler = handlers.find((h) => h.match === matched);
+    parts.push(handler ? handler.render(matched, key++) : matched);
+    lastIndex = match.index + matched.length;
+  }
+  if (lastIndex < text.length) parts.push(text.slice(lastIndex));
+
+  return parts;
+}
+
 function Hero() {
   const scrollToWork = () => document.getElementById("work")?.scrollIntoView({ behavior: "smooth" });
   const { outerRef, innerRef, textRef } = useFitText(true);
@@ -146,7 +217,7 @@ function Hero() {
             className="font-['Space_Grotesk',sans-serif] text-white leading-[1.05] tracking-[-0.02em] w-full"
             style={{ fontWeight: 300, whiteSpace: "normal" }}
           >
-            {homeHero.introText}
+            {renderHeroIntro(homeHero.introText, scrollToWork)}
           </h1>
         </div>
       </div>
@@ -333,6 +404,7 @@ function About() {
                     { label: "argstudios.com", href: "https://argstudios.com" },
                     { label: "anthonyrichardgrant.com", href: "https://anthonyrichardgrant.com" },
                     { label: "@anthony.r.grant", href: "https://instagram.com/anthony.r.grant" },
+                    { label: "LinkedIn", href: "https://www.linkedin.com/in/anthonygrant" },
                   ].map((link) => (
                     <a key={link.label} href={link.href} target="_blank" rel="noreferrer" className="font-['DM_Mono',monospace] text-sm hover:opacity-50 transition-opacity inline-flex items-center gap-2" style={{ color: CORAL }}>
                       {link.label} <span className="text-xs">↗</span>
@@ -371,7 +443,6 @@ function Contact() {
       <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-8 mt-20">
         <div className="flex flex-col gap-3">
           {[
-            { label: "Email", value: "argstudios@gmail.com", href: "mailto:argstudios@gmail.com" },
             { label: "Studio", value: "argstudios.com", href: "https://argstudios.com" },
             { label: "Art", value: "anthonyrichardgrant.com", href: "https://anthonyrichardgrant.com" },
             { label: "Instagram", value: "@anthony.r.grant", href: "https://instagram.com/anthony.r.grant" },
